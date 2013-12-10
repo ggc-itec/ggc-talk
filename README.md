@@ -1,4 +1,5 @@
-ggc-talk
-========
+#GGC-Talk
 
-Unofficial website for the GGC community
+A website for the Georgia Gwinnett College community
+
+hello
