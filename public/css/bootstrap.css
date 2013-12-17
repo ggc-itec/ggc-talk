@@ -7116,3 +7116,69 @@ td.visible-print {
     display: none !important;
   }
 }
+
+/* ggc-talk navbar generated using http://smarchal.com/twbscolor/ */
+.navbar-ggc {
+    background-color: #577e0c;
+    border-color: #7f9f4a;
+}
+.navbar-ggc .navbar-brand {
+    color: #ffffff;
+}
+.navbar-ggc .navbar-brand:hover,
+.navbar-ggc .navbar-brand:focus {
+    color: #000000;
+}
+.navbar-ggc .navbar-nav > li > a {
+    color: #ffffff;
+}
+.navbar-ggc .navbar-nav > li > a:hover,
+.navbar-ggc .navbar-nav > li > a:focus {
+    color: #000000;
+}
+.navbar-ggc .navbar-nav > .active > a, 
+.navbar-ggc .navbar-nav > .active > a:hover, 
+.navbar-ggc .navbar-nav > .active > a:focus {
+    color: #000000;
+    background-color: #7f9f4a;
+}
+.navbar-ggc .navbar-nav > .open > a, 
+.navbar-ggc .navbar-nav > .open > a:hover, 
+.navbar-ggc .navbar-nav > .open > a:focus {
+    color: #000000;
+    background-color: #7f9f4a;
+}
+.navbar-ggc .navbar-nav > .dropdown > a .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+.navbar-ggc .navbar-nav > .dropdown > a:hover .caret,
+.navbar-ggc .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #000000;
+    border-bottom-color: #000000;
+}
+.navbar-ggc .navbar-nav > .open > a .caret, 
+.navbar-ggc .navbar-nav > .open > a:hover .caret, 
+.navbar-ggc .navbar-nav > .open > a:focus .caret {
+    border-top-color: #000000;
+    border-bottom-color: #000000;
+}
+.navbar-ggc .navbar-toggle {
+    border-color: #7f9f4a;
+}
+.navbar-ggc .navbar-toggle:hover,
+.navbar-ggc .navbar-toggle:focus {
+    background-color: #7f9f4a;
+}
+.navbar-ggc .navbar-toggle .icon-bar {
+    background-color: #ffffff;
+}
+@media (max-width: 767px) {
+    .navbar-ggc .navbar-nav .open .dropdown-menu > li > a {
+        color: #ffffff;
+    }
+    .navbar-ggc .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-ggc .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #000000;
+    }
+}
