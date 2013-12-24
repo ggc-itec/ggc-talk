@@ -9,3 +9,10 @@
 5. Open terminal and type `composer install` in the `c:\wamp\www\ggc-talk` folder
 5. Open a browser and type `localhost/ggc-talk/public` in the url bar
 
+
+## Editing the project
+
+1. Download and install [Aptana Studio 3](http://www.aptana.com/products/studio3/download)
+2. Start Aptana Studio
+3. Click on `File` then `Import`
+4. Select `Existing Projects into Workspace` then select the `ggc-talk` repository
