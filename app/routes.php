@@ -30,3 +30,8 @@ Route::post('/create', 'LocationController@handleCreate');
 Route::post('/edit', 'LocationController@handleEdit');
 Route::post('/delete', 'LocationController@handleDelete');
 
+
+Route::model('flickr_pic','Flickr_pic');
+Route::get('/flickr', 'FlickrPicController@index');
+Route::get('/flick_favs', 'FlickrPicController@showFavs');
+Route::post('/flickr_add','FlickrPicController@handleAdd');
