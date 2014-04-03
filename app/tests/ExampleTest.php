@@ -3,6 +3,9 @@
 class ExampleTest extends TestCase {
 
 	/**
+	 *IMPORTANT! unit tests MUST end with 'Test'
+	 *
+	 *
 	 * A basic functional test example.
 	 *
 	 * @return void
