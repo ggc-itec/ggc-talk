@@ -4,5 +4,9 @@
     {
       
       public $timestamps = false;
+
+      public static $rules = array(
+        'name' => 'required'
+      );
       
     }

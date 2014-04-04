@@ -1,5 +1,14 @@
 #GGC-Talk
 
+## Usage
+
+- [How to setup development environment in Windows](#How to setup development environment in Windows)
+- [Editing the project](#Editing the project)
+- [Troubleshooting](#Troubleshooting)
+- [Packages](#Packages)
+
+
+
 ## How to setup development environment in Windows
 
 1. Download and install [WAMP](http://www.wampserver.com/en/)
@@ -29,5 +38,37 @@
  on the command line, make sure you run the command:   `php artisan migrate`
   This command updates your MySQL database changes so that you have a Database Version control. Basically, it makes sure    your database is up to date.
 
+ 3. I added a new custom class but Laravel can't see it!?
+ 
+ Please make sure to run the command 'composer dump-autoload' in the root of the application.
+ Alternatively, you can explicityly add a directory to the ClassLoader::addDirectories in the app/start/Global.php
+ file.
+```php
+ ClassLoader::addDirectories(array(
+ 
+ 	app_path().'/commands',
+ 	app_path().'/controllers',
+ 	app_path().'/models',
+ 	app_path().'/database/seeds',
+ 	app_path().'/MyClassFolderGoesHere'
+ 
+ ));
+```
+ 
+
+## Packages
+
+Packages are the primary way of adding functionality to Laravel. 
+
+* [Ardent](https://github.com/laravelbook/ardent "Ardent repo")  
+Description:Self validation for Models.
+
+* [Laravel4Generators]((https://github.com/JeffreyWay/Laravel-4-Generators "L4 Generators")  
+Description: extends php artisan generate command for faster workflow and uniform coding standard.
+ 
+
+    
+
+ 
  
  

@@ -18,20 +18,42 @@ Route::get('/', function()
 
 Route::resource('welcome','WelcomeController');
 
-//Routes for the map feature
-//Example from Dayle Ree's, Code Bright http://daylerees.com/codebright
-Route::model('location', 'Location');
-Route::get('/showlist', 'LocationController@showList');
-Route::get('/create', 'LocationController@create');
-Route::get('/edit/{location}', 'LocationController@edit');
-Route::get('/delete/{location}', 'LocationController@delete');
-Route::get('/showmap/{location}', 'LocationController@showMap');
-Route::post('/create', 'LocationController@handleCreate');
-Route::post('/edit', 'LocationController@handleEdit');
-Route::post('/delete', 'LocationController@handleDelete');
-
-
+// ===============================================
+// Flickr SECTION =================================
+// ===============================================
 Route::model('flickr_pic','Flickr_pic');
 Route::get('/flickr', 'FlickrPicController@index');
 Route::get('/flick_favs', 'FlickrPicController@showFavs');
 Route::post('/flickr_add','FlickrPicController@handleAdd');
+
+// ===============================================
+// Location SECTION =================================
+// ===============================================
+Route::group(array('prefix' => '/location'), function()
+{
+	//Routes for the map feature
+	//Example from Dayle Ree's, Code Bright http://daylerees.com/codebright
+	Route::model('location', 'Location');
+	
+	Route::get('/', 'LocationController@showList');
+	Route::get('/showlist', 'LocationController@showList');
+	Route::get('/create', 'LocationController@create');
+	Route::get('/edit/{location}', 'LocationController@edit');
+	Route::get('/delete/{location}', 'LocationController@delete');
+	Route::get('/showmap/{location}', 'LocationController@showMap');
+	
+	Route::post('/create', 'LocationController@handleCreate');
+	Route::post('/edit', 'LocationController@handleEdit');
+	Route::post('/delete', 'LocationController@handleDelete');
+
+});
+
+// ===============================================
+// Posts SECTION =================================
+// Handles routing for Message Board Post Views
+// ===============================================
+// ===============================================
+Route::group(array('prefix' => '/posts'), function()
+{
+	Route::get('/', 'PostsController@index');
+});
