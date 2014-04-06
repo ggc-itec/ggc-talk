@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', array('as' => 'home', function()
 {
 	return View::make('home');
-});
+}));
 
 Route::resource('welcome','WelcomeController');
 
@@ -56,4 +56,23 @@ Route::group(array('prefix' => '/location'), function()
 Route::group(array('prefix' => '/posts'), function()
 {
 	Route::get('/', 'PostsController@index');
+});
+
+/* 
+ * Only non-logged in users can access these routes
+ */
+Route::group(array('before' => 'guest'), function()
+{
+  Route::get('login', array('as' => 'login', 'uses' => 'UsersController@showLogin'));
+  Route::post('login', 'UsersController@login');
+  Route::get('register', array('as' => 'register', 'uses' => 'UsersController@showRegister'));
+  Route::post('register', 'UsersController@register');
+});
+
+/* 
+ * Only logged in users can access these routes
+ */
+Route::group(array('before' => 'auth'), function()
+{
+  Route::get('logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
 });

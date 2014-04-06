@@ -40,12 +40,26 @@
               </ul>
             </li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            @if(Auth::guest())
+              <li class="">{{ HTML::linkRoute('register', 'Register') }}</li>
+              <li class="">{{ HTML::linkRoute('login', 'Login') }}</li>
+            @elseif(Auth::check())
+              <li class="">{{ HTML::linkRoute('logout', 'Logout (' . Auth::user() -> first_name . ')') }}</li>
+            @endif
+          </ul>
         </div>
       </div>
     </div>
  
     <div style="overflow: auto;"class="jumbotron">
-    
+      @if(Session::has('alert'))
+      <div class="alert alert-dismissable {{ Session::get('alert-class') }}">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{ Session::get('alert') }}
+      </div>
+      @endif
+      
        @yield('content')
      
     </div>
