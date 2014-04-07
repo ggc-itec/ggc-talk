@@ -28,6 +28,8 @@
             <li class="active"><a href="./">Home</a></li>
             <li><a href="/location/showlist">Maps</a></li>
             <li><a href="#about">App 2</a></li>
+            <li><a href="./showlist">Maps</a></li>
+            <li><a href="./flickr">Pics</a></li>
             <li><a href="#about">App 3</a></li>
             <li><a href="#about">About</a></li>
             <li class="dropbdown">
@@ -40,12 +42,26 @@
               </ul>
             </li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            @if(Auth::guest())
+              <li class="">{{ HTML::linkRoute('register', 'Register') }}</li>
+              <li class="">{{ HTML::linkRoute('login', 'Login') }}</li>
+            @elseif(Auth::check())
+              <li class="">{{ HTML::linkRoute('logout', 'Logout (' . Auth::user() -> first_name . ')') }}</li>
+            @endif
+          </ul>
         </div>
       </div>
     </div>
  
-    <div class="jumbotron">
-     
+    <div style="overflow: auto;"class="jumbotron">
+      @if(Session::has('alert'))
+      <div class="alert alert-dismissable {{ Session::get('alert-class') }}">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{ Session::get('alert') }}
+      </div>
+      @endif
+      
        @yield('content')
      
     </div>
