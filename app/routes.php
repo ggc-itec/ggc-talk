@@ -49,6 +49,22 @@ Route::group(array('prefix' => '/location'), function()
 });
 
 // ===============================================
+// Imgrr SECTION =================================
+// 
+// ===============================================
+// ===============================================
+Route::group(array('prefix' => '/imgrr'), function()
+{
+  Route::model('imgrr_pic','Imgrr_pic');
+  Route::model('imgrr_comment','Imgrr_comment');
+  Route::get('/','ImgrrController@imageGallery');
+  Route::get('/upload','ImgrrController@upload');
+  Route::get('/comments/{imgrr_pic}', 'ImgrrController@displayComments');
+  Route::post('/handleupload','ImgrrController@handleUpload');
+  Route::post('/addcomment','ImgrrController@addComment');
+});
+
+// ===============================================
 // Posts SECTION =================================
 // Handles routing for Message Board Post Views
 // ===============================================
