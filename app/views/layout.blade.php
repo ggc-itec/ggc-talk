@@ -26,6 +26,8 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="./">Home</a></li>
+            <li><a href="/location/showlist">Maps</a></li>
+            <li><a href="#about">App 2</a></li>
             <li><a href="./showlist">Maps</a></li>
             <li><a href="./flickr">Pics</a></li>
             <li><a href="#about">App 3</a></li>
