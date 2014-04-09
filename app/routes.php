@@ -25,6 +25,7 @@ Route::model('flickr_pic','Flickr_pic');
 Route::get('/flickr', 'FlickrPicController@index');
 Route::get('/flick_favs', 'FlickrPicController@showFavs');
 Route::post('/flickr_add','FlickrPicController@handleAdd');
+Route::post('/flickr_delete','FlickrPicController@handleDelete');
 
 // ===============================================
 // Location SECTION =================================
@@ -55,8 +56,12 @@ Route::group(array('prefix' => '/location'), function()
 // ===============================================
 Route::group(array('prefix' => '/posts'), function()
 {
-	Route::get('/', 'PostsController@index');
+	
+	Route::get('/', array('as'=>'posts', 'uses' => 'PostController@index'));
+	Route::get('/addPost', 'PostController@create');	
+	Route::post('/store', 'PostController@store');	
 });
+
 
 /* 
  * Only non-logged in users can access these routes
