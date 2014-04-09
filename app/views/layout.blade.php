@@ -26,11 +26,17 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="./">Home</a></li>
+<<<<<<< HEAD
             <li><a href="/location/showlist">Maps</a></li>
             <li><a href="#about">App 2</a></li>
             <li><a href="./showlist">Maps</a></li>
             <li><a href="./flickr">Pics</a></li>
             <li><a href="#about">App 3</a></li>
+=======
+            <li><a href="{{ URL::to('location/showlist') }}">Maps</a></li>
+            <li><a href="{{ URL::to('flickr') }}">Pics</a></li>
+            <li><a href="{{ URL::to('imgrr') }}">Imgrr</a></li>
+>>>>>>> upstream/master
             <li><a href="#about">About</a></li>
             <li class="dropbdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">

@@ -66,8 +66,9 @@
             <input type="hidden" name="url" value="{{ $image_link }}" />
             <input type="hidden" name="content" value="{{ htmlentities($entry['content']) }}" />
             <input type="hidden" name="published" value="{{ $entry['published'] }}" />
-            <input type="submit" class="btn btn-danger" value="Add" />
+            <input type="submit" class="btn btn-primary" value="Add" />
           </form>
+         
         </td>
       </tr>
       @endforeach

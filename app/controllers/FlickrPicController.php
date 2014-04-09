@@ -25,4 +25,12 @@
       $pic->save();
       return Redirect::action('FlickrPicController@showFavs');
     }
+    
+    public function handleDelete()
+    {
+      $id = Input::get('id');
+      $pic = Flickr_pic::findOrFail($id);
+      $pic->delete();
+      return Redirect::action('FlickrPicController@showFavs');
+    }
   }
