@@ -25,4 +25,33 @@
       $pic->save();
       return Redirect::action('FlickrPicController@showFavs');
     }
+	
+	public function editFavPic(Flickr_pic $flickr_pic)
+	{
+		return View::make('flickr.editPic', compact('flickr_pic'));
+	}
+	
+	public function handleEdit()
+	{
+		$id = Input::get('flickr_pic');
+      	$pic = Flickr_pic::findOrFail($id);
+		$pic->name = Input::get('new_name');
+		$pic->save();
+      
+      	return Redirect::action('FlickrPicController@showFavs');
+	}
+	
+	public function deleteFavPic(Flickr_pic $flickr_pic)
+	{
+		return View::make('flickr.deletePic', compact('flickr_pic'));
+	}
+	
+	public function handleDelete()
+	{
+		$id = Input::get('flickr_pic');
+		$pic = Flickr_pic::findOrFail($id);
+		$pic->delete();
+		
+		return Redirect::action('FlickrPicController@showFavs');
+	}
   }
