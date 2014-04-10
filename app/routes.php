@@ -25,6 +25,10 @@ Route::model('flickr_pic','Flickr_pic');
 Route::get('/flickr', 'FlickrPicController@index');
 Route::get('/flick_favs', 'FlickrPicController@showFavs');
 Route::post('/flickr_add','FlickrPicController@handleAdd');
+Route::get('/editPic/{flickr_pic}', 'FlickrPicController@editFavPic');
+Route::post('/saveEdit', 'FlickrPicController@handleEdit');
+Route::get('/deleteFavPic{flickr_pic}', 'FlickrPicController@deleteFavPic');
+Route::post('/deletePic', 'FlickrPicController@handleDelete');
 
 // ===============================================
 // Location SECTION =================================
