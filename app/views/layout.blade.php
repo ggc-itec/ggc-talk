@@ -35,7 +35,7 @@
             <li><a href="{{ URL::to('location/showlist') }}">Maps</a></li>
             <li><a href="{{ URL::to('flickr') }}">Pics</a></li>
             <li><a href="{{ URL::to('imgrr') }}">Imgrr</a></li>
-
+            <li><a href="#">TechTalks</a></li>
             <li><a href="#about">About</a></li>
             <li class="dropbdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
