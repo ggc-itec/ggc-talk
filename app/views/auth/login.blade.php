@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="jumbotron">
-  {{ Form::open(array('action' => 'UsersController@login', 'id' => 'logInForm', 'class' => 'form-horizontal')) }}
+  {{ Form::open(array('action' => 'UserController@login', 'id' => 'logInForm', 'class' => 'form-horizontal')) }}
   <fieldset>
     <legend>
       <h2>Login</h2>

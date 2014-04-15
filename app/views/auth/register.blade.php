@@ -4,7 +4,7 @@
 
 <div class="jumbotron">
   <div class="col-lg-6">
-    {{ Form::open(array('action' => 'UsersController@register', 'id' => 'registerForm', 'class' => 'form-horizontal')) }}
+    {{ Form::open(array('action' => 'UserController@register', 'id' => 'registerForm', 'class' => 'form-horizontal')) }}
     <fieldset>
       <legend>
         <h2>Sign up!</h2>
