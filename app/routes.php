@@ -123,12 +123,6 @@ Route::group(array('before' => 'guest'), function() {
 /*
  * Only logged in users can access these routes
  */
-
-Route::get('admin/user/edit/{user}', array(
-  'as' => 'editUser',
-  'uses' => 'UserController@edit'
-));
-
 Route::group(array('before' => 'auth'), function() {
   Route::get('logout', array(
     'as' => 'logout',
@@ -151,20 +145,19 @@ Route::group(array('before' => 'auth'), function() {
 
         Route::post('create', 'UserController@create');
 
-        Route::post('edit/{user}', array(
+        Route::get('edit/{user}', array(
           'as' => 'editUser',
-          'uses' => 'UserController@save'
+          'uses' => 'UserController@edit'
         ));
+
+        Route::post('edit/{user}', 'UserController@save');
 
         Route::get('delete/{user}', array(
           'as' => 'deleteUser',
           'uses' => 'UserController@showDelete'
         ));
 
-        Route::post('delete/{user}', array(
-          'as' => 'deleteUser',
-          'uses' => 'UserController@delete'
-        ));
+        Route::post('delete/{user}', 'UserController@delete');
       });
     });
   });

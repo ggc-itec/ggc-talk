@@ -110,6 +110,16 @@ class UserController extends BaseController {
     $password = Input::get('password');
     $role = Input::get('role');
 
+    $regex = preg_match('/\b\w*(@ggc.edu)\b/', $email);
+
+    // If the email does not end with a @ggc.edu email address
+    if (!$regex) {
+      return Redirect::route('createUser') -> with(array(
+        'alert' => 'Not a valid @ggc.edu email address!',
+        'alert-class' => 'alert-danger'
+      ));
+    }
+
     $hashed_password = Hash::make($password);
 
     $user = new User;
