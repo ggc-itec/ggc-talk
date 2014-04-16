@@ -1,26 +1,24 @@
 @extends('layout')
 
 @section('content')
-   <div class="jumbotron">
-      <h2>Quote of the Day</h2> 
-      <p>
-		This is the index.blade for the PostController
-      </p>
-    </div>
 
+<div class="page-header">
+  <h1>Comments</h1>
+</div>
 
+<div class="panel panel-default">
+  <div class="panel-body">
+    
+  </div>
+</div>
 
-
-@if (count($posts) > 0)    
-	@foreach ($posts as $p)
-	    <p>Title: {{ $p->title }}</p>
-	    <p>Message:  {{ $p->message }}</p>
-	@endforeach
-@else
-    I don't have any records!
-@endif
-
-
-@stop
-
-
+<!-- form for adding a comment -->
+<form action="{{ action('PostController@store') }}" method="post" role="form">
+   
+  <div class="form-group">
+    <label for="comment">Comment</label>
+    <input type="text" class="form-control" name="comment" />
+  </div>
+    
+  <input type="submit" value="Post" class="btn btn-primary" />
+</form>
