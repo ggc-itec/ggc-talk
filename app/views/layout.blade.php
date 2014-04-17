@@ -28,6 +28,7 @@
             <li class="active"><a href="./">Home</a></li>
             <li><a href="./showlist">Maps</a></li>
             <li><a href="./flickr">Pics</a></li>
+            <li><a href="./marketplace">Market Place</a></li>
             <li><a href="#about">App 3</a></li>
             <li><a href="#about">About</a></li>
             <li class="dropbdown">
