@@ -116,3 +116,13 @@ Route::group(array('before' => 'auth'), function()
 {
   Route::get('logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
 });
+
+// ===============================================
+// Housing SECTION =================================
+// Handles routing for housing
+// ===============================================
+// ===============================================
+Route::group(array('prefix' => '/housing'), function()
+{
+	Route::get('/', 'HousingController@showListings');
+});
