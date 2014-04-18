@@ -37,13 +37,6 @@
             <a href="{{ action('FlickrPicController@deleteFavPic', $pic->id) }}"
               class="btn btn-danger">Delete</a>
           </td>
-          <td>
-          </form>
-            <form name="flickrPic" action="{{ action('FlickrPicController@handleDelete') }}" method="post" role="form">
-            <input type="hidden" name="id" value="{{ $pic->id }}" />
-            <input type="submit" class="btn btn-danger" value="Delete" />
-            </form>
-          </td>
         </tr>
         @endforeach
       </tbody>
