@@ -40,4 +40,7 @@ Route::get('/flickr/delete/{flickr_pic}', 'FlickrPicController@delete');
 Route::post('flickr/delete', 'FlickrPicController@handleDelete');
 
 
+Route::model('book_table', 'Book_table');
 Route::get('/marketplace', 'MarketPlaceController@index');
+Route::post('/marketplace_add', 'MarketPlaceController@handle_add');
+

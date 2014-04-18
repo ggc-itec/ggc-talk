@@ -8,4 +8,17 @@ class MarketPlaceController extends BaseController
       return View::make('marketplace.marketplace');
     }
 	
+	public function handle_add()
+	{
+		$book = new Book_table();
+		$book -> book_title = Input::get('name');
+		$book -> book_author = Input::get('author');
+		$book -> book_ISBN10 = Input::get('isbn10');
+		$book -> book_ISBN13 = Input::get('isbn13');
+		$book -> book_edition = Input::get('edition');
+		$book -> book_condition = Input::get('condition');
+		$book -> save();
+		return Redirect::action('MarketPlaceController@index');
+	}
+	
 }

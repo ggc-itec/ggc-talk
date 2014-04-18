@@ -2,14 +2,14 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookTable extends Migration {
+class CreateBookTables extends Migration {
 
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
-	public function up()
+		public function up()
 	{
 		
 	  Schema::create('book_table', function($table) 
