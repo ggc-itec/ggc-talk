@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration {
       $table -> string('last_name', 50);
       $table -> string('role', 16);
       $table -> string('remember_token', 100);
+      $table -> string('confirm_token', 100);
+      $table -> integer('confirmed');
       $table -> timestamps();
     });
 

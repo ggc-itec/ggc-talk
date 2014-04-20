@@ -14,9 +14,11 @@ class UserController extends BaseController {
 
   // Attempt to login a user
   public function login() {
+
     $user = array(
       'id' => Input::get('email'),
-      'password' => Input::get('password')
+      'password' => Input::get('password'),
+      'confirmed' => 1
     );
 
     if (Auth::attempt($user, Input::has('remember'))) {
@@ -26,7 +28,7 @@ class UserController extends BaseController {
       ));
     } else {
       return Redirect::route('login') -> with(array(
-        'alert' => 'Your username/password combination was incorrect.',
+        'alert' => 'Your username/password combination was incorrect or you have not confirmed your email address.',
         'alert-class' => 'alert-danger'
       )) -> withInput();
     }
@@ -75,7 +77,15 @@ class UserController extends BaseController {
         $user -> last_name = $last_name;
         $user -> password = $hashed_password;
         $user -> role = 'Standard';
+        $user -> confirm_token = str_random(100);
+        $user -> confirmed = 0;
         $user -> save();
+        
+        $data = array('token' => $user -> confirm_token);
+        Mail::send('emails.auth.confirm', $data, function($message) use ($user) {
+          $message -> to($user -> email, $user -> first_name . ' ' . $user -> last_name) -> subject('Confirm your email address for GGC Talk');
+        });
+
       } catch (\Illuminate\Database\QueryException $e) {
         return Redirect::route('register') -> with(array(
           'alert' => 'Error: Failed to register user in database.',
@@ -85,10 +95,10 @@ class UserController extends BaseController {
 
       // Login the new user
       $user = User::where('id', $email) -> first();
-      Auth::login($user);
+      //Auth::login($user);
 
       return Redirect::route('home') -> with(array(
-        'alert' => 'Welcome! You have successfully created an account, and have been logged in.',
+        'alert' => 'Welcome! You have successfully created an account. A confirmation email has been sent to ' . $user -> email,
         'alert-class' => 'alert-success'
       ));
     }
@@ -97,6 +107,18 @@ class UserController extends BaseController {
       'alert' => 'The attempt to create an account was unsuccessful!',
       'alert-class' => 'alert-danger'
     ));
+  }
+
+  public function confirm($token) {
+    $user = User::where('confirm_token', $token) -> first();
+    $user -> confirmed = 1;
+    $user -> save();
+    Auth::login($user);
+    return Redirect::route('home') -> with(array(
+      'alert' => 'Welcome! You have successfully confirmed your email. You have been logged in.',
+      'alert-class' => 'alert-success'
+    ));
+
   }
 
   public function listUsers() {
@@ -130,6 +152,7 @@ class UserController extends BaseController {
     $user -> last_name = $last_name;
     $user -> password = $hashed_password;
     $user -> role = $role;
+    $user -> confirmed = 1;
     $user -> save();
 
     return Redirect::route('modUsers') -> with(array(

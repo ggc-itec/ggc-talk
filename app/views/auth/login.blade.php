@@ -22,21 +22,23 @@
     </div>
     <div class="form-group">
       <div class="col-lg-offset-2 col-lg-5">
-          {{ Form::checkbox('remember', 'remember', false, array('class' => 'checkbox-inline')) }}
-          {{ Form::label('remember', 'Remember me', array('style' => 'font-weight: normal')) }}
+        {{ Form::checkbox('remember', 'remember', false, array('class' => 'checkbox-inline')) }}
+        {{ Form::label('remember', 'Remember me', array('style' => 'font-weight: normal')) }}
       </div>
     </div>
     <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
+      <div class="col-lg-6 col-lg-offset-2">
         <button class="btn btn-default">
           Cancel
         </button>
         <button type="submit" class="btn btn-primary">
           Login
         </button>
-        <a href="{{ route('reminder') }}" class="btn btn-primary btn-lg pull-right">
-          Forgot Password
-        </a>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-6 col-lg-offset-2">
+        <a href="{{ route('reminder') }}" class="btn btn-default"> Forgot Password </a>
       </div>
     </div>
   </fieldset>

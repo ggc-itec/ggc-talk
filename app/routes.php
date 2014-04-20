@@ -129,6 +129,11 @@ Route::group(array('before' => 'guest'), function() {
     'uses' => 'RemindersController@getReset'
   ));
   Route::post('password/reset', 'RemindersController@postReset');
+
+  Route::get('user/confirm/{token}', array(
+    'as' => 'confirm',
+    'uses' => 'UserController@confirm'
+  ));
 });
 
 /*

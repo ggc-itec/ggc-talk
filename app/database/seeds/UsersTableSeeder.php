@@ -10,6 +10,7 @@ class UsersTableSeeder extends Seeder {
     $user -> first_name = 'FirstName';
     $user -> last_name = 'LastName';
     $user -> role = 'Admin';
+    $user -> confirmed = 1;
     $user -> save();
 
   }
