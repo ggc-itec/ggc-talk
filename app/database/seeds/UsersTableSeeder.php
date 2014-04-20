@@ -2,17 +2,15 @@
 
 class UsersTableSeeder extends Seeder {
 
-  public function run()
-  {
-    DB::table('users')->delete();
-    
-    User::create(array(
-      'id' => 'admin@admin.com',
-      'password' => Hash::make('admin'),
-      'first_name' => 'FirstName',
-      'last_name' => 'LastName',
-      'role' => 'Admin'
-    ));
+  public function run() {
+    $user = new User;
+    $user -> id = 'talkggc@gmail.com';
+    $user -> email = 'talkggc@gmail.com';
+    $user -> password = Hash::make('password');
+    $user -> first_name = 'FirstName';
+    $user -> last_name = 'LastName';
+    $user -> role = 'Admin';
+    $user -> save();
 
   }
 

@@ -118,6 +118,17 @@ Route::group(array('before' => 'guest'), function() {
     'uses' => 'UserController@showRegister'
   ));
   Route::post('register', 'UserController@register');
+  Route::get('reminder', array(
+    'as' => 'reminder',
+    'uses' => 'RemindersController@getRemind'
+  ));
+  Route::post('reminder', 'RemindersController@postRemind');
+
+  Route::get('password/reset/{token}', array(
+    'as' => 'reset',
+    'uses' => 'RemindersController@getReset'
+  ));
+  Route::post('password/reset', 'RemindersController@postReset');
 });
 
 /*

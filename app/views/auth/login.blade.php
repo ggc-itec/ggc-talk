@@ -34,6 +34,9 @@
         <button type="submit" class="btn btn-primary">
           Login
         </button>
+        <a href="{{ route('reminder') }}" class="btn btn-primary btn-lg pull-right">
+          Forgot Password
+        </a>
       </div>
     </div>
   </fieldset>

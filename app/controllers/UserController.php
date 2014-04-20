@@ -70,6 +70,7 @@ class UserController extends BaseController {
       try {
         $user = new User;
         $user -> id = $email;
+        $user -> email = $email;
         $user -> first_name = $first_name;
         $user -> last_name = $last_name;
         $user -> password = $hashed_password;
@@ -124,6 +125,7 @@ class UserController extends BaseController {
 
     $user = new User;
     $user -> id = $email;
+    $user -> email = $email;
     $user -> first_name = $first_name;
     $user -> last_name = $last_name;
     $user -> password = $hashed_password;
@@ -148,6 +150,7 @@ class UserController extends BaseController {
     $role = Input::get('role');
 
     $user -> id = $email;
+    $user -> email = $email;
     $user -> first_name = $first_name;
     $user -> last_name = $last_name;
 
