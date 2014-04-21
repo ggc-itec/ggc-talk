@@ -17,7 +17,8 @@ class UsersController extends BaseController {
     $user = array('id' => Input::get('email'), 'password' => Input::get('password'));
 
     if (Auth::attempt($user, Input::has('remember'))) {
-      return Redirect::route('home') -> with(array('alert' => 'You are successfully logged in.', 'alert-class' => 'alert-success'));
+      // redirects to intended/requested page before Auth::guest() filtered to login; if intended page does not exist, defaults to home page
+      return Redirect::intended('/') -> with(array('alert' => 'You are successfully logged in.', 'alert-class' => 'alert-success'));
     } else {
       return Redirect::route('login') -> with(array('alert' => 'Your username/password combination was incorrect.', 'alert-class' => 'alert-danger')) -> withInput();
     }
@@ -66,8 +67,9 @@ class UsersController extends BaseController {
       // Login the new user
       $user = User::where('id', $email) -> first();
       Auth::login($user);
-
-      return Redirect::route('home') -> with(array('alert' => 'Welcome! You have successfully created an account, and have been logged in.', 'alert-class' => 'alert-success'));
+	  
+	  // redirects to intended/requested page before Auth::guest() filtered to register; if intended page does not exist, defaults to home page
+      return Redirect::intended('/') -> with(array('alert' => 'Welcome! You have successfully created an account, and have been logged in.', 'alert-class' => 'alert-success'));
     }
 
     return Redirect::route('register') -> with(array('alert' => 'The attempt to create an account was unsuccessful!', 'alert-class' => 'alert-danger'));

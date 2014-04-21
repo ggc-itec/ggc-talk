@@ -125,4 +125,8 @@ Route::group(array('before' => 'auth'), function()
 Route::group(array('prefix' => '/housing'), function()
 {
 	Route::get('/', 'HousingController@showListings');
+	Route::get('post', 'HousingController@postListing');
+	Route::post('handlePost', 'HousingController@handleAddPost');
+	Route::get('redirectLogin', 'HousingController@redirectToLogin');
+	Route::get('redirectRegister', 'HousingController@redirectToRegister');
 });
