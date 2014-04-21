@@ -177,13 +177,13 @@ Route::group(array('before' => 'auth'), function() {
       });
     });
   });
+});
 
 // ===============================================
 // Housing SECTION =================================
 // Handles routing for housing
 // ===============================================
 // ===============================================
-Route::group(array('prefix' => '/housing'), function()
-{
-	Route::get('/', 'HousingController@showListings');
+Route::group(array('prefix' => '/housing'), function() {
+  Route::get('/', 'HousingController@showListings');
 });
