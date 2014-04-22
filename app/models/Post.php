@@ -1,8 +1,6 @@
 <?php
-// Add this line
-use LaravelBook\Ardent\Ardent;
 
-class Post extends Ardent {
+class Post extends Eloquent {
 	protected $guarded = array();
 
 	/**
@@ -16,6 +14,11 @@ class Post extends Ardent {
     );
 
     protected $fillable = array('title','message');
+	
+	public function topic()
+	{
+		return $this->belongsTo('Post_topic');
+	}
 
    
 }

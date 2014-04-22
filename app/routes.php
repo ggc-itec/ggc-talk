@@ -11,13 +11,11 @@
  |
  */
 
-Route::get('/', array(
-  'as' => 'home',
-  function() {
-    return View::make('home');
-  }
-
-));
+Route::get('/', array('as' => 'home', function()
+{
+	//return View::make('home');
+	return View::make('posts.index');
+}));
 
 Route::resource('welcome', 'WelcomeController');
 
@@ -89,14 +87,14 @@ Route::group(array('prefix' => '/techtalk'), function() {
 // Handles routing for Message Board Post Views
 // ===============================================
 // ===============================================
-Route::group(array('prefix' => '/posts'), function() {
-
-  Route::get('/', array(
-    'as' => 'posts',
-    'uses' => 'PostController@index'
-  ));
-  Route::get('/addPost', 'PostController@create');
-  Route::post('/store', 'PostController@store');
+Route::group(array('prefix' => '/posts'), function()
+{
+	Route::model('post_category','Posts_category');
+    Route::model('post_topic','Posts_topic');
+	Route::model('post','Post');
+	//Route::get('/', array('as'=>'posts', 'uses' => 'PostController@index'));
+	Route::get('/addPost', 'PostController@create');	
+	Route::post('/store', 'PostController@store');	
 });
 
 /*
@@ -178,7 +176,6 @@ Route::group(array('before' => 'auth'), function() {
     });
   });
 });
-
 // ===============================================
 // Housing SECTION =================================
 // Handles routing for housing
