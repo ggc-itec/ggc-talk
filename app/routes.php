@@ -144,6 +144,13 @@ Route::group(array('before' => 'auth'), function() {
     'as' => 'logout',
     'uses' => 'UserController@logout'
   ));
+  
+  Route::get('account', array(
+    'as' => 'account',
+    'uses' => 'UserController@showAccount'
+  ));
+  Route::post('account', 'UserController@saveAccount');
+  
   Route::group(array('before' => 'admin'), function() {
     Route::group(array('prefix' => 'admin'), function() {
       Route::get('users', array(

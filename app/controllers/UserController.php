@@ -80,7 +80,7 @@ class UserController extends BaseController {
         $user -> confirm_token = str_random(100);
         $user -> confirmed = 0;
         $user -> save();
-        
+
         $data = array('token' => $user -> confirm_token);
         Mail::send('emails.auth.confirm', $data, function($message) use ($user) {
           $message -> to($user -> email, $user -> first_name . ' ' . $user -> last_name) -> subject('Confirm your email address for GGC Talk');
@@ -210,6 +210,42 @@ class UserController extends BaseController {
 
     return Redirect::route('modUsers') -> with(array(
       'alert' => "You have successfully deleted user $userId.",
+      'alert-class' => 'alert-success'
+    ));
+  }
+
+  public function showAccount() {
+    $user = Auth::user();
+    return View::make('auth.account', compact('user'));
+  }
+
+  public function saveAccount() {
+    $user = Auth::user();
+
+    $first_name = Input::get('first_name');
+    $last_name = Input::get('last_name');
+    $password = Input::get('password');
+    $confirm_password = Input::get('confirm_password');
+
+    if (!empty($password)) {
+      if (strcmp($password, $confirm_password) == 0) {
+        $hashed_pw = Hash::make($password);
+        $user -> password = $hashed_pw;
+      } else {
+        return Redirect::route('account') -> with(array(
+          'alert' => 'Error: Passwords do not match!',
+          'alert-class' => 'alert-danger'
+        ));
+      }
+    }
+
+    $user -> first_name = $first_name;
+    $user -> last_name = $last_name;
+
+    $user -> save();
+
+    return Redirect::route('home') -> with(array(
+      'alert' => 'You have successfully updated your account information.',
       'alert-class' => 'alert-success'
     ));
   }
