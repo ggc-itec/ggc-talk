@@ -12,10 +12,15 @@ class HousingController extends BaseController {
 	}
 	
 	/**
-	 * returns the post listing view
+	 * returns the post listing view if user is logged in, otherwise it redirects to 'housing'
 	 */
 	public function postListing() {
-		return View::make('housing.post');
+		if (Auth::guest()) {
+			return Redirect::to('housing');
+		}
+		else {
+			return View::make('housing.post');
+		}
 	}
 	
 	/**
@@ -35,7 +40,7 @@ class HousingController extends BaseController {
 			return Redirect::guest('login');
 		}
 		else {
-			return View::make('housing.post');
+			return Redirect::to('housing/post') -> with(array('alert' => 'You are successfully logged in.', 'alert-class' => 'alert-success'));
 		}
 	}
 	
@@ -48,7 +53,7 @@ class HousingController extends BaseController {
 			return Redirect::guest('register');
 		}
 		else {
-			return View::make('housing.post');
+			return Redirect::to('housing/post') -> with(array('alert' => 'Welcome! You have successfully created an account, and have been logged in.', 'alert-class' => 'alert-success'));
 		}
 	}
 

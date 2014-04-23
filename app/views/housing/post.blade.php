@@ -2,48 +2,6 @@
 
 @section('content')
 
-{{-- if user is a guest/not logged in, modal message is displayed to either login or register --}}
-@if ( Auth::guest() )
-
-<script type="text/javascript">
-	$(window).load(function() {
-		// set modal-dialog height
-		$('#modalDialog').css("height", "250px");
-		
-		// set offset for margin-top to center modal on page
-		var offset = ($(window).height() - $('#modalDialog').height()) / 2;
-		$('#modalDialog').css("margin-top", offset);
-		
-		// display centered modal
-		$('#myModal').modal('show');
-	}); 
-</script>
-
-<div id="myModal" class="modal fade in" data-backdrop="static" tabindex="-1" aria-hidden="true">
-	<div class="modal-dialog" id="modalDialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title">Notice</h4>
-			</div>
-			<div class="modal-body">
-				<p>
-					You must be logged in to post a listing.
-				</p>
-			</div>
-			<div class="modal-footer">
-				<a class="btn btn-success" href="{{ action('HousingController@redirectToLogin') }}">Login</a>
-				<a class="btn btn-primary" href="{{ action('HousingController@redirectToRegister') }}">Register</a>
-				<a class="btn btn-danger" href="{{ action('HousingController@showListings') }}">Cancel</a>
-			</div>
-		</div>
-	</div>
-</div>
-
-@endif
-
 <div class="page-header">
 	<h3>Post New Housing Listing</h3>
 </div>
