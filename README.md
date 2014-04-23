@@ -27,11 +27,19 @@
 4. Select `Existing Projects into Workspace` then select the `ggc-talk` repository
 
 ## Using the Auth system in your module
+
 * If your page is restricted to only logged in users, add your route to the route group with 'before' => 'auth'
 * If your page is restricted to only guests, add your route to the route group with 'before' => 'guest'
 * If you want your page available to either guests or users, then do not put your route into either of those groups
 * To get an attribute of a logged in user, use Auth::user() -> attribute.  Where attribute can be id, first_name, or last_name.
 * To only display certain elements on a view, in an if statement, you can use Auth::guest() to check if the visitor is not logged in, or Auth::check() to check it a user is logged in.
+* You can access a logged in user's attributes by using Auth::user(). Here\'s an example:
+
+```
+@if(Auth::user() -> role == 'Admin')
+<!-- insert admin specific html code here -->
+@endif
+```
 
 ## Troubleshooting
  
