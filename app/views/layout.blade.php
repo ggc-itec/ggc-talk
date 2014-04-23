@@ -110,6 +110,8 @@
         @yield('content')
 
       </div>
+      
+		@yield('xtraContent')
 
     </div>
   </body>
