@@ -1,0 +1,1 @@
+/home/joeo/Code/Laravel/ggc-talk/app/views/Categories/index.blade.php

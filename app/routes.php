@@ -89,7 +89,9 @@ Route::group(array('prefix' => '/techtalk'), function() {
 // ===============================================
 Route::group(array('prefix' => '/posts', 'as'=> 'posts'), function()
 {
-	Route::model('post_category','Posts_category');
+	
+
+  Route::model('post_category','Posts_category');
     Route::model('post_topic','Posts_topic');
 	Route::model('post','Post');
 	Route::get('/', 'PostController@index');
