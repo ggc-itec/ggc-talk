@@ -1,6 +1,6 @@
 <?php
-
-class Post extends Eloquent {
+use LaravelBook\Ardent\Ardent;
+class Post extends Ardent {
 	protected $guarded = array();
 
 	/**
@@ -19,6 +19,4 @@ class Post extends Eloquent {
 	{
 		return $this->belongsTo('Post_topic');
 	}
-
-   
 }

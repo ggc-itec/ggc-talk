@@ -13,8 +13,8 @@
 
 Route::get('/', array('as' => 'home', function()
 {
-	//return View::make('home');
-	return View::make('posts.index');
+	//current home page	
+	return Redirect::to('posts');
 }));
 
 Route::resource('welcome', 'WelcomeController');
@@ -87,12 +87,12 @@ Route::group(array('prefix' => '/techtalk'), function() {
 // Handles routing for Message Board Post Views
 // ===============================================
 // ===============================================
-Route::group(array('prefix' => '/posts'), function()
+Route::group(array('prefix' => '/posts', 'as'=> 'posts'), function()
 {
 	Route::model('post_category','Posts_category');
     Route::model('post_topic','Posts_topic');
 	Route::model('post','Post');
-	//Route::get('/', array('as'=>'posts', 'uses' => 'PostController@index'));
+	Route::get('/', 'PostController@index');
 	Route::get('/addPost', 'PostController@create');	
 	Route::post('/store', 'PostController@store');	
 });
