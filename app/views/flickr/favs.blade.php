@@ -32,8 +32,10 @@
               class="btn btn-default">Upvote</a>
             <a href=""
               class="btn btn-default">Downvote</a>
-            <a href="{{ action('FlickrPicController@delete', $pic->id) }}"
-              class="btn btn-danger">Delete</a>  
+            <a href="{{ action('FlickrPicController@editFavPic', $pic->id) }}"
+              class="btn btn-primary">Edit</a>
+            <a href="{{ action('FlickrPicController@deleteFavPic', $pic->id) }}"
+              class="btn btn-danger">Delete</a>
           </td>
         </tr>
         @endforeach
