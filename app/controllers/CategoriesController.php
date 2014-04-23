@@ -9,7 +9,7 @@ class CategoriesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$categories = Category::all();
+		$categories = Post_category::all();
 
 		return View::make('categories.index', compact('categories'));
 	}
