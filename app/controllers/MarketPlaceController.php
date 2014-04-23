@@ -10,7 +10,7 @@ class MarketPlaceController extends BaseController
 	
 	public function handle_add()
 	{
-		$book = new Book_table();
+		$book = new Book();
 		$book -> book_title = Input::get('name');
 		$book -> book_author = Input::get('author');
 		$book -> book_ISBN10 = Input::get('isbn10');

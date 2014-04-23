@@ -1,16 +1,17 @@
 @extends('layout')
 
 @section('content')
-          
-<?php
+<div class="page-header">
+      <h1> Latest from Flickr </h1>
+  </div>
 
-$i = 0;
-
-for ($i = 0; $i < 100; $i++)
-{
-	echo "Hello World!";
-}
-?>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <a href="{{ action('FlickrPicController@index') }}" class="btn btn-primary">Refresh</a>
+      <a href="{{ action('FlickrPicController@showFavs') }}" class="btn btn-primary">Favorites</a>
+    </div>
+  </div>
+  
 
 <div style="text-align: center">
 <form action="{{ action('MarketPlaceController@handle_add') }}" method="post" role="form">
@@ -21,6 +22,11 @@ for ($i = 0; $i < 100; $i++)
             Book ISBN-13: <input type="input" name="isbn13" value="" /><br />
             Book Edition: <input type="input" name="edition" value="" /><br />
             Book Condition: <input type="input" name="condition" value="" /><br />
-            <input type="submit" class="btn btn-danger" value="Add" />
+            <input type="submit" class="btn btn-success" value="Add" />
           </form>
 </div>
+
+<table class="container">
+		straight HTML 
+  </table>
+ </class>

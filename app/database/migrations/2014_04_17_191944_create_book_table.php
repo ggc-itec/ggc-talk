@@ -12,7 +12,7 @@ class CreateBookTable extends Migration {
 	public function up()
 	{
 		
-	  Schema::create('book_table', function($table) 
+	  Schema::create('books', function($table) 
 	  {
      	$table -> increments('book_id');
       	$table -> string('book_title',25);
@@ -32,7 +32,7 @@ class CreateBookTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('flickr_pics');
 	}
 
 }

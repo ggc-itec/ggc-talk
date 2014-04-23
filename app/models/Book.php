@@ -1,6 +1,6 @@
 <?php
 
-  class Book_table extends Eloquent 
+  class Book extends Eloquent 
   {
     public $timestamps = false;
   }
