@@ -2,11 +2,11 @@
 
 @section('content')
 
-<div class="well">
+<div class="jumbotron">
   {{ Form::open( array('route' => 'account', 'class' => 'form-horizontal')) }}
   <fieldset>
     <legend>
-      <h2>Update Account Information</h2>
+      <h1>Update Account Information</h1>
     </legend>
     <div class="form-group">
       <div class="col-lg-6">
