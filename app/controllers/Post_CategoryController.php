@@ -31,14 +31,14 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function store()
 	{
-		//$validator = Validator::make($data = Input::all(), Category::$rules);
+		//$validator = Validator::make($data = Input::all(), Post_category::$rules);
 //
 //		if ($validator->fails())
 //		{
 //			return Redirect::back()->withErrors($validator)->withInput();
 //		}
 
-//		Category::create($data);
+//		Post_category::create($data);
 
 		$category = new Post_category;
 		$category->title = Input::get('title');
@@ -56,7 +56,7 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$category = Category::findOrFail($id);
+		$category = Post_category::findOrFail($id);
 
 		return View::make('categories.show', compact('category'));
 	}
@@ -69,7 +69,7 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$category = Category::find($id);
+		$category = Post_category::find($id);
 
 		return View::make('categories.edit', compact('category'));
 	}
@@ -82,18 +82,31 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$category = Category::findOrFail($id);
-
-		$validator = Validator::make($data = Input::all(), Category::$rules);
+		$category = Post_category::findOrFail($id);
+		
+/**		$validator = Validator::make($data = Input::all(), Post_category::$rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
+**/
 
-		$category->update($data);
-
-		return Redirect::route('categories.index');
+		 if(Input::get('updateButton')) 
+		 {
+			        $category->title = Input::get('title');
+					$category->description = Input::get('description');
+					$category->save();
+					
+		 } 
+		  elseif(Input::get('deleteButton')) 
+		  {
+            	//destroy($id); //if register then use this method
+		  		//handle delete or soft delete.
+		  }
+		
+		return Redirect::action('Post_CategoryController@index');
+		
 	}
 
 	/**
@@ -104,9 +117,9 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Category::destroy($id);
+		Post_category::destroy($id);
 
-		return Redirect::route('categories.index');
+		return Redirect::action('Post_CategoryController@index');
 	}
 
 }

@@ -53,20 +53,20 @@ class Post_TopicController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$topic = Topic::findOrFail($id);
+		$topic = Post_topic::findOrFail($id);
 
 		return View::make('topics.show', compact('topic'));
 	}
 
-	/**
-	 * Show the form for editing the specified topic.
+	/**p
+	 * Show the form ic editing the specified topic.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-		$topic = Topic::find($id);
+		$topic = Post_topic::find($id);
 
 		return View::make('topics.edit', compact('topic'));
 	}
@@ -79,9 +79,9 @@ class Post_TopicController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$topic = Topic::findOrFail($id);
+		$topic = Post_topic::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Topic::$rules);
+		$validator = Validator::make($data = Input::all(), Post_topic::$rules);
 
 		if ($validator->fails())
 		{
@@ -101,7 +101,7 @@ class Post_TopicController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Topic::destroy($id);
+		Post_topic::destroy($id);
 
 		return Redirect::route('topics.index');
 	}

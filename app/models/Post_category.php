@@ -5,6 +5,7 @@
     public $timestamps = false;
     
 	 protected $table = 'post_category';
+    protected $fillable = array('title','description');
 	
     public function topics()
     {

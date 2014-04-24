@@ -12,6 +12,8 @@
      	ID:    {{ $category->id }}	
      	<br>
     	Title: {{ $category->title }}	
+    	<br>
+    	Description: {{ $category->description }}	
 	</p> 
 	<br>    
 @endforeach    
