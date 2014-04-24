@@ -9,12 +9,12 @@
 <form class="form-horizontal" action="{{ action('HousingController@handleAddPost') }}" method="post" role="form">
 	<div class="form-group col-md-9" style="margin-right: 5px;">
 		<label class="control-label">Title</label>
-		<input type="text" class="form-control"/>
+		<input type="text" class="form-control" name="title"/>
 	</div>
 
 	<div class="form-group col-md-2" style="margin-right: 5px;">
 		<label class="control-label">City</label>
-		<input type="text" class="form-control"/>
+		<input type="text" class="form-control" name="city"/>
 	</div>
 	
 	<div class="form-group col-md-1">
@@ -24,12 +24,12 @@
 
 	<div class="form-group col-md-12">
 		<label class="control-label">Body</label>
-		<textarea class="form-control" rows="10"></textarea>
+		<textarea class="form-control" rows="10" name="body"></textarea>
 	</div>
 
 	<div class="form-group col-md-2"  style="margin-right: 5px;">
 		<label class="control-label">Rent</label>
-		<input type="text" class="form-control" placeholder="$ asking" name="maxRent"/>
+		<input type="text" class="form-control" placeholder="$ asking" name="rent"/>
 	</div>
 
 	<div class="form-group col-md-2" style="margin-right: 5px;">
@@ -46,7 +46,7 @@
 
 	<div class="form-group col-md-2" style="margin-right: 5px;">
 		<label class="control-label">Type</label>
-		<select class="form-control" name="housingType">
+		<select class="form-control" name="type">
 			<option value="apartment">apartment</option>
 			<option value="condo">condo</option>
 			<option value="duplex">duplex</option>
@@ -57,7 +57,7 @@
 
 	<div class="form-group col-md-2">
 		<label class="control-label">Bedrooms</label>
-		<select class="form-control" name="minRooms">
+		<select class="form-control" name="bedrooms">
 			<option value="">select</option>
 			<option value="1">1</option>
 			<option value="2">2</option>
