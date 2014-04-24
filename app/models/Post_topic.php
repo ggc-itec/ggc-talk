@@ -1,6 +1,6 @@
 <?php
 
-  class Post_topic extends ardent 
+  class Post_topic extends Eloquent 
   {
     public $timestamps = false;
     

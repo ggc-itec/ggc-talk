@@ -1,6 +1,6 @@
 <?php
 
-class CategoriesController extends \BaseController {
+class Post_CategoryController extends BaseController {
 
 	/**
 	 * Display a listing of categories

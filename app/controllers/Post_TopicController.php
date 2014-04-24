@@ -1,6 +1,6 @@
 <?php
 
-class TopicsController extends \BaseController {
+class Post_TopicController extends BaseController {
 
 	/**
 	 * Display a listing of topics
@@ -9,7 +9,7 @@ class TopicsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$topics = Topic::all();
+		$topics = Post_topic::all();
 
 		return View::make('topics.index', compact('topics'));
 	}
