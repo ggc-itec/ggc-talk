@@ -26,12 +26,36 @@
 3. Click on `File` then `Import`
 4. Select `Existing Projects into Workspace` then select the `ggc-talk` repository
 
-## Using the Auth system in your module
-* If your page is restricted to only logged in users, add your route to the route group with 'before' => 'auth'
-* If your page is restricted to only guests, add your route to the route group with 'before' => 'guest'
-* If you want your page available to either guests or users, then do not put your route into either of those groups
+## Using the Auth system
+
 * To get an attribute of a logged in user, use Auth::user() -> attribute.  Where attribute can be id, first_name, or last_name.
-* To only display certain elements on a view, in an if statement, you can use Auth::guest() to check if the visitor is not logged in, or Auth::check() to check it a user is logged in.
+
+#### Restrict routes with authentication filters:
+```
+Route::group(array('before' => 'auth'), function() {
+  // insert route that can only be accessed by a logged in user
+});
+
+Route::group(array('before' => 'guest'), function() {
+  // insert route that can only be accessed by a non-logged in user
+});
+```
+
+#### How to access logged in user's attributes:
+```
+@if(Auth::user() -> role == 'Admin')
+<!-- insert admin specific html code here -->
+@endif
+```
+
+#### How to check if a user is logged in:
+```
+Auth::check()
+// This returns true if the user is logged in
+Auth::guest()
+// This returns true if the user is not logged in
+```
+You might want to use this for a specific element that you only want admins to see.  For example, you might want admins to be able to see a button to delete comments on the gallery page, but you wouldn't want standard users to see the button.
 
 ## Troubleshooting
  
