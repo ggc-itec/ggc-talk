@@ -91,23 +91,34 @@ class Post_CategoryController extends BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 **/
+	    $category->title = Input::get('title');
+		$category->description = Input::get('description');
+		$category->save();
+		return Redirect::action('Post_CategoryController@index');
+		
+	}
 
-		 if(Input::get('updateButton')) 
+	/**
+	 * Facilitate form submission by checking button submitted.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function VerifySubmitFormAction($id)
+	{
+		if(Input::get('updateButton')) 
 		 {
-			        $category->title = Input::get('title');
-					$category->description = Input::get('description');
-					$category->save();
-					
+					//update($id);
 		 } 
 		  elseif(Input::get('deleteButton')) 
 		  {
             	//destroy($id); //if register then use this method
 		  		//handle delete or soft delete.
-		  }
-		
+		  }		
 		return Redirect::action('Post_CategoryController@index');
 		
 	}
+
 
 	/**
 	 * Remove the specified resource from storage.
