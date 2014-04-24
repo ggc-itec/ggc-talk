@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class AddForeignKeyPostsTopic extends Migration {
+class AddForeignKeyPostTopic extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,11 @@ class AddForeignKeyPostsTopic extends Migration {
 	 */
 	public function up()
 	{
-		if(Schema::hasTable('posts_topic'))
+		if(Schema::hasTable('Post_topic'))
 		{
-			Schema::table('posts', function(Blueprint $table)
+			Schema::table('post', function(Blueprint $table)
 			{
-				$table->foreign('topic_id')->references('id')->on('posts_topic')
+				$table->foreign('topic_id')->references('id')->on('Post_topic')
 				->onDelete('cascade')
 				->onUpdate('cascade');
 			});

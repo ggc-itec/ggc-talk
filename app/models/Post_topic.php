@@ -4,8 +4,10 @@
   {
     public $timestamps = false;
     
-	protected $table = 'posts_topic';
-	
+  	protected $table = 'Post_topic';
+  	
+    protected $fillable = array('title');
+
     public function category()
     {
         return $this->belongsTo('Post_category');

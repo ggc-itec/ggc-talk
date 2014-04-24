@@ -87,16 +87,36 @@ Route::group(array('prefix' => '/techtalk'), function() {
 // Handles routing for Message Board Post Views
 // ===============================================
 // ===============================================
+
+Route::get('/post',  function()
+{
+  
+  return Redirect::to('posts');
+});
+
 Route::group(array('prefix' => '/posts', 'as'=> 'posts'), function()
 {
-  	Route::model('post_category','Posts_category');
-    Route::model('post_topic','Posts_topic');
+  	
+    Route::model('post_topic','Post_topic');
   	Route::model('post','Post');
   	Route::get('/', 'PostController@index');
   	Route::get('/addPost', 'PostController@create');	
-  	Route::post('/store', 'PostController@store');	
-  	Route::get('/categories', 'Post_CategoryController@index');
+  	
+    Route::post('/store', 'PostController@store');	
+  	
+    
     Route::get('/topic', 'Post_TopicController@index');
+    Route::get('/addTopic', 'Post_TopicController@create');
+    Route::post('/addTOpic', 'Post_TopicController@store');  
+});
+
+
+Route::group(array('prefix' => '/category', 'as'=> 'categories'), function()
+{
+    Route::model('post_category','post_category');
+    Route::get('/', 'Post_CategoryController@index');   
+    Route::get('/addCategory', 'Post_CategoryController@create');
+    Route::post('/addCategory', 'Post_CategoryController@store');
 });
 
 /*

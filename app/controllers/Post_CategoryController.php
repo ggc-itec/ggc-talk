@@ -31,16 +31,21 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Category::$rules);
+		//$validator = Validator::make($data = Input::all(), Category::$rules);
+//
+//		if ($validator->fails())
+//		{
+//			return Redirect::back()->withErrors($validator)->withInput();
+//		}
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+//		Category::create($data);
 
-		Category::create($data);
+		$category = new Post_category;
+		$category->title = Input::get('title');
+		$category->description = Input::get('description');
+		$category->save();
 
-		return Redirect::route('categories.index');
+		return Redirect::action('Post_CategoryController@index');
 	}
 
 	/**

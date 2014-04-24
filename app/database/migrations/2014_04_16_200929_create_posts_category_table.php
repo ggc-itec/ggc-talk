@@ -12,7 +12,7 @@ class CreatePostsCategoryTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('posts_category', function(Blueprint $table) {
+		Schema::create('post_category', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('title');
 			$table->text('description');
@@ -27,7 +27,7 @@ class CreatePostsCategoryTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('posts_category');
+		Schema::drop('post_category');
 	}
 
 }

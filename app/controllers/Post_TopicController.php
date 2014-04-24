@@ -31,14 +31,16 @@ class Post_TopicController extends BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Topic::$rules);
+		//$validator = Validator::make($data = Input::all(), Topic::$rules);
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
-
-		Topic::create($data);
+		//if ($validator->fails())
+		//{
+		//	return Redirect::back()->withErrors($validator)->withInput();
+		//}
+		$topic = new Post_topic;
+		$topic->title = Input::get('title');
+		$topic->category_id = Input::get('category_id');
+		$topic->save();
 
 		return Redirect::route('topics.index');
 	}

@@ -4,7 +4,7 @@
   {
     public $timestamps = false;
     
-	protected $table = 'posts_category';
+	 protected $table = 'post_category';
 	
     public function topics()
     {

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-header">
-  <h1>GGC Forum</h1>
+  <h1>GGC Forum - Categories</h1>
 </div>
 
 <div class="panel panel-default">

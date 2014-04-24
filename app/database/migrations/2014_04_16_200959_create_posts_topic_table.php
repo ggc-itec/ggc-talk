@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePostsTopicTable extends Migration {
+class CreatePostTopicTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreatePostsTopicTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('posts_topic', function(Blueprint $table) {
+		Schema::create('Post_topic', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('title', 140);
 			$table->integer('category_id')->unsigned();
@@ -27,7 +27,7 @@ class CreatePostsTopicTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('posts_topic');
+		Schema::drop('Post_topic');
 	}
 
 }
