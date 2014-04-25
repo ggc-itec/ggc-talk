@@ -8,7 +8,8 @@
 		"laravelbook/ardent": "~2.3.0"
 	},
 	"require-dev": {
-    	"way/generators": "*"
+    	"way/generators": "*",
+   	    "phpunit/phpunit": "3.7.*"  	
 	},
 	"autoload": {
 		"classmap": [

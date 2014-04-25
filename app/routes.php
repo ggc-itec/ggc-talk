@@ -11,13 +11,11 @@
  |
  */
 
-Route::get('/', array(
-  'as' => 'home',
-  function() {
-    return View::make('home');
-  }
-
-));
+Route::get('/', array('as' => 'home', function()
+{
+	//current home page	
+	return Redirect::to('posts');
+}));
 
 Route::resource('welcome', 'WelcomeController');
 
@@ -89,15 +87,62 @@ Route::group(array('prefix' => '/techtalk'), function() {
 // Handles routing for Message Board Post Views
 // ===============================================
 // ===============================================
-Route::group(array('prefix' => '/posts'), function() {
 
-  Route::get('/', array(
-    'as' => 'posts',
-    'uses' => 'PostController@index'
-  ));
-  Route::get('/addPost', 'PostController@create');
-  Route::post('/store', 'PostController@store');
+Route::get('/post',  function()
+{
+  
+  return Redirect::to('posts');
 });
+
+
+
+Route::group(array('prefix' => '/category', 'as'=> 'categories'), function()
+{
+    Route::model('post_category','post_category');
+    Route::get('/', 'Post_CategoryController@index');       
+    Route::get('/add', 'Post_CategoryController@create');
+     Route::get('edit/{id}', array('uses' => 'Post_CategoryController@edit'));
+ 
+    //Route::get('delete/{id?}', function($id = '-1'){});     
+
+    Route::post('/add', 'Post_CategoryController@store');    
+//    Route::post('/edit/{id}', "uses" => "Post_CategoryController@update");
+    Route::post('update/{id}', array('uses' => 'Post_CategoryController@update'));
+    //Route::post('/delete/{id?}', function($id = '-1'){}); 
+
+});
+
+
+Route::group(array('prefix' => '/topic', 'as'=> 'topic'), function()
+{
+    Route::model('post_topic','Post_topic');
+    Route::get('/', 'Post_TopicController@index');    
+    
+    Route::get('/add', 'Post_TopicController@create');
+    Route::get('/edit', 'Post_TopicController@edit');    
+
+    Route::post('/edit', 'Post_TopicController@update');
+    Route::post('/add', 'Post_TopicController@store');
+    
+});
+
+
+Route::group(array('prefix' => '/posts', 'as'=> 'posts'), function()
+{
+  	Route::model('post','Post');
+    
+    Route::get('/', 'PostController@index');     	  	
+  	Route::get('/add', 'PostController@create');     
+    Route::get('/addTopic', 'Post_TopicController@create'); 
+    Route::get('/topic', 'Post_TopicController@index');
+    
+    Route::post('/addTOpic', 'Post_TopicController@store');  
+    Route::post('/add', 'PostController@store');
+    
+});
+
+
+
 
 /*
  * User route-model binding
@@ -186,11 +231,13 @@ Route::group(array('before' => 'auth'), function() {
   });
 });
 
+
 // ===============================================
 // Housing SECTION =================================
 // Handles routing for housing
 // ===============================================
 // ===============================================
+
 Route::group(array('prefix' => '/housing'), function()
 {
 	Route::get('/', 'HousingController@showListings');
@@ -200,3 +247,4 @@ Route::group(array('prefix' => '/housing'), function()
 	Route::get('redirectRegister', 'HousingController@redirectToRegister');
 	Route::get('previewPost', 'HousingController@previewPost');
 });
+
