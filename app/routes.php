@@ -184,6 +184,12 @@ Route::group(array('before' => 'auth'), function() {
       });
     });
   });
+  //The Petitions route
+  // Route::get('petitions', 'PetitionController@showPetitions');
+  Route::group(array('prefix' => '/petitions'), function() {
+  	Route::get('/', 'PetitionController@showPetitions');
+	Route::get('upload', 'PetitionController@showCreatePetition');
+  });
 });
 
 // ===============================================
