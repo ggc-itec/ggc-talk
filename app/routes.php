@@ -98,16 +98,16 @@ Route::get('/post',  function()
 
 Route::group(array('prefix' => '/category', 'as'=> 'categories'), function()
 {
-    Route::model('post_category','post_category');
-    Route::get('/', 'Post_CategoryController@index');       
-    Route::get('/add', 'Post_CategoryController@create');
-     Route::get('edit/{id}', array('uses' => 'Post_CategoryController@edit'));
+    Route::model('Posts_category','Posts_category');
+    Route::get('/', 'Posts_CategoryController@index');       
+    Route::get('/add', 'Posts_CategoryController@create');
+     Route::get('edit/{id}', array('uses' => 'Posts_CategoryController@edit'));
  
     //Route::get('delete/{id?}', function($id = '-1'){});     
 
-    Route::post('/add', 'Post_CategoryController@store');    
-//    Route::post('/edit/{id}', "uses" => "Post_CategoryController@update");
-    Route::post('update/{id}', array('uses' => 'Post_CategoryController@update'));
+    Route::post('/add', 'Posts_CategoryController@store');    
+//    Route::post('/edit/{id}', "uses" => "Posts_CategoryController@update");
+    Route::post('edit/{id}', array('uses' => 'Posts_CategoryController@update'));
     //Route::post('/delete/{id?}', function($id = '-1'){}); 
 
 });
@@ -115,14 +115,14 @@ Route::group(array('prefix' => '/category', 'as'=> 'categories'), function()
 
 Route::group(array('prefix' => '/topic', 'as'=> 'topic'), function()
 {
-    Route::model('post_topic','Post_topic');
-    Route::get('/', 'Post_TopicController@index');    
+    Route::model('Posts_topic','Posts_topic');
+    Route::get('/', 'Posts_TopicController@index');    
     
-    Route::get('/add', 'Post_TopicController@create');
-    Route::get('/edit', 'Post_TopicController@edit');    
+    Route::get('/add', 'Posts_TopicController@create');
+    Route::get('/edit', 'Posts_TopicController@edit');    
 
-    Route::post('/edit', 'Post_TopicController@update');
-    Route::post('/add', 'Post_TopicController@store');
+    Route::post('/edit', 'Posts_TopicController@update');
+    Route::post('/add', 'Posts_TopicController@store');
     
 });
 
@@ -133,10 +133,10 @@ Route::group(array('prefix' => '/posts', 'as'=> 'posts'), function()
     
     Route::get('/', 'PostController@index');     	  	
   	Route::get('/add', 'PostController@create');     
-    Route::get('/addTopic', 'Post_TopicController@create'); 
-    Route::get('/topic', 'Post_TopicController@index');
+    Route::get('/addTopic', 'Posts_TopicController@create'); 
+    Route::get('/topic', 'Posts_TopicController@index');
     
-    Route::post('/addTOpic', 'Post_TopicController@store');  
+    Route::post('/addTOpic', 'Posts_TopicController@store');  
     Route::post('/add', 'PostController@store');
     
 });

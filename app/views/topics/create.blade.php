@@ -6,7 +6,7 @@
 	<h3>Topics</h3>
 </div>
 
-{{  Form::open(array('action' => 'Post_TopicController@store'))  }}
+{{  Form::open(array('action' => 'Posts_TopicController@store'))  }}
 	
 	<div class="form-group " style="margin-right: 5px;">
 		<label class="control-label">id</label>

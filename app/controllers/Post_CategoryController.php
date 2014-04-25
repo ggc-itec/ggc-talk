@@ -1,6 +1,6 @@
 <?php
 
-class Post_CategoryController extends BaseController {
+class Posts_CategoryController extends BaseController {
 
 	/**
 	 * Display a listing of categories
@@ -9,7 +9,7 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function index()
 	{
-		$categories = Post_category::all();
+		$categories = Posts_category::all();
 
 		return View::make('categories.index', compact('categories'));
 	}
@@ -31,21 +31,21 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function store()
 	{
-		//$validator = Validator::make($data = Input::all(), Post_category::$rules);
+		//$validator = Validator::make($data = Input::all(), Posts_category::$rules);
 //
 //		if ($validator->fails())
 //		{
 //			return Redirect::back()->withErrors($validator)->withInput();
 //		}
 
-//		Post_category::create($data);
+//		Posts_category::create($data);
 
-		$category = new Post_category;
+		$category = new Posts_category;
 		$category->title = Input::get('title');
 		$category->description = Input::get('description');
 		$category->save();
 
-		return Redirect::action('Post_CategoryController@index');
+		return Redirect::action('Posts_CategoryController@index');
 	}
 
 	/**
@@ -56,7 +56,7 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$category = Post_category::findOrFail($id);
+		$category = Posts_category::findOrFail($id);
 
 		return View::make('categories.show', compact('category'));
 	}
@@ -69,7 +69,7 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$category = Post_category::find($id);
+		$category = Posts_category::find($id);
 
 		return View::make('categories.edit', compact('category'));
 	}
@@ -82,9 +82,9 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$category = Post_category::findOrFail($id);
+		$category = Posts_category::findOrFail($id);
 		
-/**		$validator = Validator::make($data = Input::all(), Post_category::$rules);
+/**		$validator = Validator::make($data = Input::all(), Posts_category::$rules);
 
 		if ($validator->fails())
 		{
@@ -94,7 +94,7 @@ class Post_CategoryController extends BaseController {
 	    $category->title = Input::get('title');
 		$category->description = Input::get('description');
 		$category->save();
-		return Redirect::action('Post_CategoryController@index');
+		return Redirect::action('Posts_CategoryController@index');
 		
 	}
 
@@ -115,7 +115,7 @@ class Post_CategoryController extends BaseController {
             	//destroy($id); //if register then use this method
 		  		//handle delete or soft delete.
 		  }		
-		return Redirect::action('Post_CategoryController@index');
+		return Redirect::action('Posts_CategoryController@index');
 		
 	}
 
@@ -128,9 +128,9 @@ class Post_CategoryController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Post_category::destroy($id);
+		Posts_category::destroy($id);
 
-		return Redirect::action('Post_CategoryController@index');
+		return Redirect::action('Posts_CategoryController@index');
 	}
 
 }

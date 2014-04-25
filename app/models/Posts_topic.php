@@ -1,16 +1,16 @@
 <?php
 
-  class Post_topic extends Eloquent 
+  class Posts_topic extends Eloquent 
   {
     public $timestamps = false;
     
-  	protected $table = 'Post_topic';
+  	protected $table = 'Posts_topic';
   	
     protected $fillable = array('title');
 
     public function category()
     {
-        return $this->belongsTo('Post_category');
+        return $this->belongsTo('Posts_category');
     }
 
     public function posts()

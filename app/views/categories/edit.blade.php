@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-{{  Form::open(array('action' => array('Post_CategoryController@update', $category->id)))  }}
+{{  Form::open(array('action' => array('Posts_CategoryController@update', $category->id)))  }}
 				
 	<div class="form-group " style="margin-right: 5px;">
 		<label class="control-label">id  {{  $category->id  }}</label>		

@@ -9,7 +9,7 @@ class PostController extends BaseController {
 	 */
 	public function index()
 	{
-	    $posts = Post::all();
+	    $posts = Posts::all();
 		
 	    return View::make('posts.index', compact('posts'));
 	}
@@ -32,7 +32,7 @@ class PostController extends BaseController {
 	 */
 	public function store()
 	{
-	    //$validator = Validator::make($data = Input::all(), Post::$rules);
+	    //$validator = Validator::make($data = Input::all(), Posts::$rules);
 
 	  //  if ($validator->fails())
 	  //  {
@@ -56,7 +56,7 @@ class PostController extends BaseController {
 	 */
 	public function show($id)
 	{
-	    $post = Post::findOrFail($id);
+	    $post = Posts::findOrFail($id);
 
 	    return View::make('posts.show', compact('post'));
 	}
@@ -70,7 +70,7 @@ class PostController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$post = Post::find($id);
+		$post = Posts::find($id);
 
 		return View::make('posts.edit', compact('post'));
 	}
@@ -85,9 +85,9 @@ class PostController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$post = Post::findOrFail($id);
+		$post = Posts::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Post::$rules);
+		$validator = Validator::make($data = Input::all(), Posts::$rules);
 
         if ($validator->fails())
         {
@@ -107,7 +107,7 @@ class PostController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Post::destroy($id);
+		Posts::destroy($id);
 
 		return Redirect::route('posts.index');
 	}

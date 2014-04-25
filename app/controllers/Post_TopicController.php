@@ -1,6 +1,6 @@
 <?php
 
-class Post_TopicController extends BaseController {
+class Posts_TopicController extends BaseController {
 
 	/**
 	 * Display a listing of topics
@@ -9,7 +9,7 @@ class Post_TopicController extends BaseController {
 	 */
 	public function index()
 	{
-		$topics = Post_topic::all();
+		$topics = Posts_topic::all();
 
 		return View::make('topics.index', compact('topics'));
 	}
@@ -37,7 +37,7 @@ class Post_TopicController extends BaseController {
 		//{
 		//	return Redirect::back()->withErrors($validator)->withInput();
 		//}
-		$topic = new Post_topic;
+		$topic = new Posts_topic;
 		$topic->title = Input::get('title');
 		$topic->category_id = Input::get('category_id');
 		$topic->save();
@@ -53,7 +53,7 @@ class Post_TopicController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$topic = Post_topic::findOrFail($id);
+		$topic = Posts_topic::findOrFail($id);
 
 		return View::make('topics.show', compact('topic'));
 	}
@@ -66,7 +66,7 @@ class Post_TopicController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$topic = Post_topic::find($id);
+		$topic = Posts_topic::find($id);
 
 		return View::make('topics.edit', compact('topic'));
 	}
@@ -79,9 +79,9 @@ class Post_TopicController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$topic = Post_topic::findOrFail($id);
+		$topic = Posts_topic::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Post_topic::$rules);
+		$validator = Validator::make($data = Input::all(), Posts_topic::$rules);
 
 		if ($validator->fails())
 		{
@@ -101,7 +101,7 @@ class Post_TopicController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Post_topic::destroy($id);
+		Posts_topic::destroy($id);
 
 		return Redirect::route('topics.index');
 	}

@@ -1,6 +1,6 @@
 <?php
 use LaravelBook\Ardent\Ardent;
-class Post extends Ardent {
+class Posts extends Ardent {
 	protected $guarded = array();
 
 	/**
@@ -17,6 +17,6 @@ class Post extends Ardent {
 	
 	public function topic()
 	{
-		return $this->belongsTo('Post_topic');
+		return $this->belongsTo('Posts_topic');
 	}
 }

@@ -12,11 +12,11 @@ class AddForeignKeyPostsCategory extends Migration {
 	 */
 	public function up()
 	{
-		if(Schema::hasTable('post_category'))
+		if(Schema::hasTable('posts_category'))
 		{
-			Schema::table('post_topic', function(Blueprint $table)
+			Schema::table('posts_topic', function(Blueprint $table)
 			{
-				$table->foreign('category_id')->references('id')->on('post_category')
+				$table->foreign('category_id')->references('id')->on('posts_category')
 				->onDelete('cascade')
 				->onUpdate('cascade');
 			});
