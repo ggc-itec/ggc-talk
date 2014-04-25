@@ -189,6 +189,13 @@ Route::group(array('before' => 'auth'), function() {
     'as' => 'logout',
     'uses' => 'UserController@logout'
   ));
+  
+  Route::get('account', array(
+    'as' => 'account',
+    'uses' => 'UserController@showAccount'
+  ));
+  Route::post('account', 'UserController@saveAccount');
+  
   Route::group(array('before' => 'admin'), function() {
     Route::group(array('prefix' => 'admin'), function() {
       Route::get('users', array(
@@ -238,4 +245,6 @@ Route::group(array('prefix' => '/housing'), function()
 	Route::post('handlePost', 'HousingController@handleAddPost');
 	Route::get('redirectLogin', 'HousingController@redirectToLogin');
 	Route::get('redirectRegister', 'HousingController@redirectToRegister');
+	Route::get('previewPost', 'HousingController@previewPost');
 });
+

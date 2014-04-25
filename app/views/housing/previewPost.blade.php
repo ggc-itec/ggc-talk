@@ -2,7 +2,10 @@
 
 @section('content')
 
-<h1>Post Successfull!</h1>
+<div class="page-header">
+	<h3>Eventually, your listing preview will appear on this page.</h3>
+</div>
+
 <a class="btn btn-success" href="{{ action('HousingController@showListings') }}">OK</a>
 
 @stop

@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="jumbotron">
-  {{ Form::open( array('route' => array('editUser', $user -> id), 'class' => 'form-horizontal')) }}
+  {{ Form::open( array('route' => 'account', 'class' => 'form-horizontal')) }}
   <fieldset>
     <legend>
-      <h1>Edit User</h1>
+      <h1>Update Account Information</h1>
     </legend>
     <div class="form-group">
       <div class="col-lg-6">
@@ -18,18 +18,12 @@
     </div>
     <div class="form-group">
       <div class="col-lg-12">
-        {{ Form::email('email', $user -> id, array('class' => 'form-control input-lg', 'placeholder' => 'Email', 'required' => '')) }}
+        {{ Form::password('password', array('class' => 'form-control input-lg', 'placeholder' => 'New Password')) }}
       </div>
     </div>
     <div class="form-group">
       <div class="col-lg-12">
-        {{ Form::password('password', array('class' => 'form-control input-lg', 'placeholder' => 'Password')) }}
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-lg-12">
-        {{ Form::label('role', 'Role', array('control-label')) }}
-        {{ Form::select('role', array('Standard' => 'Standard', 'Admin' => 'Admin'), $user -> role, array('class' => 'form-control')) }}
+        {{ Form::password('confirm_password', array('class' => 'form-control input-lg', 'placeholder' => 'Confirm New Password')) }}
       </div>
     </div>
     <div class="form-group">

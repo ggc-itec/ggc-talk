@@ -80,8 +80,16 @@
                 </ul>
               </li>
               @endif
-              <li class="">
-                {{ HTML::linkRoute('logout', 'Logout (' . Auth::user() -> first_name . ')') }}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user() -> first_name }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="">
+                    {{ HTML::linkRoute('account', 'Account') }}
+                  </li>
+                  <li class="">
+                    {{ HTML::linkRoute('logout', 'Logout') }}
+                  </li>
+                </ul>
               </li>
               @endif
             </ul>

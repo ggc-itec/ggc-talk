@@ -6,7 +6,7 @@
   {{ Form::open(array('action' => 'UserController@login', 'id' => 'logInForm', 'class' => 'form-horizontal')) }}
   <fieldset>
     <legend>
-      <h2>Login</h2>
+      <h1>Login</h1>
     </legend>
     <div class="form-group">
       {{ Form::label('email', 'Email', array('class' => 'col-lg-2 control-label')) }}

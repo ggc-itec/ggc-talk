@@ -12,6 +12,7 @@ class CreateHousingListings extends Migration {
 	public function up() {
 		Schema::create('housing_listings', function($table) {
 			$table -> increments('id');
+			$table -> string('author', 64);
 			$table -> string('title', 200);
 			$table -> text('body');
 			$table -> decimal('rent', 7, 2);
@@ -36,8 +37,8 @@ class CreateHousingListings extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('housing_listings');
 		Schema::drop('housing_pics');
+		Schema::drop('housing_listings');
 	}
 
 }
