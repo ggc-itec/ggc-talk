@@ -12,7 +12,7 @@ class CreatePostsTopicTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Posts_topic', function(Blueprint $table) {
+		Schema::create('posts_topic', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('title', 140);
 			$table->integer('category_id')->unsigned();

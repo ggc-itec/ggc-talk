@@ -101,7 +101,7 @@ Route::group(array('prefix' => '/category', 'as'=> 'categories'), function()
     Route::model('Posts_category','Posts_category');
     Route::get('/', 'Posts_CategoryController@index');       
     Route::get('/add', 'Posts_CategoryController@create');
-     Route::get('edit/{id}', array('uses' => 'Posts_CategoryController@edit'));
+     Route::get('/edit/{id}', array('uses' => 'Posts_CategoryController@edit'));
  
     //Route::get('delete/{id?}', function($id = '-1'){});     
 

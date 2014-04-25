@@ -12,11 +12,11 @@ class AddForeignKeyPostsTopic extends Migration {
 	 */
 	public function up()
 	{
-		if(Schema::hasTable('Posts_topic'))
+		if(Schema::hasTable('posts_topic'))
 		{
 			Schema::table('posts', function(Blueprint $table)
 			{
-				$table->foreign('topic_id')->references('id')->on('Posts_topic')
+				$table->foreign('topic_id')->references('id')->on('posts_topic')
 				->onDelete('cascade')
 				->onUpdate('cascade');
 			});
