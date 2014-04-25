@@ -3,7 +3,7 @@
 {{-- dd($housing_listings->toArray()) --}}
 
 @section('content')
-<div class="page-header">
+<div class="page-header" style="margin-top: 60px;">
 	<div class="navbar-right btn-toolbar">
 		{{-- if user is logged in, allow view of own listings and allow post --}}
 		@if(Auth::check())
