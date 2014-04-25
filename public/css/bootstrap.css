@@ -6,6 +6,12 @@
 
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
+.error {
+	font-size: 12px;
+	font-style: italic;
+	color: red;
+}
+
 article,
 aside,
 details,

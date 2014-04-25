@@ -1,13 +1,12 @@
 <?php
 
 class HousingController extends BaseController {
-
+	
 	/**
 	 * displays all current housing listings on main housing search page
 	 */
 	public function showListings() {
-		$housing_listings = Housing_listing::all();
-
+		$housing_listings = Housing_listing::all() -> reverse();
 		return View::make('housing.listings') -> withHousing_listings($housing_listings);
 	}
 
@@ -17,7 +16,8 @@ class HousingController extends BaseController {
 	public function postListing() {
 		if (Auth::guest()) {
 			return Redirect::to('housing');
-		} else {
+		} 
+		else {
 			return View::make('housing.post');
 		}
 	}
@@ -27,16 +27,12 @@ class HousingController extends BaseController {
 	 * and the redirects to previewPost
 	 */
 	public function handleAddPost() {
-		$listing = new Housing_listing();
-		$listing -> author = Auth::user()->id;
-		$listing -> title = Input::get('title');
-		$listing -> city = Input::get('city');
-		$listing -> body = Input::get('body');
-		$listing -> rent = Input::get('rent');
-		$listing -> distance = Input::get('distance');
-		$listing -> type = Input::get('type');
-		$listing -> bedrooms = Input::get('bedrooms');
-		$listing -> save();
+		$housing_listing = new Housing_listing(Input::all());
+		
+		if (!$housing_listing->save()) {
+			return Redirect::back()->withInput()->withErrors($housing_listing->getErrors());
+		}
+		
 		return Redirect::to('housing/previewPost') -> with(array('alert' => 'Post successful.', 'alert-class' => 'alert-success'));
 	}
 
@@ -47,7 +43,8 @@ class HousingController extends BaseController {
 	public function redirectToLogin() {
 		if (Auth::guest()) {
 			return Redirect::guest('login');
-		} else {
+		} 
+		else {
 			return Redirect::to('housing/post') -> with(array('alert' => 'You are successfully logged in.', 'alert-class' => 'alert-success'));
 		}
 	}
@@ -59,7 +56,8 @@ class HousingController extends BaseController {
 	public function redirectToRegister() {
 		if (Auth::guest()) {
 			return Redirect::guest('register');
-		} else {
+		} 
+		else {
 			return Redirect::to('housing/post') -> with(array('alert' => 'Welcome! You have successfully created an account, and have been logged in.', 'alert-class' => 'alert-success'));
 		}
 	}
