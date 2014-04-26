@@ -59,6 +59,23 @@ Route::filter('guest', function()
 {
 	if (Auth::check()) return Redirect::to('/');
 });
+  
+/*
+ |--------------------------------------------------------------------------
+ | Role Filters
+ |--------------------------------------------------------------------------
+ |
+ */
+
+Route::filter('admin', function() {
+  if (Auth::user() -> role != 'Admin')
+    return Redirect::to('/');
+});
+
+Route::filter('standard', function() {
+  if (Auth::user() -> role == 'Premium' || Auth::user() -> role == 'Admin')
+      return Redirect::to('/');
+});
 
 /*
 |--------------------------------------------------------------------------
