@@ -22,7 +22,7 @@
 	</div>
 	
 
-
+{{  Form::submit('Add!', array('class' => 'btn btn-primary'))  }}
 {{ Form::close() }}
 
 @stop
