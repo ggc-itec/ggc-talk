@@ -7,11 +7,30 @@ class Housing_listing extends BaseModel {
 	protected static $rules = array(
 		'title' => 'required',
 		'body' => 'required',
-		'rent' => array('required', 'regex:/((([1-9]{1,2}\d?(\,\d{3}){1,})|([1-9]\d*))(\.\d{0,2})?)|0?\.\d{1,2}/'),
+		'rent' => array('required','regex:/^\d+(\.\d*)?$|^0?\.\d+$/'),
 		'type' => 'required',
 		'bedrooms' => 'required',
 		'city' => 'required'
 	);
+	
+	public function validate() {
+		parent::validate();
+		
+		$messages = array(
+			'required' => '*requiired',
+			'integer' => 'no , or .',
+			'regex' => '*invalid format'
+		);
+		
+		$validation = Validator::make($this->getAttributes(), static::$rules, $messages);
+		
+		if ($validation->fails()) {
+			$this->errors = $validation->messages();
+			return false;	
+		}
+		
+		return true;
+	}
 	
 	public function image() {
 		return $this -> hasMany('Housing_pic');

@@ -27,7 +27,15 @@ class HousingController extends BaseController {
 	 * and the redirects to previewPost
 	 */
 	public function handleAddPost() {
-		$housing_listing = new Housing_listing(Input::all());
+		$housing_listing = new Housing_listing();
+		$housing_listing->author = Auth::user()->id;
+		$housing_listing->title = Input::get('title');
+		$housing_listing->body = Input::get('body');
+		$housing_listing->rent = Input::get('rent');
+		$housing_listing->distance = Input::get('distance');
+		$housing_listing->type = Input::get('type');
+		$housing_listing->bedrooms = Input::get('bedrooms');
+		$housing_listing->city = Input::get('city');
 		
 		if (!$housing_listing->save()) {
 			return Redirect::back()->withInput()->withErrors($housing_listing->getErrors());

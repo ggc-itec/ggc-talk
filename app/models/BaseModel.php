@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This model can be extended by any other model that requires validation
+ */
+
 class BaseModel extends Eloquent {
 	
 	protected $errors;
@@ -13,11 +17,11 @@ class BaseModel extends Eloquent {
 	}
 	
 	public function validate() {
+		
 		$validation = Validator::make($this->getAttributes(), static::$rules);
 		
 		if ($validation->fails()) {
 			$this->errors = $validation->messages();
-			
 			return false;	
 		}
 		
