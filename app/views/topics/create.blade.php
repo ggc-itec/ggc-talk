@@ -18,8 +18,10 @@
 	</div>
 		<div class="form-group " style="margin-right: 5px;">
 		<label class="control-label">category_id</label>
-		<input type="text" class="form-control" name="category_id"/>
+		{{ Form::select('title', $categories) }}
 	</div>
+	
+
 
 {{ Form::close() }}
 

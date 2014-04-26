@@ -21,7 +21,10 @@ class Posts_TopicController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('topics.create');
+		
+		$categories = Posts_category::lists('title');
+
+		return View::make('topics.create')->with('categories', $categories);
 	}
 
 	/**

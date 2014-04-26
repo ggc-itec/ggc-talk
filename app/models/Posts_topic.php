@@ -4,7 +4,7 @@
   {
     public $timestamps = false;
     
-  	protected $table = 'Posts_topic';
+  	protected $table = 'posts_topic';
   	
     protected $fillable = array('title');
 
