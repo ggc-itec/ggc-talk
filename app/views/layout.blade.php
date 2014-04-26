@@ -43,6 +43,11 @@
               <li>
                 <a href="{{ URL::to('housing') }}">Housing</a>
               </li>
+              @if(Auth::check())
+              <li>
+              	<a href="{{ URL::to('petitions') }}">Class Petitions</a>
+              </li>
+              @endif
               <li>
                 <a href="#about">About</a>
               </li>
