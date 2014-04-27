@@ -7,7 +7,8 @@
 </div>
 <div class="panel panel-default">
   <div class="panel-body">
-	@foreach ($Topics as $topic)
+@if (count($topics) > 0)	
+	@foreach ($Topicsa as $topic)
      <p>
      	ID:    {{ $topic->id }}	
      	<br>
@@ -16,7 +17,10 @@
     	Category: {{ $topic->category }}	
 	</p> 
 	<br>    
-@endforeach    
+@endforeach
+@else
+ <p> No topics :( </p>
+@endif    
   </div>
 </div>
 </div>
