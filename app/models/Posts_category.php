@@ -9,6 +9,14 @@
 	
     public function topics()
     {
-        return $this->belongsToMany('Posts_topic');
+        return $this->hasMany('Posts_topic', 'category_id');
+    }
+
+    public function TopTopics()
+    {
+
+      $topics = $this->topics();
+
+      return $topics->where('created_at','<=', time())->take(5)->get();
     }
   }

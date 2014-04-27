@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-		"laravelbook/ardent": "~2.3.0"
+		"laravelbook/ardent": "~2.3.0",
+		 "doctrine/dbal": "~2.3" 
 	},
 	"require-dev": {
     	"way/generators": "*",
