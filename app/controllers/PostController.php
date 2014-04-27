@@ -60,7 +60,7 @@ class PostController extends BaseController {
 	public function show($id)
 	{
 	    $post = Posts::findOrFail($id);
-
+    	
 	    return View::make('posts.show', compact('post'));
 	}
 

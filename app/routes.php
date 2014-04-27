@@ -117,6 +117,7 @@ Route::group(array('prefix' => '/topic', 'as'=> 'topic'), function()
 {
     Route::model('Posts_topic','Posts_topic');
     Route::get('/', 'Posts_TopicController@index');    
+    Route::get('/', 'Posts_TopicController@index');  
     
     Route::get('/add', 'Posts_TopicController@create');
     Route::get('/edit/{id}', array('uses' => 'Posts_TopicController@edit'));
@@ -132,11 +133,10 @@ Route::group(array('prefix' => '/posts', 'as'=> 'posts'), function()
   	Route::model('post','Post');
     
     Route::get('/', 'PostController@index');     	  	
+    Route::get('/show/{id}', array('uses' => 'PostController@show'));
   	Route::get('/add', 'PostController@create');     
-    Route::get('/addTopic', 'Posts_TopicController@create'); 
     Route::get('/topic', 'Posts_TopicController@index');
     
-    Route::post('/addTOpic', 'Posts_TopicController@store');  
     Route::post('/add', 'PostController@store');
     
 });
