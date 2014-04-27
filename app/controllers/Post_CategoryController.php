@@ -133,4 +133,7 @@ class Posts_CategoryController extends BaseController {
 		return Redirect::action('Posts_CategoryController@index');
 	}
 
+
+	
+
 }

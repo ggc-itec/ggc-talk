@@ -7,6 +7,8 @@ class Posts extends Ardent {
      * Table
      */
     protected $table = 'posts';
+
+    public $timestamps = true;
  
     public static $rules = array(        
         'message' => 'required|min:10'	

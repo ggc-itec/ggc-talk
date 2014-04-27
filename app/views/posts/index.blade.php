@@ -19,11 +19,10 @@
   </td>Topic: {{ $post->topic->title}}</td>
 </td>{{ $post->topic->description}}</td>
 </td>Posts: {{ $post->message}}</td>
-<div class="form-group">
-  <label for="comment">Comment</label>
-  <input type="text" class="form-control" name="comment" />
-</div>
-
+    <div class="form-group">
+    <label for="comment">Comment</label>
+    <input type="text" class="form-control" name="comment" />
+    </div>
 </tr>
 
 @endforeach

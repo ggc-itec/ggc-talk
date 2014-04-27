@@ -2,7 +2,7 @@
 
   class Posts_category extends Eloquent 
   {
-    public $timestamps = false;
+    public $timestamps = true;
     
 	 protected $table = 'posts_category';
     protected $fillable = array('title','description');

@@ -12,8 +12,8 @@
     @if (count($categories) > 0) 
     @foreach ($categories as $category)         
     <div class="Category">     
-      <h2 class=""><span>Title: {{ $category->title }} </span><a class="colspan"></a></h2>
-      <p class="count">
+      <h2 class=""><span>{{ HTML::linkAction('Posts_CategoryController@show', $category->title, array($category->id)) }} </span><a class="colspan"></a></h2>
+      <p class="">
         {{ Form::hidden('categoryID',  $category->id) }}
         Description: {{ $category->description }} 
         <br><span>Topics</span>  
@@ -21,7 +21,6 @@
       </p>
     </div>
     @endforeach
-    
     @else
     <p> No Categories Found :( </p>
     @endif    
@@ -30,7 +29,3 @@
 
 
 @stop
-
-<style type="text/css">
- 
-</style>

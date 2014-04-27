@@ -44,7 +44,6 @@ class Posts_TopicController extends BaseController {
 		$topic->title = Input::get('title');
 		$topic->description = Input::get('description');
 		$topic->category_id = Input::get('category');
-
 		$topic->save();
 		
 		return Redirect::action('Posts_TopicController@index');
@@ -60,10 +59,10 @@ class Posts_TopicController extends BaseController {
 	{
 		$topic = Posts_topic::findOrFail($id);
 
-		return View::make('topics.show', compact('topic'));
+		return View::make('topics.show', compact('topics'));
 	}
 
-	/**p
+	/**
 	 * Show the form ic editing the specified topic.
 	 *
 	 * @param  int  $id
