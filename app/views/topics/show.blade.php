@@ -3,32 +3,47 @@
 @section('content')
 
 <div class="page-header">
-  <h1>GGC Forum - Topic</h1>
+  <h1>GGC Forum - 
+    @if (count($topic) > 0)  
+    {{   $topic->title   }}
+    @else  
+    -
+    @endif
+  </h1>
 </div>
 <div class=" mainPanel">
   <div class="panel-body ">
-    <table class="topicTable ">
-      <thead>
-        <th> <h4 class="title"><span>Title </span><a class="colspan"></a></h4> </th>
-        <th> <h4 class="title"><span>Description </span><a class="colspan"></a></h4> </th>
-        <th> <h4 class="title"><span>Category </span><a class="colspan"></a></h4> </th>
-      </thead>
-      <tbody class="table-striped">
-        @if (count($topics) > 0)	
-        @foreach ($topics as $topic)
-        <tr>    
-          <td>{{ HTML::linkAction('PostController@show', $topic->title, array($topic->id)) }} </td>
-          <td> {{ $topic->description }}  </td>
-          <td> {{ $topic->category->title }}	</td>
-        </tr>
 
-        @endforeach
-        @else
-        <p> No topics :( </p>
-        @endif 
-      </tbody>  
-    </table> 
-  </div>
+    @if (count($topic) > 0)          
+    @foreach ($topic->posts('created_at') as $post)
+    <div>
+      <div class="userInfo">
+      </div>
+      Message: {{ $post->message }} <br>
+      Name: {{ $post->temp_username }}  
+    </div>
+     Posted: {{ Dates::showTimeAgo($post->created_at) }}    
+     <br><br> 
+  @endforeach
+  @else
+  <p> No topics :( </p>
+  @endif 
+
 </div>
-
+</div>
+{{  Form::open(array('action' => 'PostController@store'))  }}   
+    <div class="form-group other">
+      <label for="Topic">Topic: {{$topic->title}}</label>
+      {{   Form::hidden('topicID',  $topic->id)  }}
+    </div>  
+    <div class="form-group">
+      <label for="Topic">Temp_Username</label>
+      <input type="text" class="form-control" name="temp_username" />
+    </div>  
+    <div class="form-group">
+      <label for="message">message</label>
+      <input type="text" class="form-control" name="message" />
+    </div>    
+{{  Form::submit('Add!', array('class' => 'btn btn-primary'))  }}
+{{ Form::close() }}
 @stop

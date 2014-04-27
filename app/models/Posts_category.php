@@ -7,8 +7,13 @@
 	 protected $table = 'posts_category';
     protected $fillable = array('title','description');
 	
-    public function topics()
+    public function topics($OrderBycolumn)
     {
+        if($OrderBycolumn == 'created_at')
+        {
+          return $this->hasMany('Posts_topic', 'category_id')->orderBy('created_at', 'desc')->get();
+        }
+
         return $this->hasMany('Posts_topic', 'category_id');
     }
 

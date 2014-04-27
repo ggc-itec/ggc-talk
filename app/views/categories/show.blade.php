@@ -21,7 +21,7 @@
       </thead>
       <tbody class="table-striped">
         @if (count($category) > 0)	        
-        @foreach ($category->topics as $topic)
+        @foreach ($category->topics(true) as $topic)
         <tr>    
           <td>{{ HTML::linkAction('Posts_TopicController@show', $topic->title, array($topic->id)) }} </td>
           <td> {{ $topic->description }}  </td>

@@ -20,4 +20,9 @@ class Posts extends Ardent {
 	{
 		return $this->belongsTo('Posts_topic');
 	}
+
+     public function childrenPosts($OrderBycolumn)
+    {
+       //TODO: get all children posts
+    }
 }

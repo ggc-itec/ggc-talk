@@ -6,7 +6,6 @@ class Posts_topic extends Eloquent
 
   protected $table = 'posts_topic';
 
-
   protected $fillable = array('title', 'description');
 
   public function category()
@@ -14,17 +13,24 @@ class Posts_topic extends Eloquent
     return $this->belongsTo('Posts_category');
   }
 
-  public function posts()
-  {
-    return $this->hasMany('Posts');
-  }
+  
+   public function posts($OrderBycolumn)
+    {
+        if($OrderBycolumn == 'created_at')
+        {
+          return $this->hasMany('Posts', 'topic_id')->orderBy('created_at', 'desc')->get();
+        }
+
+        return $this->hasMany('Posts', 'topic_id');
+    }
+
+    
+
+
   public function getCreatedDate()
   {
     $date = $this->created_at;
 
     return date("mm-dd-yyyy ", strtotime($date));
   }
-
-
-
 }

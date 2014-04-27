@@ -3,7 +3,7 @@
 class PostController extends BaseController {
 
 	/**
-	 * Display a listing of posts
+	 * Display a listing of postst_topic
 	 *
 	 * @return Response
 	 */
@@ -42,8 +42,7 @@ class PostController extends BaseController {
 	  //  }
 
 	    $post = new Posts();	    
-	    $post->topic_id = Input::get('topics');
-		//$post->title = Input::get('nothing');	
+	    $post->topic_id = Input::get('topic');
 		$post->temp_username = Input::get('temp_username');
 		$post->message = Input::get('message');	    
 	    $post->save();

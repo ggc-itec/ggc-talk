@@ -7,7 +7,7 @@
   <form action="{{ action('PostController@store') }}" method="POST" role="form">
     <div class="form-group">
       <label for="title">title</label>
-      {{ Form::select('topics', $topics , Input::old('topics')) }}
+      {{ Form::select('topic', $topics , Input::old('topic')) }}
     </div>    
 
      <div class="form-group">
