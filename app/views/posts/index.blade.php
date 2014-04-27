@@ -12,7 +12,7 @@
   </div>
 
 </div>
-
+@if (count($posts) > 0)	
 @foreach ($posts as $post)
     <p>This is user {{ $post->id }}</p>
     <div class="form-group">
@@ -21,5 +21,8 @@
   </div>
     
 @endforeach
+@else
+ <p> No Posts Found :( </p>
+@endif  
 
 @stop

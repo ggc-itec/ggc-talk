@@ -7,6 +7,7 @@
 </div>
 <div class="panel panel-default">
   <div class="panel-body">
+  @if (count($categories) > 0) 
 		@foreach ($categories as $category)
      <p>
      	ID:    {{ $category->id }}	
@@ -16,7 +17,10 @@
     	Description: {{ $category->description }}	
 	</p> 
 	<br>    
-@endforeach    
+@endforeach
+@else
+ <p> No Categories Found :( </p>
+@endif    
   </div>
 </div>
 </div>
