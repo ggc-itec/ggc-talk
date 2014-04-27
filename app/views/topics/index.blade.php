@@ -8,13 +8,13 @@
 <div class="panel panel-default">
   <div class="panel-body">
 @if (count($topics) > 0)	
-	@foreach ($Topicsa as $topic)
+	@foreach ($topics as $topic)
      <p>
      	ID:    {{ $topic->id }}	
      	<br>
     	title: {{ $topic->title }}	
     	<br>
-    	Category: {{ $topic->category }}	
+    	Category: {{ $topic->category->title }}	
 	</p> 
 	<br>    
 @endforeach

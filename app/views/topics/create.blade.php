@@ -8,17 +8,18 @@
 
 {{  Form::open(array('action' => 'Posts_TopicController@store'))  }}
 	
-	<div class="form-group " style="margin-right: 5px;">
-		<label class="control-label">id</label>
-		<input type="text" class="form-control" name="id"/>
-	</div>
+	
 	<div class="form-group " style="margin-right: 5px;">
 		<label class="control-label">title</label>
 		<input type="text" class="form-control" name="title"/>
 	</div>
 		<div class="form-group " style="margin-right: 5px;">
-		<label class="control-label">category_id</label>
-		{{ Form::select('title', $categories) }}
+		<label class="control-label">Category: </label>
+		
+		
+		{{ Form::select('category', $categories , Input::old('category')) }}
+		
+
 	</div>
 	
 

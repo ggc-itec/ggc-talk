@@ -22,7 +22,7 @@ class Posts_TopicController extends BaseController {
 	public function create()
 	{
 		
-		$categories = Posts_category::lists('title');
+		$categories = Posts_category::lists('title', 'id');
 
 		return View::make('topics.create')->with('categories', $categories);
 	}
@@ -42,10 +42,11 @@ class Posts_TopicController extends BaseController {
 		//}
 		$topic = new Posts_topic;
 		$topic->title = Input::get('title');
-		$topic->category_id = Input::get('category_id');
-		$topic->save();
+		$topic->category_id = Input::get('category');
 
-		return Redirect::route('topics.index');
+		$topic->save();
+		
+		return Redirect::action('Posts_TopicController@index');
 	}
 
 	/**
