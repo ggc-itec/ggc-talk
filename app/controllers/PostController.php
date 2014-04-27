@@ -9,7 +9,7 @@ class PostController extends BaseController {
 	 */
 	public function index()
 	{
-	    $posts = Posts::all();
+	    $posts = Posts::orderBy('created_at', 'DESC')->get();
 		
 	    return View::make('posts.index', compact('posts'));
 	}

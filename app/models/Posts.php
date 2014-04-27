@@ -18,11 +18,21 @@ class Posts extends Ardent {
 	
 	public function topic()
 	{
-		return $this->belongsTo('Posts_topic');
+
+
+        return $this->belongsTo('Posts_topic');
 	}
 
      public function childrenPosts($OrderBycolumn)
     {
        //TODO: get all children posts
     }
+
+     public function getCreatedDate()
+  {
+    $date = $this->created_at;
+
+    return date("mm-dd-yyyy ", strtotime($date));
+  }
 }
+
