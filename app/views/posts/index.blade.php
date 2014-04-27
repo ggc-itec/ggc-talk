@@ -14,7 +14,8 @@
 </div>
 @if (count($posts) > 0)	
 @foreach ($posts as $post)
-    <p>This is user {{ $post->id }}</p>
+    <p>Topic: {{ $post->topic->title}}</p>
+    <p>Posts: {{ $post->message}}</p>
     <div class="form-group">
     <label for="comment">Comment</label>
     <input type="text" class="form-control" name="comment" />

@@ -8,12 +8,11 @@ class Posts extends Ardent {
      */
     protected $table = 'posts';
  
-    public static $rules = array(
-        'title' => 'required|min:5',              
+    public static $rules = array(        
         'message' => 'required|min:10'	
     );
 
-    protected $fillable = array('title','message');
+    protected $fillable = array('title','message', 'temp_username');
 	
 	public function topic()
 	{

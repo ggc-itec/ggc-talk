@@ -20,8 +20,10 @@ class PostController extends BaseController {
 	 * @return Response
 	 */
 	public function create()
-	{
-        return View::make('posts.create');
+	{        
+        $topics = Posts_topic::lists('title', 'id');  
+
+        return View::make('posts.create', compact('topics'));
 	}
 
 
@@ -39,13 +41,14 @@ class PostController extends BaseController {
 	  //      return Redirect::back()->withErrors($validator)->withInput();
 	  //  }
 
-	    $post = new Post();
-	    $post->title = Input::get('title');
-	    $post->message = Input::get('message');
+	    $post = new Posts();	    
+	    $post->topic_id = Input::get('topics');
+		//$post->title = Input::get('nothing');	
+		$post->temp_username = Input::get('temp_username');
+		$post->message = Input::get('message');	    
 	    $post->save();
 	    
-	    
-	    return Redirect::route('posts');
+	    return Redirect::action('PostController@index');
 	}
 
 	/**

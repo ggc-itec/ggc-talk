@@ -7,8 +7,13 @@
   <form action="{{ action('PostController@store') }}" method="POST" role="form">
     <div class="form-group">
       <label for="title">title</label>
-      <input type="text" class="form-control" name="title" />
+      {{ Form::select('topics', $topics , Input::old('topics')) }}
     </div>    
+
+     <div class="form-group">
+      <label for="message">Temp Name</label>
+      <input type="text" class="form-control" name="temp_username" />
+    </div>  
     <div class="form-group">
       <label for="message">message</label>
       <input type="text" class="form-control" name="message" />
