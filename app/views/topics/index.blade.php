@@ -12,9 +12,11 @@
      <p>
      	ID:    {{ $topic->id }}	
      	<br>
-    	title: {{ $topic->title }}	
+      title: {{ $topic->title }}	
     	<br>
-    	Category: {{ $topic->category->title }}	
+      Description: {{ $topic->description }}  
+      <br>
+    	Category: {{ $topic->category->title }}	11
 	</p> 
 	<br>    
 @endforeach

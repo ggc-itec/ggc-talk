@@ -6,7 +6,7 @@
     
   	protected $table = 'posts_topic';
   	
-    protected $fillable = array('title');
+    protected $fillable = array('title', 'description');
 
     public function category()
     {

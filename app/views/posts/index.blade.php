@@ -15,6 +15,7 @@
 @if (count($posts) > 0)	
 @foreach ($posts as $post)
     <p>Topic: {{ $post->topic->title}}</p>
+    <p>{{ $post->topic->description}}</p>
     <p>Posts: {{ $post->message}}</p>
     <div class="form-group">
     <label for="comment">Comment</label>

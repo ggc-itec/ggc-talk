@@ -13,8 +13,13 @@
 		<label class="control-label">title</label>
 		<input type="text" class="form-control" name="title"/>
 	</div>
-		<div class="form-group " style="margin-right: 5px;">
+	<div class="form-group " style="margin-right: 5px;">
+		<label class="control-label">description</label>
+		<input type="text" class="form-control" name="description"/>
+	</div>
+	<div class="form-group " style="margin-right: 5px;">
 		<label class="control-label">Category: </label>
+	</div>
 		
 		
 		{{ Form::select('category', $categories , Input::old('category')) }}

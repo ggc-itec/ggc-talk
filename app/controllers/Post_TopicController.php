@@ -42,6 +42,7 @@ class Posts_TopicController extends BaseController {
 		//}
 		$topic = new Posts_topic;
 		$topic->title = Input::get('title');
+		$topic->description = Input::get('description');
 		$topic->category_id = Input::get('category');
 
 		$topic->save();
@@ -85,16 +86,22 @@ class Posts_TopicController extends BaseController {
 	{
 		$topic = Posts_topic::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Posts_topic::$rules);
+		//$validator = Validator::make($data = Input::all(), Posts_topic::$rules);
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+		//if ($validator->fails())
+		//{
+		//	return Redirect::back()->withErrors($validator)->withInput();
+		//}
 
-		$topic->update($data);
+		//$topic->update($data);
+		$topic = new Posts_topic;
+		$topic->title = Input::get('title');
+		$topic->description = Input::get('description');
+		$topic->category_id = Input::get('categoryID');
 
-		return Redirect::route('topics.index');
+		$topic->save();
+
+		return Redirect::action('Posts_TopicController@index');
 	}
 
 	/**

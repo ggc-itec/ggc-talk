@@ -119,9 +119,9 @@ Route::group(array('prefix' => '/topic', 'as'=> 'topic'), function()
     Route::get('/', 'Posts_TopicController@index');    
     
     Route::get('/add', 'Posts_TopicController@create');
-    Route::get('/edit', 'Posts_TopicController@edit');    
+    Route::get('/edit/{id}', array('uses' => 'Posts_TopicController@edit'));
 
-    Route::post('/edit', 'Posts_TopicController@update');
+    Route::post('edit/{id}', array('uses' => 'Posts_TopicController@update'));
     Route::post('/add', 'Posts_TopicController@store');
     
 });
