@@ -1875,6 +1875,23 @@ legend {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.fieldset-norm {
+	padding: 20px;
+	margin: 0 0 20px 0;
+	border: 1px solid #333333;
+	border-radius: 5px;
+}
+
+.legend-norm {
+  width: auto;
+  padding: 10px;
+  margin-bottom: 0;
+  font-size: 21px;
+  font-weight:bold;
+  color: #333333;
+  border: none;
+}
+
 label {
   display: inline-block;
   margin-bottom: 5px;
@@ -7187,4 +7204,8 @@ td.visible-print {
     .navbar-ggc .navbar-nav .open .dropdown-menu > li > a:focus {
         color: #000000;
     }
+}
+
+body {
+	padding-top: 50px;
 }

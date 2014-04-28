@@ -1,24 +1,18 @@
 <?php
 
 /**
- * This model can be extended by any other model that requires validation
+ * This model can be extended by any other model that requires validation.
+ * 
+ * Rules and custom error messages should be defined in the extending model.
  */
 
 class BaseModel extends Eloquent {
 	
 	protected $errors;
 	
-	public static function boot() {
-		parent::boot();
+	public function validate($input) {
 		
-		static::saving(function($model) {
-			return $model->validate();
-		});
-	}
-	
-	public function validate() {
-		
-		$validation = Validator::make($this->getAttributes(), static::$rules);
+		$validation = Validator::make($input, static::$rules, static::$messages);
 		
 		if ($validation->fails()) {
 			$this->errors = $validation->messages();

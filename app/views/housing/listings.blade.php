@@ -114,7 +114,19 @@
 <div class="panel" style="padding: 5px 100px; margin-top: -30px;">
 	@foreach ($housing_listings as $listing)
 	<div class="row">
-		<h4><img src="{{ asset('img/housePic.PNG'); }}" style="height: 75px; width: 75px; margin-right: 5px;"/><a href="#">{{ $listing->title }}</a> - ${{ $listing->rent }} / {{ $listing->bedrooms }}br ({{ $listing->city }}, GA) <label style="color: orange;">pic</label></h4>
+		<h4>
+			<?php $pic = json_decode($listing->images->first(), true); ?>
+			@if ($pic != null)
+			<img src="{{URL::asset( 'images/' . $pic['filename'] ); }}" width="50px"/>
+			@endif
+			
+			<a href="{{ action('HousingController@viewListing', $listing->id) }}">{{ $listing->title }}</a> - ${{ $listing->rent }} / {{ $listing->bedrooms }}br ({{ $listing->city }}, GA)
+			
+			@if ($pic != null)
+			<label style="color: orange;">pic</label>
+			@endif
+		</h4>
+			
 	</div>
 	@endforeach
 </div>

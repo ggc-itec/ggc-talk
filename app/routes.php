@@ -204,7 +204,7 @@ Route::group(array('prefix' => '/housing'), function()
 	Route::get('post', 'HousingController@postListing');
 	Route::post('handlePost', 'HousingController@handleAddPost');
 	Route::get('redirectLogin', 'HousingController@redirectToLogin');
-	Route::get('redirectLogin', 'HousingController@redirectToLogin');
 	Route::get('redirectRegister', 'HousingController@redirectToRegister');
 	Route::get('previewPost', 'HousingController@previewPost');
+	Route::get('listing/{listing_id}', 'HousingController@viewListing');
 });

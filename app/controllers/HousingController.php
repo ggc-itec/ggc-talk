@@ -6,8 +6,16 @@ class HousingController extends BaseController {
 	 * displays all current housing listings on main housing search page
 	 */
 	public function showListings() {
-		$housing_listings = Housing_listing::all() -> reverse();
+		$housing_listings = Housing_listing::all()->reverse();
 		return View::make('housing.listings') -> withHousing_listings($housing_listings);
+	}
+	
+	/**
+	 * view of a single listing
+	 */
+	public function viewListing($listing_id) {
+		$housing_listing = Housing_listing::find($listing_id);
+		return View::make('housing.viewListing')->withHousing_listing($housing_listing)	;
 	}
 
 	/**
@@ -21,27 +29,51 @@ class HousingController extends BaseController {
 			return View::make('housing.post');
 		}
 	}
+	
+	// returns the postSuccess view with a preview of the listing
+	public function previewPost() {
+		return View::make('housing.previewPost') -> with(array('alert' => 'You are successfully logged in.', 'alert-class' => 'alert-success'));
+	}
 
 	/**
 	 * adds all fields of the post listing form to the housing_listings table
-	 * and the redirects to previewPost
+	 * and then redirects to previewPost
 	 */
 	public function handleAddPost() {
-		$housing_listing = new Housing_listing();
+		$housing_listing = new Housing_listing(Input::all());
 		$housing_listing->author = Auth::user()->id;
-		$housing_listing->title = Input::get('title');
-		$housing_listing->body = Input::get('body');
-		$housing_listing->rent = Input::get('rent');
-		$housing_listing->distance = Input::get('distance');
-		$housing_listing->type = Input::get('type');
-		$housing_listing->bedrooms = Input::get('bedrooms');
-		$housing_listing->city = Input::get('city');
 		
-		if (!$housing_listing->save()) {
+		$housing_pic = new Housing_pic();
+		//$inputs = array('pic' => Input::file('pic'));
+		$inputs = Input::file();
+		
+		if (!$housing_listing->validate(Input::all())) {
+			if (!$housing_pic->validate($inputs)) {
+				return Redirect::back()->withInput()->withErrors(array_merge($housing_listing->getErrors()->toArray(), $housing_pic->getErrors()->toArray()));
+			}
 			return Redirect::back()->withInput()->withErrors($housing_listing->getErrors());
 		}
 		
-		return Redirect::to('housing/previewPost') -> with(array('alert' => 'Post successful.', 'alert-class' => 'alert-success'));
+		else {
+			if (!$housing_pic->validate($inputs)) {
+				return Redirect::back()->withInput()->withErrors($housing_pic->getErrors());
+			}
+			
+			$housing_listing->save();
+			
+			foreach ($inputs as $file) {
+				if ($file != null) {
+					$housing_pic = new Housing_pic();
+					$fileName = $file->getClientOriginalName();
+					$upload_success = $file->move('images', $fileName);
+					$housing_pic->filename = $fileName;
+					$housing_pic->housing_listing_id = $housing_listing->id;
+					$housing_pic->save();
+				}
+			}
+			
+			return Redirect::to('housing/previewPost') -> with(array('alert' => 'Post successful.', 'alert-class' => 'alert-success'));
+		}
 	}
 
 	/**
@@ -68,11 +100,6 @@ class HousingController extends BaseController {
 		else {
 			return Redirect::to('housing/post') -> with(array('alert' => 'Welcome! You have successfully created an account, and have been logged in.', 'alert-class' => 'alert-success'));
 		}
-	}
-	
-	// returns the postSuccess view with a preview of the listing
-	public function previewPost() {
-		return View::make('housing.previewPost') -> with(array('alert' => 'You are successfully logged in.', 'alert-class' => 'alert-success'));
 	}
 
 }
