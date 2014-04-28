@@ -13,7 +13,7 @@
 </div>
 <div class=" mainPanel">
   <div class="panel-body ">
-  <a class="btn btn-primary" href="{{ action('Post_TopicController@create') }}"> add Topic </a>
+  <a class="btn btn-primary" href="{{ action('Posts_TopicController@create') }}"> add Topic </a>
     <table class="topicTable ">
       <thead>
         <th> <h4 class="title"><span>Title </span><a class="colspan"></a></h4> </th>
