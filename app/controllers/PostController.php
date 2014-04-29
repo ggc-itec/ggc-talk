@@ -42,7 +42,7 @@ class PostController extends BaseController {
 	  //  }
 	
 	    $post = new Posts();	    
-	    $post->topic_id = Input::get('topic');
+	    $post->topic_id = Input::get('topic_id');
 		$post->temp_username = Input::get('temp_username');
 		$post->title = 'test';
 		$post->message = Input::get('message');	    
@@ -61,7 +61,7 @@ class PostController extends BaseController {
 	{
 	    $post = Posts::findOrFail($id);
     	
-	    return View::make('posts.show', compact('post'));
+	    return View::make('posts.show', compact('posts'));
 	}
 
 

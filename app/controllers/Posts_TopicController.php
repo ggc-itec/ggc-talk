@@ -57,9 +57,9 @@ class Posts_TopicController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$topic = Posts_topic::findOrFail($id);
+		$posts = Posts::where('topic_id', '=' ,$id)->get();				
 
-		return View::make('topics.show', compact('topic'));
+		return View::make('topics.show', compact('posts'));
 	}
 
 	/**

@@ -114,3 +114,18 @@ margin: 15px;
 background: white;
     
 }
+
+
+.userInfo{
+
+    border-right: black 1px solid;
+}
+
+div.messageInstance{
+    border: black 1px solid; 
+}
+
+.topicHeader{
+
+    
+}

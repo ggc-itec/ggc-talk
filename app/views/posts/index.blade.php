@@ -8,26 +8,37 @@
 <div class="panel panel-default">
   <div class="panel-body">   
    <div class="thread">
-                <div class="title">
-                  <h3>header</h3>
-                </div>
+    <div class="title">
+      <h3>header</h3>
+    </div>
     @if (count($posts) > 0)	
-   <h3>Main Posts</h3>
-  <table class="topicTable ">
+    <h3>Main Posts</h3>
+    <table class="topicTable ">
       <thead>
-        <th> <h4 class="title"><span>Title </span><a class="colspan"></a></h4> </th>
-        <th> <h4 class="title"><span>Description </span><a class="colspan"></a></h4> </th>
-        <th> <h4 class="title"><span>Category </span><a class="colspan"></a></h4> </th>
-        <th> <h4 class="title"><span>Created </span><a class="colspan"></a></h4> </th>
+        <th> <h4 class="title"><span>user Info </span><a class="colspan"></a></h4> </th>
+        <th> <h4 class="title"><span>Message </span><a class="colspan"></a></h4> </th>
       </thead>
       <tbody class="table-striped">
         @if (count($posts) > 0)  
         @foreach ($posts as $post)
-        <tr>    
-          <h3>{{ HTML::linkAction('PostController@show', $post->title, array($post->id)) }} </h3>
-          <td>{{  $post->temp_username  }}</td>
-          <td> {{ $post->topic->title }}  </td>
-          <td>{{  Dates::showTimeAgo($post->created_at)}}</td>
+        <tr>           
+          <td>
+
+            <div>
+              {{  $post->temp_username  }}
+              {{  Dates::showTimeAgo($post->created_at)}}  
+            </div>
+
+          </td>
+          <td> 
+
+            <div>
+              {{ $post->message }}  
+            </div>
+
+
+          </td>
+
         </tr>
 
         @endforeach
