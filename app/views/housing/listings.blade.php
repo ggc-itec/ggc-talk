@@ -1,18 +1,16 @@
 @extends('layout')
 
-{{-- dd($housing_listings->toArray()) --}}
-
 @section('content')
-<div class="page-header" style="margin-top: 60px;">
+<div class="page-header">
 	<div class="navbar-right btn-toolbar">
 		{{-- if user is logged in, allow view of own listings and allow post --}}
 		@if(Auth::check())
-		<a class="btn btn-primary" href="#"> My Listings </a>
-		<a class="btn btn-primary" href="{{ action('HousingController@postListing') }}"> Post </a>
+		<a class="btn btn-primary" href="{{ action('HousingController@viewMyListings') }}"> My Listings </a>
+		<a class="btn btn-primary" href="{{ action('HousingController@addListing') }}"> Post </a>
 
 		{{-- if user is guest, don't allow view of own listings nor post privileges, and alert to log in with modal--}}
 		@else
-		<a class="btn btn-primary" data-toggle="modal" data-target="#myModal">Post</a>
+		<a class="btn btn-primary" data-toggle="modal" data-target="#postModal">Post</a>
 
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -25,7 +23,7 @@
 			});
 		</script>
 
-		<div id="myModal" class="modal fade" data-backdrop="static" style="background-color: rgba(0,0,0,.7); outline: none;" tabindex="-1" aria-hidden="true">
+		<div id="postModal" class="modal fade" data-backdrop="static" style="outline: none;" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog" id="modalDialog">
 				<div class="modal-content">
 					<div class="modal-header">

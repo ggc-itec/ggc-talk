@@ -7,21 +7,20 @@ class HousingController extends BaseController {
 	 */
 	public function showListings() {
 		$housing_listings = Housing_listing::all()->reverse();
-		return View::make('housing.listings') -> withHousing_listings($housing_listings);
+		return View::make('housing.listings')->withHousing_listings($housing_listings);
 	}
 	
 	/**
 	 * view of a single listing
 	 */
-	public function viewListing($listing_id) {
-		$housing_listing = Housing_listing::find($listing_id);
-		return View::make('housing.viewListing')->withHousing_listing($housing_listing)	;
+	public function viewListing(Housing_listing $housing_listing) {
+		return View::make('housing.viewListing', compact('housing_listing'));	;
 	}
 
 	/**
 	 * returns the post listing view if user is logged in, otherwise it redirects to 'housing'
 	 */
-	public function postListing() {
+	public function addListing() {
 		if (Auth::guest()) {
 			return Redirect::to('housing');
 		} 
@@ -30,21 +29,17 @@ class HousingController extends BaseController {
 		}
 	}
 	
-	// returns the postSuccess view with a preview of the listing
-	public function previewPost() {
-		return View::make('housing.previewPost') -> with(array('alert' => 'You are successfully logged in.', 'alert-class' => 'alert-success'));
-	}
-
 	/**
 	 * adds all fields of the post listing form to the housing_listings table
 	 * and then redirects to previewPost
+	 * 
+	 * FIXME: currently overwrites an existing image file with same name as new file
 	 */
-	public function handleAddPost() {
+	public function handleAddListing() {
 		$housing_listing = new Housing_listing(Input::all());
 		$housing_listing->author = Auth::user()->id;
 		
 		$housing_pic = new Housing_pic();
-		//$inputs = array('pic' => Input::file('pic'));
 		$inputs = Input::file();
 		
 		if (!$housing_listing->validate(Input::all())) {
@@ -72,7 +67,54 @@ class HousingController extends BaseController {
 				}
 			}
 			
-			return Redirect::to('housing/previewPost') -> with(array('alert' => 'Post successful.', 'alert-class' => 'alert-success'));
+			return Redirect::to('housing/previewListing/' . $housing_listing->id) -> with(array('alert' => 'Post successful.', 'alert-class' => 'alert-success'));
+		}
+	}
+	
+	// returns a view with a preview of the listing
+	public function previewListing(Housing_listing	$housing_listing) {
+		if (Auth::guest()) {
+			return Redirect::to('housing');
+		} 
+		else {
+			return View::make('housing.previewListing', compact('housing_listing'));
+		}
+	}
+	
+	//FIXME: add view and route
+	public function editListing(Housing_listing $housing_listing) {
+		if (Auth::guest()) {
+			return Redirect::to('housing');
+		} 
+		else {
+			return View::make('housing.editListing', compact('housing_listing'));
+		}
+	}
+	
+	//FIXME: add code
+	public function handleEditListing() {
+		
+	}
+	
+	// deletes the selected listing
+	public function handleDeleteListing(Housing_listing $housing_listing) {
+		$housing_pics = $housing_listing->images()->get();
+		foreach ($housing_pics as $pic) {
+			//FIXME:need to delete pic files as well
+			$pic->delete();
+		}
+		$housing_listing->delete();
+		return Redirect::to('housing/myListings');
+	}
+	
+	// returns a view with a list of all of the current user's listings
+	public function viewMyListings() {
+		if (Auth::guest()) {
+			return Redirect::to('housing');
+		} 
+		else {
+			$my_listings = Housing_listing::whereAuthor(Auth::user()->id)->get()->reverse();
+			return View::make('housing.myListings')->withMy_listings($my_listings);
 		}
 	}
 

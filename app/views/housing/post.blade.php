@@ -6,7 +6,7 @@
 	<h3>Post New Housing Listing</h3>
 </div>
 
-{{ Form::open([ 'class' => 'form-horizontal', 'action' => 'HousingController@handleAddPost', 'files' => true]) }}
+{{ Form::open([ 'class' => 'form-horizontal', 'action' => 'HousingController@handleAddListing', 'files' => true]) }}
 	<div class="form-group col-md-9" style="margin-right: 20px;">
 		{{ Form::label('title', 'Title', ['class' => 'control-label']) }}
 		{{ $errors->first('title', '<span class="error">:message</span>') }}
