@@ -38,7 +38,7 @@
                 <a href="{{ URL::to('imgrr') }}">Imgrr</a>
               </li>
               <li>
-                <a href="#">TechTalks</a>
+                <a href="{{ URL::to('techtalks') }}">TechTalks</a>
               </li>
               <li>
                 <a href="{{ URL::to('housing') }}">Housing</a>
