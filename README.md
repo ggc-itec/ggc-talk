@@ -28,8 +28,6 @@
 
 ## Using the Auth system
 
-* To get an attribute of a logged in user, use Auth::user() -> attribute.  Where attribute can be id, first_name, or last_name.
-
 #### Restrict routes with authentication filters:
 ```
 Route::group(array('before' => 'auth'), function() {
@@ -40,6 +38,7 @@ Route::group(array('before' => 'guest'), function() {
   // insert route that can only be accessed by a non-logged in user
 });
 ```
+You might want to use this to keep users from going to a route directly via URL.  For example, if you had the login route under the guest filter, any logged in users going to the login URL will be redirected to the home page.
 
 #### How to access logged in user's attributes:
 ```
@@ -47,6 +46,7 @@ Route::group(array('before' => 'guest'), function() {
 <!-- insert admin specific html code here -->
 @endif
 ```
+You can access a logged in user's attributes to display or check against.  The example above accesses the user's role.  In addition to role, you can access id, email (though email and id are the same), first_name, and last_name.
 
 #### How to check if a user is logged in:
 ```
@@ -56,6 +56,8 @@ Auth::guest()
 // This returns true if the user is not logged in
 ```
 You might want to use this for a specific element that you only want admins to see.  For example, you might want admins to be able to see a button to delete comments on the gallery page, but you wouldn't want standard users to see the button.
+
+##### Additional documentation on the Laravel Authentication system: http://laravel.com/docs/security
 
 ## Troubleshooting
  
