@@ -72,14 +72,16 @@ Route::group(array('prefix' => '/imgrr'), function() {
 // Techtalks SECTION =============================
 // ===============================================
 // ===============================================
-Route::group(array('prefix' => '/techtalk'), function() {
-  Route::model('imgrr_pic', 'Imgrr_pic');
-  Route::model('imgrr_comment', 'Imgrr_comment');
-  Route::get('/', 'ImgrrController@imageGallery');
-  Route::get('/upload', 'ImgrrController@upload');
-  Route::get('/comments/{imgrr_pic}', 'ImgrrController@displayComments');
-  Route::post('/handleupload', 'ImgrrController@handleUpload');
-  Route::post('/addcomment', 'ImgrrController@addComment');
+Route::group(array('prefix' => '/techtalks'), function()
+{
+    Route::model('techtalk_talkslist','techtalk_talkslist');
+    Route::model('techtalk_comments','techtalk_comments');
+    Route::get('/','TechTalkController@index');
+    Route::get('/addtalk','TechTalkController@addTalk');
+    Route::post('/handleadd','TechTalkController@handleAdd');
+    Route::get('/comments/{techtalk_talk}', 'TechTalkController@displayComments');
+    Route::post('/addcomment/{talk}','TechTalkController@addComment');
+    Route::get('/showtalk/{talk}', 'TechTalkController@showTalk');
 });
 
 // ===============================================
