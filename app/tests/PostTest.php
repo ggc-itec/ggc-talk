@@ -20,7 +20,7 @@ class PostTest extends TestCase {
 	public function testCreatePostRoute()
 	{
 		//assert;arrange
-		$crawler = $this->client->request('GET', '/posts/addPost');
+		$crawler = $this->client->request('GET', '/posts/add');
 
 
 		//assert
@@ -30,7 +30,7 @@ class PostTest extends TestCase {
 	public function testPostModelValidates()
 	{
 		//arrange
-		$post = new Post;
+		$post = new Posts;
 		$post->title ='GGC Test Post!';
 		$post->message = 'This is a fake data blah blah blah';
  		
@@ -48,11 +48,14 @@ class PostTest extends TestCase {
 
 	public function testStore()
 	{
-		$post = new Post;
+		$post = new Posts;
+		$post->id = 123;
 		$post->title ='GGC Test Post!';
+		$post->temp_username ='Joe';
 		$post->message = 'This is a fake data blah blah blah';
+		$post->topic_id = 1651;
 		$post->save();
-		Post::findOrFail($post->id);
+		Posts::findOrFail($post->id);
 
 	}
 }

@@ -3,13 +3,13 @@
 class PostController extends BaseController {
 
 	/**
-	 * Display a listing of posts
+	 * Display a listing of postst_topic
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-	    $posts = Post::all();
+	    $posts = Posts::orderBy('created_at', 'DESC')->get();
 		
 	    return View::make('posts.index', compact('posts'));
 	}
@@ -20,8 +20,10 @@ class PostController extends BaseController {
 	 * @return Response
 	 */
 	public function create()
-	{
-        return View::make('posts.create');
+	{        
+        $post = Posts_topic::lists('title', 'id');  
+
+        return View::make('posts.create', compact('post'));
 	}
 
 
@@ -32,20 +34,21 @@ class PostController extends BaseController {
 	 */
 	public function store()
 	{
-	    $validator = Validator::make($data = Input::all(), Post::$rules);
+	    //$validator = Validator::make($data = Input::all(), Posts::$rules);
 
-	    if ($validator->fails())
-	    {
-	        return Redirect::back()->withErrors($validator)->withInput();
-	    }
-
-	    $post = new Post();
-	    $post->title = Input::get('title');
-	    $post->message = INput::get('message');
+	  //  if ($validator->fails())
+	  //  {
+	  //      return Redirect::back()->withErrors($validator)->withInput();
+	  //  }
+	
+	    $post = new Posts();	    
+	    $post->topic_id = Input::get('topic_id');
+		$post->temp_username = Input::get('temp_username');
+		$post->title = 'test';
+		$post->message = Input::get('message');	    
 	    $post->save();
-
 	    
-	    return Redirect::route('posts');
+	    return Redirect::action('PostController@index');
 	}
 
 	/**
@@ -56,9 +59,9 @@ class PostController extends BaseController {
 	 */
 	public function show($id)
 	{
-	    $post = Post::findOrFail($id);
-
-	    return View::make('posts.show', compact('post'));
+	    $post = Posts::findOrFail($id);
+    	
+	    return View::make('posts.show', compact('posts'));
 	}
 
 
@@ -70,7 +73,7 @@ class PostController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$post = Post::find($id);
+		$post = Posts::find($id);
 
 		return View::make('posts.edit', compact('post'));
 	}
@@ -85,9 +88,9 @@ class PostController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$post = Post::findOrFail($id);
+		$post = Posts::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Post::$rules);
+		$validator = Validator::make($data = Input::all(), Posts::$rules);
 
         if ($validator->fails())
         {
@@ -107,7 +110,7 @@ class PostController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Post::destroy($id);
+		Posts::destroy($id);
 
 		return Redirect::route('posts.index');
 	}
