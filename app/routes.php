@@ -107,6 +107,7 @@ Route::model('user', 'User');
 Route::model('books', 'Book');
 Route::get('/marketplace', 'MarketPlaceController@index');
 Route::post('/marketplace_add', 'MarketPlaceController@handle_add');
+Route::get('/marketplace{book}', 'FlickrPicController@deleteFavPic');
 /*
  * Only non-logged in users can access these routes
  */

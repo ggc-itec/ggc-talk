@@ -19,8 +19,8 @@ class CreateBookTable extends Migration {
       	$table -> string('book_author',25);
       	$table -> string('book_ISBN10',15);
       	$table -> string('book_ISBN13',15);
-		$table -> string('book_edition', 25);
-		$table -> string('book_condition', 25);
+		$table -> string('book_edition', 25) -> nullable();
+		$table -> string('book_condition', 25) -> nullable();
     });
 	
 	}
@@ -32,7 +32,7 @@ class CreateBookTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('flickr_pics');
+		Schema::drop('book_table');
 	}
 
 }
