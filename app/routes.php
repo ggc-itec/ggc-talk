@@ -249,12 +249,15 @@ Route::group(array('before' => 'auth'), function() {
 
 Route::group(array('prefix' => '/housing'), function()
 {
+	Route::model('housing_listing', 'Housing_listing');
 	Route::get('/', 'HousingController@showListings');
-	Route::get('post', 'HousingController@postListing');
-	Route::post('handlePost', 'HousingController@handleAddPost');
-	Route::get('redirectLogin', 'HousingController@redirectToLogin');
+	Route::get('post', 'HousingController@addListing');
+	Route::post('handlePost', 'HousingController@handleAddListing');
 	Route::get('redirectLogin', 'HousingController@redirectToLogin');
 	Route::get('redirectRegister', 'HousingController@redirectToRegister');
-	Route::get('previewPost', 'HousingController@previewPost');
+	Route::get('previewListing/{housing_listing}', 'HousingController@previewListing');
+	Route::get('listing/{housing_listing}', 'HousingController@viewListing');
+	Route::get('deleteListing/{housing_listing}', 'HousingController@handleDeleteListing');
+	Route::get('myListings', 'HousingController@viewMyListings');
 });
 
