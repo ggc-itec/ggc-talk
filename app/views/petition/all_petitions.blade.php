@@ -61,6 +61,9 @@
 	</div>
 </div>
 
+@if($petitions->isEmpty())
+<p>No Active Petitions</p>
+@else
 <table class="table table-condensed">
 	<thead>
 		<tr>
@@ -74,11 +77,16 @@
 			<td>{{ $petition->class_name }}</td>
 			<td>{{ $petition->subject }}</td>
 			<td>
-				<a href="" class="btn btn-default">View</a>
+				<a href="{{ action('PetitionController@showPetition', $petition->id) }}" 
+					class="btn btn-default">View</a>
+			@if(Auth::user() -> role == 'Admin')
+				<a href="" class="btn btn-danger">Delete</a>
+			@endif
 			</td>
 		</tr>
 		@endforeach
 	</tbody>
 </table>
+@endif
 
 @stop

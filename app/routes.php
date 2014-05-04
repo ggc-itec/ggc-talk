@@ -237,6 +237,7 @@ Route::group(array('before' => 'auth'), function() {
   Route::group(array('prefix' => '/petitions'), function() {
   	Route::get('/', 'PetitionController@showAllPetitions');
 	Route::get('create', 'PetitionController@showCreatePetition');
+	Route::get('showPetition/{petition}', 'PetitionController@showPetition');
 	Route::post('handleCreate', 'PetitionController@handleCreatePetition');
   });
   

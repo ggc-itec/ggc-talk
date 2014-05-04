@@ -13,11 +13,6 @@ class PetitionController extends BaseController
 		return View::make('petition.create_petition');
 	}
 	
-	public function showPetition()
-	{
-		return "This is the page for a petition";
-	}
-	
 	public function handleCreatePetition()
 	{
 		$petition = new Petition();
@@ -26,5 +21,20 @@ class PetitionController extends BaseController
 		$petition -> subject = Input::get('subject');
 		$petition -> save();
 		return Redirect::to('petitions');
+	}
+	
+	/**
+	 * This should only be called by an Admin
+	 */
+	// public function handleDeletePetition(Petition $petition)
+	// {
+		// $petition->delete();
+		// return Redirect::to('petitions');
+	// }
+	
+	public function showPetition(Petition $petition)
+	{
+		var_dump($petition);
+		// return View::make('petition.show_petition', compact('petition'));
 	}
 }
