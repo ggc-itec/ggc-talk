@@ -26,15 +26,16 @@ class PetitionController extends BaseController
 	/**
 	 * This should only be called by an Admin
 	 */
-	// public function handleDeletePetition(Petition $petition)
-	// {
-		// $petition->delete();
-		// return Redirect::to('petitions');
-	// }
-	
-	public function showPetition(Petition $petition)
+	public function handleDeletePetition($petition)
 	{
-		var_dump($petition);
-		// return View::make('petition.show_petition', compact('petition'));
+		$thePetition = Petition::find($petition);
+		$thePetition->delete();
+		return Redirect::to('petitions');
+	}
+	
+	public function showPetition($petition)
+	{
+		$thePetition = Petition::find($petition);
+		return View::make('petition.show_petition', compact('thePetition'));
 	}
 }
