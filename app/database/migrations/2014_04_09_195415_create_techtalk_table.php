@@ -11,7 +11,7 @@ class CreateTechtalkTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('techtalk', function($table)
+        Schema::create('techtalks', function($table)
         {
             $table ->increments('id');
             $table ->string('title');
@@ -19,12 +19,12 @@ class CreateTechtalkTable extends Migration {
             $table ->timestamps();
         });
 
-        Schema::create('tech_comment', function($table)
+        Schema::create('tech_comments', function($table)
         {
             $table ->string('username', 128);
             $table ->string('body', 500);
             $table ->integer('techtalk_id')->unsigned();
-            $table ->foreign('techtalk_id')->references('id')->on('techtalk');
+            $table ->foreign('techtalk_id')->references('id')->on('techtalks');
             $table ->timestamps();
         });
 	}
@@ -36,8 +36,8 @@ class CreateTechtalkTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('techtalk');
-        Schema::drop('tech_comment');
+        Schema::drop('tech_comments');
+		Schema::drop('techtalks');
 	}
 
 }

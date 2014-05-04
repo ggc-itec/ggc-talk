@@ -5,10 +5,12 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-		"laravelbook/ardent": "~2.3.0"
+		"laravelbook/ardent": "~2.3.0",
+		 "doctrine/dbal": "~2.3" 
 	},
 	"require-dev": {
-    	"way/generators": "*"
+    	"way/generators": "*",
+   	    "phpunit/phpunit": "3.7.*"  	
 	},
 	"autoload": {
 		"classmap": [
@@ -17,7 +19,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+      "app/utilities"
 		],
 		
 		"psr-0": {

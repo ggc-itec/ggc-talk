@@ -4,8 +4,7 @@
     <title>ggc-talk</title>
     <link rel="shortcut icon" href="{{ asset('img/ggctalk-small.png'); }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css'); }}" rel="stylesheet">
-    <script src="{{ asset('js/jquery-2.0.3.min.js'); }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js'); }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/messageboard.css'); }}" rel="stylesheet">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
@@ -38,7 +37,7 @@
                 <a href="{{ URL::to('imgrr') }}">Imgrr</a>
               </li>
               <li>
-                <a href="#">TechTalks</a>
+                <a href="{{ URL::to('techtalks') }}">TechTalks</a>
               </li>
               <li>
                 <a href="{{ URL::to('housing') }}">Housing</a>
@@ -119,6 +118,8 @@
 		@yield('xtraContent')
 
     </div>
+    <script src="{{ asset('js/jquery-2.0.3.min.js'); }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js'); }}"></script>    
   </body>
 
 </html>
