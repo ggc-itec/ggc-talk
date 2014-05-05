@@ -2,8 +2,8 @@
 
 @section('content')
 
-<div class="page-header" style="margin-top: 60px;">
-	<h3>Post New Housing Listing</h3>
+<div class="page-header">
+	<h2>Post New Housing Listing</h2>
 </div>
 
 {{ Form::open([ 'class' => 'form-horizontal', 'action' => 'HousingController@handleAddListing', 'files' => true]) }}
@@ -69,42 +69,64 @@
 			'5' => '5'), '', ['class' => 'form-control', 'style' => 'width: 100px;']) }}
 	</div>
 	
-	
-	<fieldset class="fieldset-norm col-md-12">
-		<legend class="legend-norm">Pics</legend>
-		<div class="form-inline col-md-11 col-md-offset-1" style="margin-top: -50px;">
-			<div class="form-group col-md-5" style="margin-right: 75px;">
-				{{ Form::label('', '', ['class' => 'control-label']) }}
-				{{ $errors->first('pic1', '<span class="error">:message</span>') }}
-  				{{ Form::file('pic1', ['class' => 'form-control', 'style' => 'margin-top: -20px']) }}
+	<fieldset class="fieldset-norm col-md-5" style="padding-right: 0px; margin-right: 20px;">
+		<legend class="legend-norm">Contact Info</legend>
+		<div class="form-group col-md-12" style="margin-top: -50px; margin-bottom: 0px; padding: 0 0 0 10px;">
+			<h6 style="margin: 15px 15px 0px 0;">If you do not provide either a phone number or an alternate email address, your GGC email will be displayed by default.</h6>
+			
+			<div class="form-group col-md-12">
+				{{ Form::label('', 'Display GGC Email', ['class' => 'control-label', 'style' => 'font-size: 14px;']) }}
+				{{ Form::checkbox('displayAuthor_Email', '1') }}
 			</div>
 			
-			<div class="form-group col-md-5">
-				{{ Form::label('', '', ['class' => 'control-label']) }}
-				{{ $errors->first('pic2', '<span class="error">:message</span>') }}
-  				{{ Form::file('pic2', ['class' => 'form-control', 'style' => 'margin-top: -20px']) }}
+			<div class="form-group col-md-6" style="margin-right: 30px; margin-top: -25px;">
+				{{ Form::label('', 'Phone Number', ['class' => 'control-label', 'style' => 'font-size: 14px;']) }}
+				{{ $errors->first('contactPhone', '<span class="error">:message</span>') }}
+  				{{ Form::text('contactPhone', null, ['class' => 'form-control', 'placeholder' => 'xxx-xxx-xxxx', 'style' => 'width: 190px;']) }}
+			</div>
+			
+			<div class="form-group col-md-6" style="margin-right: 0px; margin-top: -25px;">
+				{{ Form::label('', 'Alt. Email', ['class' => 'control-label', 'style' => 'font-size: 14px;']) }}
+				{{ $errors->first('alternateEmail', '<span class="error">:message</span>') }}
+  				{{ Form::text('alternateEmail', null, ['class' => 'form-control', 'placeholder' => 'example@provider.com', 'style' => 'width: 190px;']) }}
 			</div>
 		</div>
+	</fieldset>
 	
+	<fieldset class="fieldset-norm col-md-6" style="padding-right: 0px; padding-bottom: 10px;">
+		<legend class="legend-norm">Pics</legend>
+		<div class="form-inline col-md-12" style="margin-top: -50px; margin-left: -5px; padding: 0px;">
+			<div class="form-group col-md-6" style="margin-right: 20px;">
+				{{ Form::label('', '', ['class' => 'control-label']) }}
+				{{ $errors->first('pic1', '<span class="error">:message</span>') }}
+  				{{ Form::file('pic1', ['class' => 'form-control', 'style' => 'width: 230px;']) }}
+			</div>
 			
-		<div class="form-inline col-md-11 col-md-offset-1">
-			<div class="form-group col-md-5" style="margin-right: 75px;">
+			<div class="form-group col-md-6">
+				{{ Form::label('', '', ['class' => 'control-label']) }}
+				{{ $errors->first('pic2', '<span class="error">:message</span>') }}
+  				{{ Form::file('pic2', ['class' => 'form-control', 'style' => 'width: 230px;']) }}
+			</div>
+		</div>
+			
+		<div class="form-inline col-md-12" style="margin-left: -5px; padding: 0;">
+			<div class="form-group col-md-6" style="margin-right: 20px;">
 				{{ Form::label('', '', ['class' => 'control-label']) }}
 				{{ $errors->first('pic3', '<span class="error">:message</span>') }}
-  				{{ Form::file('pic3', ['class' => 'form-control', 'style' => 'margin-top: -20px']) }}
+  				{{ Form::file('pic3', ['class' => 'form-control', 'style' => 'margin-top: -20px; width: 230px;']) }}
 			</div>
 	
-			<div class="form-group col-md-5">
+			<div class="form-group col-md-6">
 				{{ Form::label('', '', ['class' => 'control-label']) }}
 				{{ $errors->first('pic4', '<span class="error">:message</span>') }}
-  				{{ Form::file('pic4', ['class' => 'form-control', 'style' => 'margin-top: -20px']) }}
+  				{{ Form::file('pic4', ['class' => 'form-control', 'style' => 'margin-top: -20px; width: 230px;']) }}
 			</div>
 		</div>
 	</fieldset>
 	
 	<div class="col-md-2 col-md-offset-10">
 		<input type="submit" class="btn btn-primary" value="Post" />
-		<a href="{{ action('HousingController@showListings') }}" class="btn btn-danger">cancel</a>
+		<a href="{{ action('HousingController@showAllListings') }}" class="btn btn-danger">cancel</a>
 	</div>
 {{ Form::close() }}
 
