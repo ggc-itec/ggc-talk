@@ -18,13 +18,16 @@
 	<thead>
 		<tr>
 			<th>Class Name</th>
+			<th>Signees</th>
 			<th>Subject</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach($petitions as $petition)
+		<?php $signee = Signee::where('petition_id', '=', $petition->id) ?>
 		<tr>
 			<td>{{ $petition->class_name }}</td>
+			<td>{{ $signee->count() }}</td>
 			<td>{{ $petition->subject }}</td>
 			<td>
 				<a href="{{ action('PetitionController@showPetition', $petition->id) }}" 

@@ -240,6 +240,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('showPetition/{petition}', 'PetitionController@showPetition');
 	Route::get('delete/{petition}', 'PetitionController@handleDeletePetition');
 	Route::post('handleCreate', 'PetitionController@handleCreatePetition');
+	Route::post('handleSign', 'PetitionController@handleSignPetition');
   });
   
 });
