@@ -8,11 +8,11 @@ class Petition extends BaseModel
 	
 	protected static $rules = array(
 		'class_name' => 'required',
-		'class_desc' => 'required',
-		'subject' => 'required'
+		'class_desc' => 'required'
+		// 'subject' => 'required'
 	);
 	
-	protected static $message = array(
+	protected static $messages = array(
 			'required' => '*required'
 	);
 }

@@ -12,16 +12,8 @@
 		{{ $errors->first('class_name', '<span class="error">:message</span>') }}
 		{{ Form::text('class_name', null, ['class' => 'form-control']) }}
 	</div>
-	<div class="form-control col-md-3" style="margin-right: 5px">
-		{{ Form::label('subject', 'Subject', ['class' => 'control-label']) }}
-		{{ $errors->first('subject', '<span class="error">:message</span>' }}
-		{{ Form::select('subject', array(
-			'' => 'Subject',
-			'ACCT' => 'Accounting',
-			'ANTH' => 'Anthropology',
-			'' => '',), '', ['class' => 'form-control', 'style' => ''] }}
-	</div>
-	<div class="form-group col-md-3" style="margin-right: 5px;">
+	<!-- FIX ME better way would be a subjects table in the database -->
+	<!--<div class="form-group col-md-3" style="margin-right: 5px;">
 		<label class="control-label">Subject</label>
 		<select class="form-control"  style="padding-left: 10px;" name="subject">
 			<option value="">Subject</option>
@@ -70,11 +62,13 @@
 			<option VALUE="SPED">Special Education</option>
 			<option VALUE="THEA">Theatre</option>
 		</select>
-	</div>
+	</div>-->
 
+	
 	<div class="form-group col-md-9">
-		<label class="control-label">Class Description</label>
-		<textarea class="form-control" rows="10" name="class_desc"></textarea>
+		{{ Form::label('class_desc', 'Class Description', ['class' => 'control-label']) }}
+		{{ $errors->first('class_desc', '<span class="error">:message</span>') }}
+		{{ Form::textarea('class_desc', null, ['size' => '0x10', 'class' => 'form-control']) }}
 	</div>
 	
 	<div class="form-group col-md-12">
