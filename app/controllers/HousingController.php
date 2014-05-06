@@ -3,18 +3,126 @@
 class HousingController extends BaseController {
 	
 	/**
-	 * displays all current housing listings on main housing search page
+	 * displays all current housing listings on main housing page with a paginator
+	 * that splits the results in groups of 30 on separate pages
 	 */
-	public function showListings() {
-		$housing_listings = Housing_listing::all()->reverse();
-		return View::make('housing.listings')->withHousing_listings($housing_listings);
+	public function showAllListings() {
+		$housing_listings = Housing_listing::orderBy('id', 'desc')->paginate(30);
+		return View::make('housing.showAllListings')->withHousing_listings($housing_listings);
+	}
+	
+	/**
+	 * searches housing listings with search bar input and then displays results with pagination
+	 */
+	public function showSearchResults() {
+		
+		$housing_listings = Housing_listing::where(function($query) {
+			$input = Input::all();
+			$textOnlySearch = false;
+			
+			// check if all fields except search text are empty
+			if ($input['searchText'] != '') {
+				$inputFields = Input::except('searchText');
+				$totalFields = count($inputFields);
+				$countEmptyFields = 0;
+				foreach ($inputFields as $field) {
+					if ($field == '') {
+						$countEmptyFields++;
+					}
+				}
+				if ($countEmptyFields == $totalFields) {
+					$textOnlySearch = true;
+				}
+			}
+			
+			// performs search text only query
+			if ($input['searchText'] != '' && $textOnlySearch){
+				$searchTerms = explode(' ', $input['searchText']);
+				
+				foreach ($searchTerms as $term) {
+					$query->orWhere('title', 'LIKE', "%$term%")->orWhere('body', 'LIKE', "%$term%");
+				}
+			}
+			
+			// perform query with all non-empty input fields
+			elseif ($input['searchText'] != '' && !$textOnlySearch) {
+				$searchTerms = explode(' ', $input['searchText']);
+				
+				// query all listing attributes except body
+				foreach ($searchTerms as $term) {
+					$query->orWhere('title', 'LIKE', "%$term%");
+					
+					if ($input['rent'] != '') {
+						$query->where('rent', '<=', $input['rent']);
+					}
+					if ($input['distance'] != '') {
+						$query->where('distance', '<=', $input['distance']);
+					}
+					if ($input['type'] != '') {
+						$query->where('type', '=', $input['type']);
+					}
+					if ($input['bedrooms']) {
+						$query->where('bedrooms', '>=', $input['bedrooms']);
+					}
+					if (isset($input['hasPic'])) {
+						$query->where('hasPic', '=', $input['hasPic']);
+					}
+				}
+				
+				// query all listing attributes except title
+				foreach ($searchTerms as $term) {
+					$query->orWhere('body', 'LIKE', "%$term%");
+					
+					$query->orWhere('title', 'LIKE', "%$term%");
+					
+					if ($input['rent'] != '') {
+						$query->where('rent', '<=', $input['rent']);
+					}
+					if ($input['distance'] != '') {
+						$query->where('distance', '<=', $input['distance']);
+					}
+					if ($input['type'] != '') {
+						$query->where('type', '=', $input['type']);
+					}
+					if ($input['bedrooms']) {
+						$query->where('bedrooms', '>=', $input['bedrooms']);
+					}
+					if (isset($input['hasPic'])) {
+						$query->where('hasPic', '=', $input['hasPic']);
+					}
+				}
+			}
+			
+			// perform query without search text
+			elseif ($input['searchText'] == '') {
+				if ($input['rent'] != '') {
+					$query->where('rent', '<=', $input['rent']);
+				}
+				if ($input['distance'] != '') {
+					$query->where('distance', '<=', $input['distance']);
+				}
+				if ($input['type'] != '') {
+					$query->where('type', '=', $input['type']);
+				}
+				if ($input['bedrooms']) {
+					$query->where('bedrooms', '>=', $input['bedrooms']);
+				}
+				if (isset($input['hasPic'])) {
+					$query->where('hasPic', '=', $input['hasPic']);
+				}
+			}
+			
+			
+		})->orderby('id', 'desc')->paginate(30);
+		
+		return View::make('housing.showSearchResults')->withHousing_listings($housing_listings)->withInput(Input::all());
 	}
 	
 	/**
 	 * view of a single listing
 	 */
 	public function viewListing(Housing_listing $housing_listing) {
-		return View::make('housing.viewListing', compact('housing_listing'));	;
+		return View::make('housing.viewListing', compact('housing_listing'));
 	}
 
 	/**
@@ -30,8 +138,8 @@ class HousingController extends BaseController {
 	}
 	
 	/**
-	 * adds all fields of the post listing form to the housing_listings table
-	 * and then redirects to previewPost
+	 * validates housing listing and housing pic input, then either returns with error messages
+	 * or saves housing listing and housing pics
 	 * 
 	 * FIXME: currently overwrites an existing image file with same name as new file
 	 */
@@ -40,34 +148,49 @@ class HousingController extends BaseController {
 		$housing_listing->author = Auth::user()->id;
 		
 		$housing_pic = new Housing_pic();
-		$inputs = Input::file();
+		$picFiles = Input::file();
 		
+		// if housing listing input doesn't validate, check validation for housing pics then return with error messages
 		if (!$housing_listing->validate(Input::all())) {
-			if (!$housing_pic->validate($inputs)) {
+			// if housing pic input doesn't validate, return with error messages
+			if (!$housing_pic->validate($picFiles)) {
+				// return with housing listing and housing pic validation error messages
 				return Redirect::back()->withInput()->withErrors(array_merge($housing_listing->getErrors()->toArray(), $housing_pic->getErrors()->toArray()));
 			}
+			// return with only housing listing validation error messages
 			return Redirect::back()->withInput()->withErrors($housing_listing->getErrors());
 		}
 		
+		// if housing listing input validates, check validation for housing pics then either save or return with error messages
 		else {
-			if (!$housing_pic->validate($inputs)) {
+			// if housing pic input doesn't validate, return with error messages
+			if (!$housing_pic->validate($picFiles)) {
+				// return with housing pic validation error messages
 				return Redirect::back()->withInput()->withErrors($housing_pic->getErrors());
 			}
 			
-			$housing_listing->save();
-			
-			foreach ($inputs as $file) {
-				if ($file != null) {
+			// saves each picture with reference to housing listing if it isn't null
+			foreach ($picFiles as $picFile) {
+				if ($picFile != null) {
+					// sets housing listing has pic attribute then saves housing listing
+					// this is necessary to retrieve housing listing id to reference with pic
+					$housing_listing->hasPic = 1;
+					$housing_listing->save();
+					
 					$housing_pic = new Housing_pic();
-					$fileName = $file->getClientOriginalName();
-					$upload_success = $file->move('images', $fileName);
+					$fileName = $picFile->getClientOriginalName();
+					$upload_success = $picFile->move('images', $fileName);
 					$housing_pic->filename = $fileName;
 					$housing_pic->housing_listing_id = $housing_listing->id;
 					$housing_pic->save();
 				}
 			}
 			
-			return Redirect::to('housing/previewListing/' . $housing_listing->id) -> with(array('alert' => 'Post successful.', 'alert-class' => 'alert-success'));
+			// save housing listing in case it wasn't already saved when saving pics
+			$housing_listing->save();
+			
+			// redirect to listing preview with success alert
+			return Redirect::to('housing/previewListing/' . $housing_listing->id)->with(array('alert' => 'Post successful.', 'alert-class' => 'alert-success'));
 		}
 	}
 	

@@ -1,8 +1,9 @@
 @extends('layout')
 
 @section('content')
+
 <div class="page-header">
-	<div class="navbar-right btn-toolbar">
+	<div class="navbar-right">
 		{{-- if user is logged in, allow view of own listings and allow post --}}
 		@if(Auth::check())
 		<a class="btn btn-primary" href="{{ action('HousingController@viewMyListings') }}"> My Listings </a>
@@ -50,82 +51,64 @@
 </div>
 
 <div class="navbar navbar-inverse">
-	<form class="navbar-form" role="search">
+	
+	{{ Form::open([ 'class' => 'navbar-form', 'action' => 'HousingController@showSearchResults', 'style' => 'border: none', 'role' => 'search', 'method' => 'get']) }}
 		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Search..." name="searchText"/>
+			{{ Form::input('search', 'searchText', Input::get('searchText', null), ['class' => 'form-control', 'placeholder' => 'Search...']) }}
 		</div>
 		<div class="form-group" style="margin-right: 10px;">
 			<button type="submit" class="btn btn-info">
 				Search
 			</button>
 		</div>
-
-		<label class="label">rent: </label>
+		
+		{{ Form::label('', 'rent: ', ['class' => 'label']) }}
 
 		<div class="form-group">
-			<input style="width: 70px; margin-right: 10px;" type="text" class="form-control" placeholder="$ max" name="maxRent"/>
+			{{ Form::text('rent', Input::get('rent', null), ['class' => 'form-control', 'placeholder' => '$ max', 'style' => 'width: 70px; margin-right: 10px;']) }}
 		</div>
 
 		<div class="form-group">
-			<select class="form-control" name="distance" style="margin-right: 10px;">
-				<option value="">any distance from GGC</option>
-				<option value="5">within 5 miles</option>
-				<option value="10">within 10 miles</option>
-				<option value="15">within 15 miles</option>
-				<option value="20">within 20 miles</option>
-				<option value="25">within 25 miles</option>
-			</select>
+			{{ Form::select('distance', array(
+				'' => 'any distance from GGC', 
+				'5' => '5 miles or less', 
+				'10' => '10 miles or less', 
+				'15' => '15 miles or less', 
+				'20' => '20 miles or less', 
+				'25' => '25 miles or less'), Input::get('distance', ''), ['class' => 'form-control', 'style' => 'margin-right: 10px;']) }}
 		</div>
 
 		<div class="form-group">
-			<select class="form-control" name="housingType" style="margin-right: 10px;">
-				<option value="">any housing type</option>
-				<option value="apartment">apartment</option>
-				<option value="condo">condo</option>
-				<option value="duplex">duplex</option>
-				<option value="townhouse">townhouse</option>
-				<option value="house">house</option>
-			</select>
+			{{ Form::select('type', array(
+				'' => 'any housing type',
+				'apartment' => 'apartment', 
+				'condo' => 'condo', 
+				'duplex' => 'duplex', 
+				'townhouse' => 'townhouse', 
+				'house' => 'house'), Input::get('type', ''), ['class' => 'form-control', 'style' => 'margin-right: 10px;']) }}
 		</div>
 
 		<div class="form-group">
-			<select class="form-control" name="minRooms" style="margin-right: 10px;">
-				<option value="">0+ BR</option>
-				<option value="1">1+ BR</option>
-				<option value="2">2+ BR</option>
-				<option value="3">3+ BR</option>
-				<option value="4">4+ BR</option>
-				<option value="5">5+ BR</option>
-			</select>
+			{{ Form::select('bedrooms', array(
+				'' => '0+ BR', 
+				'1' => '1+ BR', 
+				'2' => '2+ BR', 
+				'3' => '3+ BR', 
+				'4' => '4+ BR', 
+				'5' => '5+ BR'), Input::get('bedrooms', ''), ['class' => 'form-control', 'style' => 'margin-right: 10px;']) }}
 		</div>
 
 		<div class="form-group">
-			<label class="label" style="font-weight: normal;">
-				<input type="checkbox"/>
-				pic</label>
+			{{ Form::checkbox('hasPic', '1', Input::get('hasPic'), ['style' => 'width: 20px; height: 20px;']) }}
+			
 		</div>
-	</form>
+		
+		<div class="form-group">
+			{{ Form::label('', 'pic', ['class' => 'label', 'style' => 'height: 30px; font-weight: normal; margin-left: -10px;']) }}
+		</div>
+	{{ Form::close() }}
 </div>
 @stop
 
-@section('xtraContent')
-<div class="panel" style="padding: 5px 100px; margin-top: -30px;">
-	@foreach ($housing_listings as $listing)
-	<div class="row">
-		<h4>
-			<?php $pic = json_decode($listing->images->first(), true); ?>
-			@if ($pic != null)
-			<img src="{{URL::asset( 'images/' . $pic['filename'] ); }}" width="50px"/>
-			@endif
-			
-			<a href="{{ action('HousingController@viewListing', $listing->id) }}">{{ $listing->title }}</a> - ${{ $listing->rent }} / {{ $listing->bedrooms }}br ({{ $listing->city }}, GA)
-			
-			@if ($pic != null)
-			<label style="color: orange;">pic</label>
-			@endif
-		</h4>
-			
-	</div>
-	@endforeach
-</div>
-@stop
+@yeild('xtraContent')
+

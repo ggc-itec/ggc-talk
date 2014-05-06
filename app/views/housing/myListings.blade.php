@@ -2,8 +2,11 @@
 
 @section('content')
 
-<div class="page-header" style="margin-top: 60px;">
-	<h3>My Listings</h3>
+<div class="page-header">
+	<div class="navbar-right">
+		<a class="btn btn-primary" href="{{ action('HousingController@addListing') }}">Post</a>
+	</div>
+	<h1>My Listings</h1>
 </div>
 
 @if ($my_listings != null)

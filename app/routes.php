@@ -255,7 +255,7 @@ Route::group(array('before' => 'auth'), function() {
 Route::group(array('prefix' => '/housing'), function()
 {
 	Route::model('housing_listing', 'Housing_listing');
-	Route::get('/', 'HousingController@showListings');
+	Route::get('/', 'HousingController@showAllListings');
 	Route::get('post', 'HousingController@addListing');
 	Route::post('handlePost', 'HousingController@handleAddListing');
 	Route::get('redirectLogin', 'HousingController@redirectToLogin');
@@ -264,5 +264,6 @@ Route::group(array('prefix' => '/housing'), function()
 	Route::get('listing/{housing_listing}', 'HousingController@viewListing');
 	Route::get('deleteListing/{housing_listing}', 'HousingController@handleDeleteListing');
 	Route::get('myListings', 'HousingController@viewMyListings');
+	Route::get('searchResults', 'HousingController@showSearchResults');
 });
 

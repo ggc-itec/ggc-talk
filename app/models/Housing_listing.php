@@ -2,7 +2,7 @@
 
 class Housing_listing extends BaseModel {
 	
-	protected $fillable = array('author', 'title', 'body', 'rent', 'distance', 'type', 'bedrooms', 'city');
+	protected $fillable = array('author', 'title', 'body', 'rent', 'distance', 'type', 'bedrooms', 'city', 'alternateEmail', 'contactPhone', 'displayAuthor_Email');
 	
 	protected static $rules = array(
 		'title' => 'required',
@@ -11,13 +11,16 @@ class Housing_listing extends BaseModel {
 		'type' => 'required',
 		'bedrooms' => 'required',
 		'city' => 'required',
+		'contactPhone' => 'regex:/\d{3}-\d{3}-\d{4}$/',
+		'alternateEmail' => 'email',
 		'pic' => 'image'
 	);
 	
 	protected static $messages = array(
 			'required' => '*requiired',
 			'regex' => '*invalid format',
-			'image' => '*invalid file'
+			'image' => '*invalid file',
+			'email' => '*invalid format'
 	);
 	
 	public function images() {
