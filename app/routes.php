@@ -233,11 +233,14 @@ Route::group(array('before' => 'auth'), function() {
       });
     });
   });
-  //The Petitions route
-  // Route::get('petitions', 'PetitionController@showPetitions');
+  //The Petition routes
   Route::group(array('prefix' => '/petitions'), function() {
-  	Route::get('/', 'PetitionController@showPetitions');
-	Route::get('upload', 'PetitionController@showCreatePetition');
+  	Route::get('/', 'PetitionController@showAllPetitions');
+	Route::get('create', 'PetitionController@showCreatePetition');
+	Route::get('showPetition/{petition}', 'PetitionController@showPetition');
+	Route::get('delete/{petition}', 'PetitionController@handleDeletePetition');
+	Route::post('handleCreate', 'PetitionController@handleCreatePetition');
+	Route::post('handleSign', 'PetitionController@handleSignPetition');
   });
   
 });
