@@ -35,17 +35,14 @@ class PetitionController extends BaseController
 	/**
 	 * This should only be called by an Admin
 	 */
-	public function handleDeletePetition($petition)
+	public function handleDeletePetition(Petition $petition)
 	{
-		$thePetition = Petition::find($petition);
-		$thePetition->delete();
+		$petition->delete();
 		return Redirect::to('petitions');
 	}
 	
-	public function showPetition($petition)
+	public function showPetition(Petition $petition)
 	{
-		$thePetition = Petition::find($petition);
-		$signees = Signee::where('petition_id', '=', $petition);
-		return View::make('petition.show_petition', compact('thePetition'), compact('signees'));
+		return View::make('petition.show_petition', compact('petition'));
 	}
 }

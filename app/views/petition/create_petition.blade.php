@@ -4,13 +4,23 @@
 <div class="page-header">
 	<h1> Create Petition </h1>
 </div>
-
-<form class="form-horizontal" action="{{ action('PetitionController@handleCreatePetition') }}" method="post" role="form">
-	<div class="form-group col-md-9" style="margin-right: 5px;">
-		<label class="control-label">Class Name</label>
-		<input type="text" class="form-control" name="class_name"/>
-	</div>
+{{ Form::open([ 'class' => 'form-horizontal', 'action' => 'PetitionController@handleCreatePetition', 'files' => true]) }}
+<!--<form class="form-horizontal" action="{{ action('PetitionController@handleCreatePetition') }}" method="post" role="form"> -->
 	
+	<div class="form-group col-md-9" style="margin-right: 5px;">
+		{{ Form::label('class_name', 'Class Name', ['class' => 'control-label']) }}
+		{{ $errors->first('class_name', '<span class="error">:message</span>') }}
+		{{ Form::text('class_name', null, ['class' => 'form-control']) }}
+	</div>
+	<div class="form-control col-md-3" style="margin-right: 5px">
+		{{ Form::label('subject', 'Subject', ['class' => 'control-label']) }}
+		{{ $errors->first('subject', '<span class="error">:message</span>' }}
+		{{ Form::select('subject', array(
+			'' => 'Subject',
+			'ACCT' => 'Accounting',
+			'ANTH' => 'Anthropology',
+			'' => '',), '', ['class' => 'form-control', 'style' => ''] }}
+	</div>
 	<div class="form-group col-md-3" style="margin-right: 5px;">
 		<label class="control-label">Subject</label>
 		<select class="form-control"  style="padding-left: 10px;" name="subject">
@@ -71,5 +81,6 @@
 		<input type="submit" class="btn btn-primary" value="Post" />
 		<a href="{{ URL::to('petitions') }}" class="btn btn-danger">Cancel</a>
 	</div>
-</form>
+<!-- </form> -->
+{{ Form::close() }}
 @stop
