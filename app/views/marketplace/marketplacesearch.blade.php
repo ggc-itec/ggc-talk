@@ -6,7 +6,7 @@
 
 <div class="jumbotron" align="center">
   <div class="col-lg-12" style="padding-left: 5; padding-right: 5px;">
-    {{ Form::open(array('action' => 'MarketPlaceController@handle_add', 'id' => 'registerForm', 'class' => 'form-horizontal')) }}
+    {{ Form::open(array('action' => 'MarketPlaceController@handle_search', 'id' => 'registerForm', 'class' => 'form-horizontal')) }}
     <fieldset>
       <legend>
         <h2><center>Search For A Book(s)?!</center></h2>

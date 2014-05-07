@@ -20,5 +20,10 @@ class MarketPlaceController extends BaseController
 		$book -> save();
 		return Redirect::action('MarketPlaceController@index');
 	}
+
+	public function handle_search()
+	{
+		return View::make('marketplace.marketplacesearch');
+	}
 	
 }

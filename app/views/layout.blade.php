@@ -50,7 +50,7 @@
               				<a href="#/marketplace_add" target="_self">Add Book</a>
               			</li>
               			<li>
-              				<a href="#/marketplace_add" target="_self">Search Book</a>
+              				<a href="#/marketplace_search" target="_self">Search Book(s)?!</a>
               			</li>
               		</ul>
               </li>
