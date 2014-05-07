@@ -5,7 +5,7 @@ class MarketPlaceController extends BaseController
   	
     public function index()
     {
-      return View::make('marketplace.marketplace');
+      return View::make('marketplace.marketplacesearch');
     }
 	
 	public function handle_add()
