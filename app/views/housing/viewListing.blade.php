@@ -2,8 +2,6 @@
 
 @section('content')
 
-<script src="{{ asset('js/housingScript.js'); }}"></script>
-
 <div class="page-header">
 	<div class="navbar-link">
 		<span style="font-size: 12px;">Posted: today</span>

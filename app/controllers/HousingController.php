@@ -111,8 +111,6 @@ class HousingController extends BaseController {
 					$query->where('hasPic', '=', $input['hasPic']);
 				}
 			}
-			
-			
 		})->orderby('id', 'desc')->paginate(30);
 		
 		return View::make('housing.showSearchResults')->withHousing_listings($housing_listings)->withInput(Input::all());

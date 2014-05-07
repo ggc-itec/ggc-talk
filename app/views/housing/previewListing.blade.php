@@ -2,15 +2,13 @@
 
 @section('content')
 
-<script src="{{ asset('js/housingScript.js'); }}"></script>
-
 <div class="page-header">
 	<div class="navbar-right">
 		<a class="btn btn-primary" href="{{ action('HousingController@addListing') }}">Post</a>
 	</div>
 	<div class="navbar-link">
 		<a class="btn btn-success" href="{{ action('HousingController@viewMyListings') }}">Done</a>
-		<a class="btn btn-primary" href="#">Edit</a>
+		<a class="btn btn-primary" href="{{ action('HousingController@editListing', $housing_listing->id) }}">Edit</a>
 		<a class="btn btn-danger" data-toggle="modal" data-target="#deletePostModal">Delete</a>
 
 		<script type="text/javascript">

@@ -1,11 +1,18 @@
+<script src="{{ asset('js/housingScript.js'); }}"></script>
+
 @foreach ( $housing_listing->images()->take(1)->get() as $mainPic )
 <div class="col-md-5">
-	<img class="img-thumbnail" src="{{ URL::asset( 'images/' . $mainPic->filename ); }}" width="400px" id="mainPic"/>
-	<ul class="list-inline">
-		@foreach( $housing_listing->images()->get() as $pic )
-		<li><img class="btn housingPic" src="{{ URL::asset( 'images/' . $pic->filename ); }}" width="75px" style="margin-right: -20px;"/></li>
-		@endforeach
-	</ul>
+	<div class="row">
+		<ul class="list-inline">
+			@foreach( $housing_listing->images()->get() as $pic )
+				<li><img class="housingPic" src="{{ URL::asset( 'images/' . $pic->filename ); }}" width="65px" style="padding: 0; margin-bottom: 5px;"/></li>
+			@endforeach
+		</ul>
+	</div>
+	
+	<div class="row">
+		<img class="img-thumbnail" src="{{ URL::asset( 'images/' . $mainPic->filename ); }}" id="mainPic"/>
+	</div>
 </div>
 @endforeach
 
