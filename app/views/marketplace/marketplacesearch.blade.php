@@ -34,9 +34,9 @@
          <button type="submit" class="btn btn-primary">
             Search
           </button>
-          <button type="submit" class="btn btn-success">
-          	Add New Book
-          </button>
+          <!-- <button type="submit" class="btn btn-success" value = "Post"> -->
+              <button href="{{ action('MarketPlaceController@handle_add') }}" value = "Post" type="submit" class="btn btn-success">Add New Asses</button>
+          <!-- </button> -->
           <button class="btn btn-danger">
             Clear Form
           </button>
