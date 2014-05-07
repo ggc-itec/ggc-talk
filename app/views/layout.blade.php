@@ -4,8 +4,7 @@
     <title>ggc-talk</title>
     <link rel="shortcut icon" href="{{ asset('img/ggctalk-small.png'); }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css'); }}" rel="stylesheet">
-    <script src="{{ asset('js/jquery-2.0.3.min.js'); }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js'); }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/messageboard.css'); }}" rel="stylesheet">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
@@ -38,11 +37,16 @@
                 <a href="{{ URL::to('imgrr') }}">Imgrr</a>
               </li>
               <li>
-                <a href="#">TechTalks</a>
+                <a href="{{ URL::to('techtalks') }}">TechTalks</a>
               </li>
               <li>
                 <a href="{{ URL::to('housing') }}">Housing</a>
               </li>
+              @if(Auth::check())
+              <li>
+              	<a href="{{ URL::to('petitions') }}">Class Petitions</a>
+              </li>
+              @endif
               <li>
               	<a href="{{ URL::to('marketplace') }}">MarketPlace</a>
               </li>
@@ -83,8 +87,16 @@
                 </ul>
               </li>
               @endif
-              <li class="">
-                {{ HTML::linkRoute('logout', 'Logout (' . Auth::user() -> first_name . ')') }}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user() -> first_name }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="">
+                    {{ HTML::linkRoute('account', 'Account') }}
+                  </li>
+                  <li class="">
+                    {{ HTML::linkRoute('logout', 'Logout') }}
+                  </li>
+                </ul>
               </li>
               @endif
             </ul>
@@ -109,6 +121,8 @@
 		@yield('xtraContent')
 
     </div>
+    <script src="{{ asset('js/jquery-2.0.3.min.js'); }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js'); }}"></script>    
   </body>
 
 </html>

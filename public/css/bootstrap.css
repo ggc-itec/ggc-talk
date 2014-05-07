@@ -6,6 +6,12 @@
 
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
+.error {
+	font-size: 12px;
+	font-style: italic;
+	color: red;
+}
+
 article,
 aside,
 details,
@@ -1869,6 +1875,23 @@ legend {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.fieldset-norm {
+	padding: 20px;
+	margin: 0 0 20px 0;
+	border: 1px solid #333333;
+	border-radius: 5px;
+}
+
+.legend-norm {
+  width: auto;
+  padding: 10px;
+  margin-bottom: 0;
+  font-size: 21px;
+  font-weight:bold;
+  color: #333333;
+  border: none;
+}
+
 label {
   display: inline-block;
   margin-bottom: 5px;
@@ -1973,7 +1996,7 @@ output {
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  cursor: not-allowed;
+  cursor: default;
   background-color: #eeeeee;
 }
 
