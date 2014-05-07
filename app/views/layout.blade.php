@@ -47,10 +47,10 @@
               	<a href="#" class="dropdown-toggle" data-toggle="dropdown">MarketPlace</a>
               		<ul class="dropdown-menu">
               			<li>
-              				<a href="#/marketplace_add" target="_blank">Add Book</a>
+              				<a href="#/marketplace_add" target="_self">Add Book</a>
               			</li>
               			<li>
-              				<a href="#/marketplace_add" target="_blank">Search Book</a>
+              				<a href="#/marketplace_add" target="_self">Search Book</a>
               			</li>
               		</ul>
               </li>
