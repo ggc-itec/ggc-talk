@@ -43,8 +43,16 @@
               <li>
                 <a href="{{ URL::to('housing') }}">Housing</a>
               </li>
-              <li>
-              	<a href="{{ URL::to('/marketplace') }}">MarketPlace</a>
+              <li class="dropbdown">
+              	<a href="#" class="dropdown-toggle" data-toggle="dropdown">MarketPlace</a>
+              		<ul class="dropdown-menu">
+              			<li>
+              				<a href="/marketplace_add" target="_blank">Add Book</a>
+              			</li>
+              			<li>
+              				<a href="/marketplace_add" target="_blank">Search Book</a>
+              			</li>
+              		</ul>
               </li>
               <li>
                 <a href="#about">About</a>

@@ -9,7 +9,7 @@
     {{ Form::open(array('action' => 'MarketPlaceController@handle_add', 'id' => 'registerForm', 'class' => 'form-horizontal')) }}
     <fieldset>
       <legend>
-        <h2><center>Add A Book(s)?!</center></h2>
+        <h2><center>Search For A Book(s)?!</center></h2>
       </legend>
       <div class="form-group">
           {{ Form::text('name', '', array('class' => 'form-control input-lg', 'placeholder' => 'Enter Book Title')) }}
