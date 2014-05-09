@@ -14,6 +14,8 @@ class MarketPlaceController extends BaseController {
 		$book -> book_ISBN13 = Input::get('isbn13');
 		$book -> book_edition = Input::get('edition');
 		$book -> book_condition = Input::get('condition');
+		$book -> book_email = Input::get('email');
+		$book -> book_description = Input::get('book_description');
 		$book -> save();
 		return Redirect::action('MarketPlaceController@index');
 	}

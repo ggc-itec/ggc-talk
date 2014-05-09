@@ -30,6 +30,12 @@
           {{ Form::text('condition', '', array('class' => 'form-control input-lg', 'placeholder' => 'Book Condition')) }}
       </div>
       <div class="form-group">
+          {{ Form::text('email', '', array('class' => 'form-control input-lg', 'placeholder' => 'Your E-mail Address')) }}
+      </div>
+       <div class="form-group">
+          {{ Form::text('book_description', '', array('class' => 'form-control input-lg', 'placeholder' => 'Description/Cost')) }}
+      </div>
+      <div class="form-group">
         <div class="pull-center">
           <!-- <button type="submit" class="btn btn-success" value = "Post"> -->
           <button href="{{ action('MarketPlaceController@handle_add') }}" value = "Post" type="submit" class="btn btn-success">Add New Asses</button>

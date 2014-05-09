@@ -21,6 +21,8 @@ class CreateBookTable extends Migration {
       	$table -> string('book_ISBN13',15);
 		$table -> string('book_edition', 25) -> nullable();
 		$table -> string('book_condition', 25) -> nullable();
+		$table -> string('book_email',35);
+		$table -> string('book_description', 250);
     });
 	
 	}
