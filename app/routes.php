@@ -235,7 +235,6 @@ Route::group(array('before' => 'auth'), function() {
   });
   //The Petition routes
   Route::group(array('prefix' => '/petitions'), function() {
-  	Route::model('petition', 'Petition');
   	Route::get('/', 'PetitionController@showAllPetitions');
 	Route::get('create', 'PetitionController@showCreatePetition');
 	Route::get('showPetition/{petition}', 'PetitionController@showPetition');
@@ -266,7 +265,24 @@ Route::group(array('prefix' => '/housing'), function()
 	Route::get('deleteListing/{housing_listing}', 'HousingController@handleDeleteListing');
 	Route::get('myListings', 'HousingController@viewMyListings');
 	Route::get('searchResults', 'HousingController@showSearchResults');
-	Route::get('editListing/{housing_listing}', 'HousingController@editListing');
-	Route::post('handleEdit/{housing_listing}', 'HousingController@handleEditListing');
 });
 
+// ===============================================
+// RMI SECTION =================================
+// 
+// ===============================================
+// ===============================================
+Route::group(array('prefix' => '/rmi'), function()
+{
+  Route::model('internship','Internship');
+  Route::get('/','RMIController@imageGallery');
+  Route::get('/upload','RMIController@upload');
+  Route::post('/handleupload','RMIController@handleUploadRMI');
+  Route::get('/showlist', 'RMIController@showList');
+  Route::post('/', 'RMIController@handleCreate');
+  Route::get('/deleteInternship{internship}','RMIController@deleteInternship');
+  Route::post('/deleteInternship','RMIController@handleDelete');
+  Route::get('editInternship{internship}','RMIController@editInternship');
+  Route::post('/editInternship','RMIController@handleEdit');
+  
+});
