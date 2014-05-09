@@ -21,16 +21,17 @@ class MarketPlaceController extends BaseController
 		return Redirect::action('MarketPlaceController@index');
 	}
 
+	public function handle_search(){
+		$input = Input::all();
+		$results = DB::select('select * from books WHERE book_title = '.input::get('name'));
+		var_dump($results);
+	}
+
 	public function go_to_search(){
 		return View::make('marketplace.marketplacesearch');		
 	}	
 
 	public function go_to_add(){
 		return View::make('marketplace.marketplaceadd');		
-	}
-
-	public function handle_search()
-	{
-		return View::make('marketplace.marketplace');
 	}
 }
