@@ -1,11 +1,22 @@
+<script src="{{ asset('js/housingScript.js'); }}"></script>
+
+<?php $id = $housing_listing->id; ?>
+
 @foreach ( $housing_listing->images()->take(1)->get() as $mainPic )
 <div class="col-md-5">
-	<img class="img-thumbnail" src="{{ URL::asset( 'images/' . $mainPic->filename ); }}" width="400px" id="mainPic"/>
-	<ul class="list-inline">
-		@foreach( $housing_listing->images()->get() as $pic )
-		<li><img class="btn housingPic" src="{{ URL::asset( 'images/' . $pic->filename ); }}" width="75px" style="margin-right: -20px;"/></li>
-		@endforeach
-	</ul>
+	@if( count($housing_listing->images()->get()) > 1 )
+		<div class="row">
+			<ul class="list-inline">
+				@foreach( $housing_listing->images()->get() as $pic )
+					<li><img class="housingPic" src="{{ URL::asset( 'images/housing_pics/' . $id . '/' . $pic->filename ); }}" style="padding: 0; margin-bottom: 5px; max-width:65px; max-height: 65px;"/></li>
+				@endforeach
+			</ul>
+		</div>
+	@endif
+	
+	<div class="row">
+		<img style="max-height: 400px;" class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $id . '/' . $mainPic->filename ); }}" id="mainPic"/>
+	</div>
 </div>
 @endforeach
 

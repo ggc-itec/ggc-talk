@@ -24,7 +24,7 @@ class TechTalkController extends BaseController
         $techtalk->speaker = Input::get('speaker');
         $techtalk->title = Input::get('title');
         $techtalk->save();
-
+        $talks = Techtalk::orderBy('created_at', 'DESC')->get();
         return View::make('techtalks.index', compact('talks'));
     }
 
