@@ -7,20 +7,27 @@ class HousingController extends BaseController {
 	 * that splits the results in groups of 30 on separate pages
 	 */
 	public function showAllListings() {
-		$housing_listings = Housing_listing::orderBy('id', 'desc')->paginate(30);
+		$housing_listings = Housing_listing::orderBy('updated_at', 'desc')->paginate(30);
 		return View::make('housing.showAllListings')->withHousing_listings($housing_listings);
 	}
 	
 	/**
-	 * searches housing listings with search bar input and then displays results with pagination
+	 * performs 1 of 3 possible queries to search housing listings with search bar input
+	 * and then displays results with pagination
+	 * 
+	 * Query 1: text only search
+	 * Query 2: text and other inputs
+	 * Query 3: only other inputs - no text
 	 */
 	public function showSearchResults() {
-		
+		// custom query from search bar input
 		$housing_listings = Housing_listing::where(function($query) {
 			$input = Input::all();
 			$textOnlySearch = false;
 			
-			// check if all fields except search text are empty
+			// checks if all fields except search text are empty to see if query should
+			// only use search text to query listings -- if all other fields are empty
+			// then $textOnlySearch is set to true
 			if ($input['searchText'] != '') {
 				$inputFields = Input::except('searchText');
 				$totalFields = count($inputFields);
@@ -35,7 +42,8 @@ class HousingController extends BaseController {
 				}
 			}
 			
-			// performs search text only query
+			// Query 1
+			// if search text is not empty and $textOnlySearch is true, then performs search text only query
 			if ($input['searchText'] != '' && $textOnlySearch){
 				$searchTerms = explode(' ', $input['searchText']);
 				
@@ -44,11 +52,20 @@ class HousingController extends BaseController {
 				}
 			}
 			
-			// perform query with all non-empty input fields
+			// Query 2
+			// if search text is not empty and other fields are also not empty, then
+			// performs query with all non-empty input fields
 			elseif ($input['searchText'] != '' && !$textOnlySearch) {
+				// separates search terms to query using each term separately
 				$searchTerms = explode(' ', $input['searchText']);
 				
-				// query all listing attributes except body
+				// NOTE: two separate queries are performed: 1 with everything excluding body of listing, and 1 with
+				// everything excluding title of listing. This is to ensure that results do not include listings that
+				// have attributes other than what is specified by the search bar input. I tried combining a search with
+				// both title and body attributes, but results were being included that contained attributes other than
+				// those specified. I don't know why, but separating the queries works.
+				
+				// query against all listing attributes except 'body'
 				foreach ($searchTerms as $term) {
 					$query->orWhere('title', 'LIKE', "%$term%");
 					
@@ -69,11 +86,9 @@ class HousingController extends BaseController {
 					}
 				}
 				
-				// query all listing attributes except title
+				// also query against all listing attributes except 'title'
 				foreach ($searchTerms as $term) {
 					$query->orWhere('body', 'LIKE', "%$term%");
-					
-					$query->orWhere('title', 'LIKE', "%$term%");
 					
 					if ($input['rent'] != '') {
 						$query->where('rent', '<=', $input['rent']);
@@ -93,7 +108,8 @@ class HousingController extends BaseController {
 				}
 			}
 			
-			// perform query without search text
+			// Query 3
+			// if search text is empty, performs query without search text
 			elseif ($input['searchText'] == '') {
 				if ($input['rent'] != '') {
 					$query->where('rent', '<=', $input['rent']);
@@ -111,9 +127,7 @@ class HousingController extends BaseController {
 					$query->where('hasPic', '=', $input['hasPic']);
 				}
 			}
-			
-			
-		})->orderby('id', 'desc')->paginate(30);
+		})->orderby('updated_at', 'desc')->paginate(30);
 		
 		return View::make('housing.showSearchResults')->withHousing_listings($housing_listings)->withInput(Input::all());
 	}
@@ -138,10 +152,8 @@ class HousingController extends BaseController {
 	}
 	
 	/**
-	 * validates housing listing and housing pic input, then either returns with error messages
-	 * or saves housing listing and housing pics
-	 * 
-	 * FIXME: currently overwrites an existing image file with same name as new file
+	 * validates housing listing and housing pic input, then either returns
+	 * with error messages or saves housing listing and housing pics
 	 */
 	public function handleAddListing() {
 		$housing_listing = new Housing_listing(Input::all());
@@ -169,24 +181,45 @@ class HousingController extends BaseController {
 				return Redirect::back()->withInput()->withErrors($housing_pic->getErrors());
 			}
 			
-			// saves each picture with reference to housing listing if it isn't null
+			// saves housing listing and each pic with reference to housing listing id if pic isn't null
 			foreach ($picFiles as $picFile) {
 				if ($picFile != null) {
-					// sets housing listing has pic attribute then saves housing listing
+					// sets housing listing 'hasPic' attribute then saves housing listing
 					// this is necessary to retrieve housing listing id to reference with pic
 					$housing_listing->hasPic = 1;
 					$housing_listing->save();
 					
 					$housing_pic = new Housing_pic();
-					$fileName = $picFile->getClientOriginalName();
-					$upload_success = $picFile->move('images', $fileName);
+					
+					// creates directory for pic using listin id if it doesn't already exist
+					$path = 'images/housing_pics/' . $housing_listing->id;
+					if (!File::isDirectory($path)) {
+						File::makeDirectory($path);
+					}
+					
+					// separates filename and extension into an associative array to set unique filename
+					$fileNameInfo = pathinfo($picFile->getClientOriginalName());
+					
+					// sets a unique filename to prevent overwrite by adding a random string to the end of
+					// the filename if the filepath already exists, otherwise it retains original file name
+					// NOTE - random string to be appended to the filename is initially an empty string
+					$randomStr = '';
+					do{
+						$fileName = $fileNameInfo['filename'] . $randomStr . '.' . $fileNameInfo['extension'];
+    					$file_path = $path . '/' . $fileName;
+    					$randomStr = '_' . Str::random(6);
+					} while (File::exists($file_path));
+					
+					// uploads file and saves pic info in database
+					$upload_success = $picFile->move($path, $fileName);
 					$housing_pic->filename = $fileName;
 					$housing_pic->housing_listing_id = $housing_listing->id;
 					$housing_pic->save();
 				}
 			}
 			
-			// save housing listing in case it wasn't already saved when saving pics
+			// saves housing listing in case it wasn't already saved when saving housing pics
+			// which may occur if housing pics are null
 			$housing_listing->save();
 			
 			// redirect to listing preview with success alert
@@ -204,7 +237,7 @@ class HousingController extends BaseController {
 		}
 	}
 	
-	//FIXME: add view and route
+	// returns view to allow user to edit listing
 	public function editListing(Housing_listing $housing_listing) {
 		if (Auth::guest()) {
 			return Redirect::to('housing');
@@ -214,18 +247,87 @@ class HousingController extends BaseController {
 		}
 	}
 	
-	//FIXME: add code
-	public function handleEditListing() {
+	// updates housing listing with the input provided by user in the edit listing view
+	//FIXME: update code to handle picture changes
+	public function handleEditListing(Housing_listing $housing_listing) {
+		$housing_listing->update(Input::all());
 		
+		$housing_pic = new Housing_pic();
+		$picFiles = Input::file();
+		
+		// if housing listing input doesn't validate, check validation for housing pics then return with error messages
+		if (!$housing_listing->validate(Input::all())) {
+			// if housing pic input doesn't validate, return with error messages
+			if (!$housing_pic->validate($picFiles)) {
+				// return with housing listing and housing pic validation error messages
+				return Redirect::back()->withInput()->withErrors(array_merge($housing_listing->getErrors()->toArray(), $housing_pic->getErrors()->toArray()));
+			}
+			// return with only housing listing validation error messages
+			return Redirect::back()->withInput()->withErrors($housing_listing->getErrors());
+		}
+		
+		// if housing listing input validates, check validation for housing pics then either save or return with error messages
+		else {
+			// if housing pic input doesn't validate, return with error messages
+			if (!$housing_pic->validate($picFiles)) {
+				// return with housing pic validation error messages
+				return Redirect::back()->withInput()->withErrors($housing_pic->getErrors());
+			}
+			
+			// saves housing listing and each pic with reference to housing listing id if pic isn't null
+			foreach ($picFiles as $picFile) {
+				if ($picFile != null) {
+					// sets housing listing 'hasPic' attribute then saves housing listing
+					// this is necessary to retrieve housing listing id to reference with pic
+					$housing_listing->hasPic = 1;
+					$housing_listing->save();
+					
+					$housing_pic = new Housing_pic();
+					
+					// creates directory for pic using listin id if it doesn't already exist
+					$path = 'images/housing_pics/' . $housing_listing->id;
+					if (!File::isDirectory($path)) {
+						File::makeDirectory($path);
+					}
+					
+					// separates filename and extension into an associative array to set unique filename
+					$fileNameInfo = pathinfo($picFile->getClientOriginalName());
+					
+					// sets a unique filename to prevent overwrite by adding a random string to the end of
+					// the filename if the filepath already exists, otherwise it retains original file name
+					// NOTE - random string to be appended to the filename is initially an empty string
+					$randomStr = '';
+					do{
+						$fileName = $fileNameInfo['filename'] . $randomStr . '.' . $fileNameInfo['extension'];
+    					$file_path = $path . '/' . $fileName;
+    					$randomStr = '_' . Str::random(6);
+					} while (File::exists($file_path));
+					
+					// uploads file and saves pic info in database
+					$upload_success = $picFile->move($path, $fileName);
+					$housing_pic->filename = $fileName;
+					$housing_pic->housing_listing_id = $housing_listing->id;
+					$housing_pic->save();
+				}
+			}
+			
+			// saves housing listing in case it wasn't already saved when saving housing pics
+			// which may occur if housing pics are null
+			$housing_listing->save();
+			
+			// redirect to listing preview with success alert
+			return Redirect::to('housing/previewListing/' . $housing_listing->id)->with(array('alert' => 'Edit successful.', 'alert-class' => 'alert-success'));
+		}
 	}
 	
-	// deletes the selected listing
+	// deletes the selected listing, its related pics, and directory with physical pics
 	public function handleDeleteListing(Housing_listing $housing_listing) {
+		// must delete pics first, since they contain a foreign key constraint
 		$housing_pics = $housing_listing->images()->get();
 		foreach ($housing_pics as $pic) {
-			//FIXME:need to delete pic files as well
 			$pic->delete();
 		}
+		File::deleteDirectory('images/housing_pics/' . $housing_listing->id);
 		$housing_listing->delete();
 		return Redirect::to('housing/myListings');
 	}

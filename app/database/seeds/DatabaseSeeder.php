@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder {
 
 		$this -> call('UsersTableSeeder');
 		$this -> call('PostsTableSeeder');
-		$this -> call('HousingListingsTableSeeder');
+		//$this -> call('HousingListingsTableSeeder');
 	}
 
 }
