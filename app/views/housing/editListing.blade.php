@@ -44,7 +44,7 @@
 			'10' => 'within 10 miles', 
 			'15' => 'within 15 miles', 
 			'20' => 'within 20 miles', 
-			'25' => 'within 25 miles'), '', ['class' => 'form-control', 'style' => 'width: 145px;']) }}
+			'25' => 'within 25 miles'), $housing_listing->distance, ['class' => 'form-control', 'style' => 'width: 145px;']) }}
 	</div>
 
 	<div class="form-group col-md-2" style="margin-right: 5px;">
@@ -54,7 +54,7 @@
 			'condo' => 'condo', 
 			'duplex' => 'duplex', 
 			'townhouse' => 'townhouse', 
-			'house' => 'house'), 'apartment', ['class' => 'form-control', 'style' => 'width: 125px;']) }}
+			'house' => 'house'), $housing_listing->type, ['class' => 'form-control', 'style' => 'width: 125px;']) }}
 	</div>
 
 	<div class="form-group col-md-3">
@@ -66,7 +66,7 @@
 			'2' => '2', 
 			'3' => '3', 
 			'4' => '4', 
-			'5' => '5'), '', ['class' => 'form-control', 'style' => 'width: 100px;']) }}
+			'5' => '5'), $housing_listing->bedrooms, ['class' => 'form-control', 'style' => 'width: 100px;']) }}
 	</div>
 	
 	<fieldset class="fieldset-norm col-md-5" style="padding-right: 0px; margin-right: 20px;">
@@ -76,19 +76,23 @@
 			
 			<div class="form-group col-md-12">
 				{{ Form::label('', 'Display GGC Email', ['class' => 'control-label', 'style' => 'font-size: 14px;']) }}
-				{{ Form::checkbox('displayAuthor_Email', '1') }}
+				@if ($housing_listing->displayAuthor_Email == 1)
+					{{ Form::checkbox('displayAuthor_Email', '1', true) }}
+				@else
+					{{ Form::checkbox('displayAuthor_Email', '1') }}
+				@endif
 			</div>
 			
 			<div class="form-group col-md-6" style="margin-right: 30px; margin-top: -25px;">
 				{{ Form::label('', 'Phone Number', ['class' => 'control-label', 'style' => 'font-size: 14px;']) }}
 				{{ $errors->first('contactPhone', '<span class="error">:message</span>') }}
-  				{{ Form::text('contactPhone', null, ['class' => 'form-control', 'placeholder' => 'xxx-xxx-xxxx', 'style' => 'width: 190px;']) }}
+  				{{ Form::text('contactPhone', $housing_listing->contactPhone, ['class' => 'form-control', 'placeholder' => 'xxx-xxx-xxxx', 'style' => 'width: 190px;']) }}
 			</div>
 			
 			<div class="form-group col-md-6" style="margin-right: 0px; margin-top: -25px;">
 				{{ Form::label('', 'Alt. Email', ['class' => 'control-label', 'style' => 'font-size: 14px;']) }}
 				{{ $errors->first('alternateEmail', '<span class="error">:message</span>') }}
-  				{{ Form::text('alternateEmail', null, ['class' => 'form-control', 'placeholder' => 'example@provider.com', 'style' => 'width: 190px;']) }}
+  				{{ Form::text('alternateEmail', $housing_listing->alternateEmail, ['class' => 'form-control', 'placeholder' => 'example@provider.com', 'style' => 'width: 190px;']) }}
 			</div>
 		</div>
 	</fieldset>
@@ -125,7 +129,7 @@
 	</fieldset>
 	
 	<div class="col-md-2 col-md-offset-10">
-		<input type="submit" class="btn btn-primary" value="Post" />
+		<input type="submit" class="btn btn-primary" value="Save" />
 		<a href="{{ action('HousingController@previewListing', $housing_listing->id) }}" class="btn btn-danger">cancel</a>
 	</div>
 {{ Form::close() }}
