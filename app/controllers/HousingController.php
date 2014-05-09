@@ -345,7 +345,7 @@ class HousingController extends BaseController {
 						}
 					}
 				}
-				// else, if the id IS null - meaning a pic does not currently uploaded in this slot,
+				// else, if the id IS null - meaning a pic is not currently uploaded in this slot,
 				// then check to see if the user wants to upload a pic
 				else {
 					// if new file input is not null, then user wants to upload a pic, so do it

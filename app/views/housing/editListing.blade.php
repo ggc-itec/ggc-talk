@@ -102,8 +102,8 @@
 		<legend class="legend-norm">Edit Pics</legend>
 		<div class="form-inline col-md-12" style="margin-top: -50px; margin-left: -5px; padding: 0px;">
 			<div class="form-group col-md-6" style="margin-right: 20px;">
-				<div style="margin-top: 20px; height: 75px; max-width: 125px; display: inline-block;">
-					<img <?php if ($pics != null && count($pics) >= 1) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[0]['filename'] ); }}"<?php } ?>/>
+				<div style="margin-top: 20px; height: 90px; width: 125px; display: inline-block;">
+					<img style="max-height: 85px;" <?php if ($pics != null && count($pics) >= 1) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[0]['filename'] ); }}"<?php } ?>/>
 				</div>
 				@if ($pics != null && count($pics) >= 1)
 				{{ Form::hidden('picID_1', $pics[0]['id'], ['class' => 'form-control'])}}
@@ -115,8 +115,8 @@
 			</div>
 			
 			<div class="form-group col-md-6">
-				<div style="margin-top: 20px; height: 75px; max-width: 125px; display: inline-block;">
-					<img <?php if ($pics != null && count($pics) >= 2) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[1]['filename'] ); }}"<?php } ?>/>
+				<div style="margin-top: 20px; height: 90px; width: 125px; display: inline-block;">
+					<img style="max-height: 85px;" <?php if ($pics != null && count($pics) >= 2) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[1]['filename'] ); }}"<?php } ?>/>
 				</div>
 				@if ($pics != null && count($pics) >= 2)
 				{{ Form::hidden('picID_2', $pics[1]['id'], ['class' => 'form-control'])}}
@@ -130,8 +130,8 @@
 			
 		<div class="form-inline col-md-12" style="margin-left: -5px; padding: 0;">
 			<div class="form-group col-md-6" style="margin-right: 20px;">
-				<div style="margin-top: 10px; height: 75px; max-width: 125px; display: inline-block;">
-					<img <?php if ($pics != null && count($pics) >= 3) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[2]['filename'] ); }}"<?php } ?>/>
+				<div style="margin-top: 10px; height: 90px; width: 125px; display: inline-block;">
+					<img style="max-height: 85px;" <?php if ($pics != null && count($pics) >= 3) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[2]['filename'] ); }}"<?php } ?>/>
 				</div>
 				@if ($pics != null && count($pics) >= 3)
 				{{ Form::hidden('picID_3', $pics[2]['id'], ['class' => 'form-control'])}}
@@ -143,8 +143,8 @@
 			</div>
 	
 			<div class="form-group col-md-6">
-				<div style="margin-top: 10px; height: 75px; max-width: 125px; display: inline-block;">
-					<img <?php if ($pics != null && count($pics) >= 4) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[3]['filename'] ); }}"<?php } ?>/>
+				<div style="margin-top: 10px; height: 90px; width: 125px; display: inline-block;">
+					<img style="max-height: 85px;" <?php if ($pics != null && count($pics) >= 4) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[3]['filename'] ); }}"<?php } ?>/>
 				</div>
 				@if ($pics != null && count($pics) == 4)
 				{{ Form::hidden('picID_4', $pics[3]['id'], ['class' => 'form-control'])}}
