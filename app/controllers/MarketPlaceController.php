@@ -1,15 +1,12 @@
 <?php
 
-class MarketPlaceController extends BaseController 
-{
-  	
-    public function index()
-    {
-      return View::make('marketplace.startpage');
-    }
-	
-	public function handle_add()
-	{
+class MarketPlaceController extends BaseController {
+
+	public function index() {
+		return View::make('marketplace.startpage');
+	}
+
+	public function handle_add() {
 		$book = new Book();
 		$book -> book_title = Input::get('name');
 		$book -> book_author = Input::get('author');
@@ -21,17 +18,38 @@ class MarketPlaceController extends BaseController
 		return Redirect::action('MarketPlaceController@index');
 	}
 
-	public function handle_search(){
-		$input = Input::all();
-		$results = DB::select('select * from books WHERE book_title = '.input::get('name'));
-		var_dump($results);
+	public function handle_search() {
+		$books = DB::table('books') -> get();
+		$array = array();
+		
+		if (Input::get('name') != '')
+		{
+			foreach ($books as $book) 
+			{
+				if ($book -> book_title == Input::get('name'))
+				{
+					array_push($array, $book);
+				}
+			}
+		}
+		else
+		{
+			foreach($books as $book)
+			{
+				array_push($array, $book);
+			}
+		}
+		
+		var_dump($array);
+
 	}
 
-	public function go_to_search(){
-		return View::make('marketplace.marketplacesearch');		
-	}	
-
-	public function go_to_add(){
-		return View::make('marketplace.marketplaceadd');		
+	public function go_to_search() {
+		return View::make('marketplace.marketplacesearch');
 	}
+
+	public function go_to_add() {
+		return View::make('marketplace.marketplaceadd');
+	}
+
 }

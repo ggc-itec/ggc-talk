@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'ggctalk',
 			'username'  => 'root',
-			'password'  => '16140313',
+			'password'  => 'dannym',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
