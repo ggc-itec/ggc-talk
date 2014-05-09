@@ -5,7 +5,7 @@ class MarketPlaceController extends BaseController
   	
     public function index()
     {
-      return View::make('marketplace.marketplacesearch');
+      return View::make('marketplace.startpage');
     }
 	
 	public function handle_add()
@@ -21,9 +21,16 @@ class MarketPlaceController extends BaseController
 		return Redirect::action('MarketPlaceController@index');
 	}
 
+	public function go_to_search(){
+		return View::make('marketplace.marketplacesearch');		
+	}	
+
+	public function go_to_add(){
+		return View::make('marketplace.marketplaceadd');		
+	}
+
 	public function handle_search()
 	{
-		return View::make('marketplace.marketplacesearch');
+		return View::make('marketplace.marketplace');
 	}
-	
 }
