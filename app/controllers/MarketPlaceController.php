@@ -42,7 +42,7 @@ class MarketPlaceController extends BaseController {
 			}
 		}
 		
-		var_dump($array);
+		return View::make('marketplace.booklist', compact('books'));
 
 	}
 

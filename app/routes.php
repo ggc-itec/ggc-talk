@@ -160,6 +160,7 @@ Route::post('/handle_search', 'MarketPlaceController@handle_search');
 Route::get('/marketplace', 'MarketPlaceController@index');
 Route::post('/marketplace_add', 'MarketPlaceController@handle_add');
 Route::get('/marketplace{book}', 'FlickrPicController@deleteFavPic');
+Route::get('/handle_search{books}', 'MarketPlaceController@handle_search');
 
 /*
  * Only non-logged in users can access these routes
