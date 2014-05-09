@@ -12,14 +12,16 @@ class CreateJokesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('jokes', function($table) {
+	 Schema::create('jokes', function($table)
+	 {
       $table->increments('id');
       $table->string('joke', 500);
-      $table->string('laughtrack',50);
-    });
+      $table->string('laughtrack', 50);
+	  $table ->timestamps();
+     });
     
     DB::table('jokes')->insert(array(
-      'joke' => 'So two guys walk into a bar... You\'d think one of them would have seen it coming.',
+      'joke' => 'So two guys walk into a bar... Youd think one of them would have seen it coming.',
       'laughtrack' => 'Ohohohoho!'
     ));
     
@@ -29,12 +31,12 @@ class CreateJokesTable extends Migration {
     ));
     
     DB::table('jokes')->insert(array(
-      'joke' => 'At first Bob didn\'t like his new haircut, but it started to grow on him.',
+      'joke' => 'At first Bob didnt like his new haircut, but it started to grow on him.',
       'laughtrack' => 'Ahahahaha!'
     ));
     
     DB::table('jokes')->insert(array(
-      'joke' => 'Why shouldn\'t you write with a broken pencil? BECAUSE IT\'S POINTLESS',
+      'joke' => 'Why shouldnt you write with a broken pencil? BECAUSE ITS POINTLESS',
       'laughtrack' => 'Bwahahahaha!'
     ));
     
@@ -59,11 +61,11 @@ class CreateJokesTable extends Migration {
     ));
     
     DB::table('jokes')->insert(array(
-      'joke' => 'There’s two fish in a tank. One turns to the other and says ‘You man the guns, I’ll drive’',
+      'joke' => 'Theres two fish in a tank. One turns to the other and says "You man the guns, Ill drive"',
       'laughtrack' => 'GWAHAHAHAHAHAHA!!'
     ));
     }
-
+    
 	/**
      * Reverse the migrations.
      *

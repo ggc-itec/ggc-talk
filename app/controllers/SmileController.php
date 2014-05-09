@@ -1,13 +1,13 @@
 <?php
 
-/*class SmileController extends BaseController
+class SmileController extends BaseController
 {
     /**
      * Show a random joke and a cat picture
      *
      * @return Response
      */
- /*   public function showFunStuff()
+    public function showFunStuff()
     {
         return View::make('smile.fun_stuff');
     }
@@ -17,7 +17,7 @@
      *
      * @return Response
      */
- /*   public function showHappyVideo()
+    public function showHappyVideo()
     {
         return View::make('smile.video');
     }

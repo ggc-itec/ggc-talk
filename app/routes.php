@@ -99,6 +99,15 @@ Route::group(array('prefix' => '/posts'), function() {
   Route::post('/store', 'PostController@store');
 });
 
+// ===============================================
+// Smile SECTION =================================
+// ===============================================
+// ===============================================
+  Route::group(array('prefix' => '/smile'), function() {
+  	Route::get('/', 'SmileController@showFunStuff');
+	Route::get('/video', 'SmileController@showHappyVideo');
+  });
+
 /*
  * User route-model binding
  */

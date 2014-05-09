@@ -7,8 +7,5 @@
 src="//www.youtube.com/embed/ntDTUdyeE-k" frameborder="0" allowfullscreen>
 </iframe>
 
-   <div class="row">
-    
-   </div>
 </div>
 @stop
