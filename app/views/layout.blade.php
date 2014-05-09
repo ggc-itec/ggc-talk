@@ -38,6 +38,9 @@
                 <a href="{{ URL::to('imgrr') }}">Imgrr</a>
               </li>
               <li>
+              	<a href="{{ URL::to('smile') }}">Smile</a>
+              </li>
+              <li>
                 <a href="#">TechTalks</a>
               </li>
               <li>
