@@ -8,14 +8,14 @@
 		<div class="row">
 			<ul class="list-inline">
 				@foreach( $housing_listing->images()->get() as $pic )
-					<li><img class="housingPic" src="{{ URL::asset( 'images/housing_pics/' . $id . '/' . $pic->filename ); }}" width="65px" style="padding: 0; margin-bottom: 5px;"/></li>
+					<li><img class="housingPic" src="{{ URL::asset( 'images/housing_pics/' . $id . '/' . $pic->filename ); }}" style="padding: 0; margin-bottom: 5px; max-width:65px; max-height: 65px;"/></li>
 				@endforeach
 			</ul>
 		</div>
 	@endif
 	
 	<div class="row">
-		<img class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $id . '/' . $mainPic->filename ); }}" id="mainPic"/>
+		<img style="max-height: 400px;" class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $id . '/' . $mainPic->filename ); }}" id="mainPic"/>
 	</div>
 </div>
 @endforeach
