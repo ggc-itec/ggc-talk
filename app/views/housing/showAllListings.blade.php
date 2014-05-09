@@ -22,7 +22,7 @@
 			</div>
 		@endforeach
 	@else
-		<h3 class="container" style="width: 230px;">Be the first to post a listing!</h3>
+		<h3 class="container" style="width: 325px;">Be the first to post a listing!</h3>
 	@endif
 	
 	{{ $housing_listings->links() }}

@@ -97,31 +97,60 @@
 		</div>
 	</fieldset>
 	
+	<?php $pics = $housing_listing->images()->get()->toArray();?>
 	<fieldset class="fieldset-norm col-md-6" style="padding-right: 0px; padding-bottom: 10px;">
-		<legend class="legend-norm">Pics</legend>
+		<legend class="legend-norm">Edit Pics</legend>
 		<div class="form-inline col-md-12" style="margin-top: -50px; margin-left: -5px; padding: 0px;">
 			<div class="form-group col-md-6" style="margin-right: 20px;">
-				{{ Form::label('', '', ['class' => 'control-label']) }}
+				<div style="margin-top: 20px; height: 75px; max-width: 125px; display: inline-block;">
+					<img <?php if ($pics != null && count($pics) >= 1) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[0]['filename'] ); }}"<?php } ?>/>
+				</div>
+				@if ($pics != null && count($pics) >= 1)
+				{{ Form::hidden('picID_1', $pics[0]['id'], ['class' => 'form-control'])}}
+				{{ Form::checkbox('removePic1', '1')}}
+				{{ Form::label('', 'Remove', ['style' => 'font-size: 14px;'])}}
+				@endif
 				{{ $errors->first('pic1', '<span class="error">:message</span>') }}
   				{{ Form::file('pic1', ['class' => 'form-control', 'style' => 'width: 230px;']) }}
 			</div>
 			
 			<div class="form-group col-md-6">
-				{{ Form::label('', '', ['class' => 'control-label']) }}
+				<div style="margin-top: 20px; height: 75px; max-width: 125px; display: inline-block;">
+					<img <?php if ($pics != null && count($pics) >= 2) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[1]['filename'] ); }}"<?php } ?>/>
+				</div>
+				@if ($pics != null && count($pics) >= 2)
+				{{ Form::hidden('picID_2', $pics[1]['id'], ['class' => 'form-control'])}}
+				{{ Form::checkbox('removePic2', '1')}}
+				{{ Form::label('', 'Remove', ['style' => 'font-size: 14px;'])}}
+				@endif
 				{{ $errors->first('pic2', '<span class="error">:message</span>') }}
-  				{{ Form::file('pic2', ['class' => 'form-control', 'style' => 'width: 230px;']) }}
+  				{{ Form::file('pic2', ['class' => 'form-control', 'style' => 'width: 230px;', 'value' => 'add']) }}
 			</div>
 		</div>
 			
 		<div class="form-inline col-md-12" style="margin-left: -5px; padding: 0;">
 			<div class="form-group col-md-6" style="margin-right: 20px;">
-				{{ Form::label('', '', ['class' => 'control-label']) }}
+				<div style="margin-top: 10px; height: 75px; max-width: 125px; display: inline-block;">
+					<img <?php if ($pics != null && count($pics) >= 3) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[2]['filename'] ); }}"<?php } ?>/>
+				</div>
+				@if ($pics != null && count($pics) >= 3)
+				{{ Form::hidden('picID_3', $pics[2]['id'], ['class' => 'form-control'])}}
+				{{ Form::checkbox('removePic3', '1')}}
+				{{ Form::label('', 'Remove', ['style' => 'font-size: 14px;'])}}
+				@endif
 				{{ $errors->first('pic3', '<span class="error">:message</span>') }}
   				{{ Form::file('pic3', ['class' => 'form-control', 'style' => 'margin-top: -20px; width: 230px;']) }}
 			</div>
 	
 			<div class="form-group col-md-6">
-				{{ Form::label('', '', ['class' => 'control-label']) }}
+				<div style="margin-top: 10px; height: 75px; max-width: 125px; display: inline-block;">
+					<img <?php if ($pics != null && count($pics) >= 4) { ?>class="img-thumbnail" src="{{ URL::asset( 'images/housing_pics/' . $housing_listing->id . '/' . $pics[3]['filename'] ); }}"<?php } ?>/>
+				</div>
+				@if ($pics != null && count($pics) == 4)
+				{{ Form::hidden('picID_4', $pics[3]['id'], ['class' => 'form-control'])}}
+				{{ Form::checkbox('removePic4', '1')}}
+				{{ Form::label('', 'Remove', ['style' => 'font-size: 14px;'])}}
+				@endif
 				{{ $errors->first('pic4', '<span class="error">:message</span>') }}
   				{{ Form::file('pic4', ['class' => 'form-control', 'style' => 'margin-top: -20px; width: 230px;']) }}
 			</div>

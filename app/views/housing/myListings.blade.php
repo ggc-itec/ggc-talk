@@ -9,7 +9,7 @@
 	<h1>My Listings</h1>
 </div>
 
-@if ($my_listings != null)
+@if (count($my_listings) > 0)
 <table class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr style="text-align: center;">
@@ -25,7 +25,7 @@
 	@endforeach
 </table>
 @else
-<h4>No listings</h4>
+<h3 class="container" style="width: 450px;">You currently do not have any listings.</h3>
 @endif
 
 @stop
