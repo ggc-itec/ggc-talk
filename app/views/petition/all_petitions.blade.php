@@ -19,7 +19,7 @@
 		<tr>
 			<th>Class Name</th>
 			<th>Signees</th>
-			<!--<th>Subject</th>-->
+			<th>Subject</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,6 +28,7 @@
 		<tr>
 			<td>{{ $petition->class_name }}</td>
 			<td>{{ $signee->count() }}</td>
+			<td>{{ $petition->subject }}</td>
 			<td>
 				<a href="{{ action('PetitionController@showPetition', $petition->id) }}" 
 					class="btn btn-default">View</a>
