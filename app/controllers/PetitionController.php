@@ -18,14 +18,14 @@ class PetitionController extends BaseController
 		$petition = new Petition();
 		$petition -> class_name = Input::get('class_name');
 		$petition -> class_desc = Input::get('class_desc');
-		$petition -> subject = "";//FIX ME Later
+		$petition -> subject = Input::get('subject');
 		if(!$petition->validate(Input::all()))
 		{
 			return Redirect::back()->withInput()->withErrors(array_merge($petition->getErrors()->toArray()));
 		}else 
 		{
 			$petition -> save();
-			return Redirect::to('petitions')->with(array('alert' => 'Don\'t forget to sign your own petition', 'alert-class' => 'alert-success'));
+			return Redirect::to('petitions')->with(array('alert' => 'Successful! Don\'t forget to sign your own petition', 'alert-class' => 'alert-success'));
 		}
 		
 	}
