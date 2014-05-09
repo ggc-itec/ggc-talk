@@ -9,7 +9,7 @@
     {{ Form::open(array('action' => 'MarketPlaceController@handle_add', 'id' => 'registerForm', 'class' => 'form-horizontal')) }}
     <fieldset>
       <legend>
-        <h2><center>Add Asses</center></h2>
+        <h2><center>Add Book</center></h2>
       </legend>
       <div class="form-group">
           {{ Form::text('name', '', array('class' => 'form-control input-lg', 'placeholder' => 'Enter Book Title')) }}
@@ -38,7 +38,7 @@
       <div class="form-group">
         <div class="pull-center">
           <!-- <button type="submit" class="btn btn-success" value = "Post"> -->
-          <button href="{{ action('MarketPlaceController@handle_add') }}" value = "Post" type="submit" class="btn btn-success">Add New Asses</button>
+          <button href="{{ action('MarketPlaceController@handle_add') }}" value = "Post" type="submit" class="btn btn-primary">Add New Book</button>
           <!-- </button> -->
           <button class="btn btn-danger">
             Clear Form

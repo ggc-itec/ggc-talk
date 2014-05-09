@@ -23,11 +23,12 @@ class MarketPlaceController extends BaseController {
 	public function handle_search() {
 		$books = DB::table('books') -> get();
 		$array = array();
-		
-		if (Input::get('name') != '')
+		$string = Input::get('name');
+		if ($string != null)
 		{
 			foreach ($books as $book) 
 			{
+
 				if ($book -> book_title == Input::get('name'))
 				{
 					array_push($array, $book);
@@ -41,6 +42,8 @@ class MarketPlaceController extends BaseController {
 				array_push($array, $book);
 			}
 		}
+
+		$books = $array;
 		
 		return View::make('marketplace.booklist', compact('books'));
 
