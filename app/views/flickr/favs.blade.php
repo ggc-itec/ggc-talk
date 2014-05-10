@@ -47,6 +47,4 @@
     <div class="panel-body">
       <a href="{{ action('FlickrPicController@index') }}" class="btn btn-primary">Refresh</a>
       <a href="{{ action('FlickrPicController@showFavs') }}" class="btn btn-primary">Favorites</a>
-    </div>
-  </div>
 @stop

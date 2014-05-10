@@ -6,4 +6,4 @@ composer.lock
 Thumbs.db
 .project
 /public/images/
-app/config/database.php
+

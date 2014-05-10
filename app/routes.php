@@ -25,6 +25,7 @@ Route::resource('welcome', 'WelcomeController');
 Route::model('flickr_pic', 'Flickr_pic');
 Route::get('/flickr', 'FlickrPicController@index');
 Route::get('/flick_favs', 'FlickrPicController@showFavs');
+
 Route::post('/flickr_add', 'FlickrPicController@handleAdd');
 Route::post('/flickr_delete', 'FlickrPicController@handleDelete');
 Route::get('/editPic/{flickr_pic}', 'FlickrPicController@editFavPic');
@@ -152,6 +153,14 @@ Route::group(array('prefix' => '/posts', 'as'=> 'posts'), function()
  * User route-model binding
  */
 Route::model('user', 'User');
+Route::model('books', 'Book');
+Route::get('/go_to_add','MarketPlaceController@go_to_add');
+Route::get('/go_to_search','MarketPlaceController@go_to_search');
+Route::post('/handle_search', 'MarketPlaceController@handle_search');
+Route::get('/marketplace', 'MarketPlaceController@index');
+Route::post('/marketplace_add', 'MarketPlaceController@handle_add');
+Route::get('/marketplace{book}', 'FlickrPicController@deleteFavPic');
+Route::get('/handle_search{books}', 'MarketPlaceController@handle_search');
 
 /*
  * Only non-logged in users can access these routes
