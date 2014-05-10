@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css'); }}" rel="stylesheet">
     <script src="{{ asset('js/jquery-2.0.3.min.js'); }}"></script>
     <script src="{{ asset('js/bootstrap.min.js'); }}"></script>
-    <link rel="stylesheet" href="{{ asset('css/messageboard.css'); }}" rel="stylesheet">    
+    <link rel="stylesheet" href="{{ asset('css/messageboard.css'); }}" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
@@ -27,33 +27,35 @@
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li class="active">
-                <a href="./">Home</a>
+                <a href="{{ URL::to('/') }}">Home</a>
               </li>
-              <li>
-                <a href="{{ URL::to('location/showlist') }}">Maps</a>
-              </li>
-              <li>
-                <a href="{{ URL::to('flickr') }}">Pics</a>
-              </li>
-              <li>
-                <a href="{{ URL::to('imgrr') }}">Imgrr</a>
-              </li>
-              <li>
-                <a href="{{ URL::to('techtalks') }}">TechTalks</a>
-              </li>
-              <li>
-                <a href="{{ URL::to('housing') }}">Housing</a>
-              </li>
-              @if(Auth::check())
-              <li>
-              	<a href="{{ URL::to('petitions') }}">Class Petitions</a>
-              </li>
-              @endif
-              <li>
-              	<a href="{{ URL::to('marketplace') }}">MarketPlace</a>
-              </li>
-              <li>
-                <a href="#about">About</a>
+              <li class="dropbdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alpha</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{{ URL::to('location/showlist') }}">Maps</a>
+                  </li>
+                  <li>
+                    <a href="{{ URL::to('flickr') }}">Pics</a>
+                  </li>
+                  <li>
+                    <a href="{{ URL::to('imgrr') }}">Imgrr</a>
+                  </li>
+                  <li>
+                    <a href="{{ URL::to('techtalks') }}">TechTalks</a>
+                  </li>
+                  <li>
+                    <a href="{{ URL::to('housing') }}">Housing</a>
+                  </li>
+                  @if(Auth::check())
+                  <li>
+                    <a href="{{ URL::to('petitions') }}">Class Petitions</a>
+                  </li>
+                  @endif
+                  <li>
+                    <a href="{{ URL::to('marketplace') }}">MarketPlace</a>
+                  </li>
+                </ul>
               </li>
               <li class="dropbdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Developers </a>
@@ -65,6 +67,9 @@
                     <a href="https://github.com/ggc-itec/ggc-talk" target="_blank">Github</a>
                   </li>
                 </ul>
+              </li>
+              <li>
+                <a href="#about">About</a>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -119,8 +124,8 @@
         @yield('content')
 
       </div>
-      
-		@yield('xtraContent')
+
+      @yield('xtraContent')
 
     </div>
   </body>
