@@ -260,7 +260,6 @@ Route::group(array('before' => 'auth'), function() {
 // Handles routing for housing
 // ===============================================
 // ===============================================
-
 Route::group(array('prefix' => '/housing'), function()
 {
 	Route::model('housing_listing', 'Housing_listing');
@@ -273,6 +272,8 @@ Route::group(array('prefix' => '/housing'), function()
 	Route::get('listing/{housing_listing}', 'HousingController@viewListing');
 	Route::get('deleteListing/{housing_listing}', 'HousingController@handleDeleteListing');
 	Route::get('myListings', 'HousingController@viewMyListings');
+	Route::get('editListing/{housing_listing}', 'HousingController@editListing');
+	Route::post('handleEditListing/{housing_listing}', 'HousingController@handleEditListing');
 	Route::get('searchResults', 'HousingController@showSearchResults');
 });
 
